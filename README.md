@@ -1,7 +1,7 @@
 # PRCO304
 My final year project repository
 
-Supervisor: Prof. Steve Furnell
+Supervisor: Prof. Steven Furnell
 
 Trello Board Link: https://trello.com/b/EP2IqT7z
 
