@@ -12,7 +12,7 @@ namespace api.Controllers
 {
     public class CustomersController : Controller
     {
-        private PRCO304_wbutlerEntities db = new PRCO304_wbutlerEntities();
+        private Entities db = new Entities();
 
         // GET: Customers
         public ActionResult Index()

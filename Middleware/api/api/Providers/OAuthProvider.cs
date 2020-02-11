@@ -40,14 +40,14 @@ namespace api.Providers
                         {
                             var claims = new List<Claim>()
                             {
-                                new Claim(ClaimTypes.Sid, Convert.ToString(customer.CUSTOMER_ID)),
-                                new Claim(ClaimTypes.Email, customer.EMAIL_ADDRESS),
+                                new Claim(ClaimTypes.Sid, Convert.ToString(customer.customer_id)),
+                                new Claim(ClaimTypes.Email, customer.email_address),
                                 new Claim(ClaimTypes.Role, "Customer")
                             };
 
                             ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
 
-                            var properties = CreateProperties(customer.CUSTOMER_ID.ToString());
+                            var properties = CreateProperties(customer.customer_id.ToString());
                             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
                             context.Validated(ticket);
                         }

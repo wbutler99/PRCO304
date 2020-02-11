@@ -13,10 +13,10 @@ namespace api.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class PRCO304_wbutlerEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public PRCO304_wbutlerEntities()
-            : base("name=PRCO304_wbutlerEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
