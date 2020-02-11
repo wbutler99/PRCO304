@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PRCO304_wbutlerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CUSTOMERS">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email_address" Type="varchar" MaxLength="62" Nullable="false" />
+          <Property Name="customer_hashed_password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password_salt" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="first_name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="last_name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="date_of_birth" Type="date" Nullable="false" />
+          <Property Name="address_line_one" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address_line_two" Type="varchar" MaxLength="50" />
+          <Property Name="postcode" Type="varchar" MaxLength="8" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PRCO304_wbutlerModelStoreContainer">
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PRCO304_wbutlerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="customer_id" />
+          </Key>
+          <Property Name="customer_id" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email_address" Type="String" MaxLength="62" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="customer_hashed_password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password_salt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="first_name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="last_name" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="address_line_one" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address_line_two" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="postcode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="PRCO304_wbutlerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PRCO304_wbutlerModelStoreContainer" CdmEntityContainer="PRCO304_wbutlerEntities">
+          <EntitySetMapping Name="CUSTOMERS">
+            <EntityTypeMapping TypeName="PRCO304_wbutlerModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMERS">
+                <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="email_address" ColumnName="email_address" />
+                <ScalarProperty Name="customer_hashed_password" ColumnName="customer_hashed_password" />
+                <ScalarProperty Name="password_salt" ColumnName="password_salt" />
+                <ScalarProperty Name="first_name" ColumnName="first_name" />
+                <ScalarProperty Name="last_name" ColumnName="last_name" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="address_line_one" ColumnName="address_line_one" />
+                <ScalarProperty Name="address_line_two" ColumnName="address_line_two" />
+                <ScalarProperty Name="postcode" ColumnName="postcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
