@@ -26,5 +26,7 @@ namespace api.Models
         }
     
         public virtual DbSet<CUSTOMER> CUSTOMERS { get; set; }
+        public virtual DbSet<EMPLOYEE> EMPLOYEES { get; set; }
+        public virtual DbSet<SHOP> SHOPS { get; set; }
     }
 }

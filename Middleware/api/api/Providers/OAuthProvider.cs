@@ -63,13 +63,13 @@ namespace api.Providers
                         {
                             var claims = new List<Claim>()
                             {
-                                new Claim(ClaimTypes.Sid, Convert.ToString(employee.EMPLOYEE_ID)),
+                                new Claim(ClaimTypes.Sid, Convert.ToString(employee.employee_id)),
                                 new Claim(ClaimTypes.Role, "Employee")
                             };
 
                             ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
 
-                            var properties = CreateProperties(employee.EMPLOYEE_ID);
+                            var properties = CreateProperties(employee.employee_id);
                             var ticket = new AuthenticationTicket(oAuthIdentity, properties);
                             context.Validated(ticket);
                         }

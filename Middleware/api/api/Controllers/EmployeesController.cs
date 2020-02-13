@@ -12,44 +12,44 @@ using api.Models;
 
 namespace api.Controllers
 {
-    public class CustomersController : ApiController
+    public class EmployeesController : ApiController
     {
         private Entities db = new Entities();
 
-        // GET: api/Customers
-        public IQueryable<CUSTOMER> GetCUSTOMERS()
+        // GET: api/Employees
+        public IQueryable<EMPLOYEE> GetEMPLOYEES()
         {
-            return db.CUSTOMERS;
+            return db.EMPLOYEES;
         }
 
-        // GET: api/Customers/5
-        [ResponseType(typeof(CUSTOMER))]
-        public IHttpActionResult GetCUSTOMER(int id)
+        // GET: api/Employees/5
+        [ResponseType(typeof(EMPLOYEE))]
+        public IHttpActionResult GetEMPLOYEE(string id)
         {
-            CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
-            if (cUSTOMER == null)
+            EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
+            if (eMPLOYEE == null)
             {
                 return NotFound();
             }
 
-            return Ok(cUSTOMER);
+            return Ok(eMPLOYEE);
         }
 
-        // PUT: api/Customers/5
+        // PUT: api/Employees/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCUSTOMER(int id, CUSTOMER cUSTOMER)
+        public IHttpActionResult PutEMPLOYEE(string id, EMPLOYEE eMPLOYEE)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cUSTOMER.customer_id)
+            if (id != eMPLOYEE.employee_id)
             {
                 return BadRequest();
             }
 
-            db.Entry(cUSTOMER).State = EntityState.Modified;
+            db.Entry(eMPLOYEE).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CUSTOMERExists(id))
+                if (!EMPLOYEEExists(id))
                 {
                     return NotFound();
                 }
@@ -70,16 +70,16 @@ namespace api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Customers
-        [ResponseType(typeof(CUSTOMER))]
-        public IHttpActionResult PostCUSTOMER(CUSTOMER cUSTOMER)
+        // POST: api/Employees
+        [ResponseType(typeof(EMPLOYEE))]
+        public IHttpActionResult PostEMPLOYEE(EMPLOYEE eMPLOYEE)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.CUSTOMERS.Add(cUSTOMER);
+            db.EMPLOYEES.Add(eMPLOYEE);
 
             try
             {
@@ -87,7 +87,7 @@ namespace api.Controllers
             }
             catch (DbUpdateException)
             {
-                if (CUSTOMERExists(cUSTOMER.customer_id))
+                if (EMPLOYEEExists(eMPLOYEE.employee_id))
                 {
                     return Conflict();
                 }
@@ -97,23 +97,23 @@ namespace api.Controllers
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = cUSTOMER.customer_id }, cUSTOMER);
+            return CreatedAtRoute("DefaultApi", new { id = eMPLOYEE.employee_id }, eMPLOYEE);
         }
 
-        // DELETE: api/Customers/5
-        [ResponseType(typeof(CUSTOMER))]
-        public IHttpActionResult DeleteCUSTOMER(int id)
+        // DELETE: api/Employees/5
+        [ResponseType(typeof(EMPLOYEE))]
+        public IHttpActionResult DeleteEMPLOYEE(string id)
         {
-            CUSTOMER cUSTOMER = db.CUSTOMERS.Find(id);
-            if (cUSTOMER == null)
+            EMPLOYEE eMPLOYEE = db.EMPLOYEES.Find(id);
+            if (eMPLOYEE == null)
             {
                 return NotFound();
             }
 
-            db.CUSTOMERS.Remove(cUSTOMER);
+            db.EMPLOYEES.Remove(eMPLOYEE);
             db.SaveChanges();
 
-            return Ok(cUSTOMER);
+            return Ok(eMPLOYEE);
         }
 
         protected override void Dispose(bool disposing)
@@ -125,9 +125,9 @@ namespace api.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CUSTOMERExists(int id)
+        private bool EMPLOYEEExists(string id)
         {
-            return db.CUSTOMERS.Count(e => e.customer_id == id) > 0;
+            return db.EMPLOYEES.Count(e => e.employee_id == id) > 0;
         }
     }
 }

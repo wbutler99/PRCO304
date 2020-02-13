@@ -12,12 +12,12 @@ namespace api.Services
 
         public EMPLOYEE ValidateEmployee(string employeeId, string password)
         {
-            EMPLOYEE employee = db.EMPLOYEES.FirstOrDefault(e => e.EMPLOYEE_ID == employeeId);
+            EMPLOYEE employee = db.EMPLOYEES.FirstOrDefault(e => e.employee_id == employeeId);
 
             if (employee != null)
             {
-                string attemptedHash = Utilities.Security.GenerateSHA256Hash(password, employee.PASSWORD_SALT);
-                if (attemptedHash.Equals(employee.EMPLOYEE_HASHED_PASSWORD))
+                string attemptedHash = Utilities.Security.GenerateSHA256Hash(password, employee.employee_password_salt);
+                if (attemptedHash.Equals(employee.employee_hashed_password))
                     return employee;
             }
             return null;
