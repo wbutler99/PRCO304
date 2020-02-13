@@ -10,10 +10,10 @@ namespace api.Services
     {
         private Entities db = new Entities();
 
-        public CUSTOMER ValidateCustomer(string emailAddress, string password)
+        public CUSTOMER ValidateCustomer(string username, string password)
         {
             // Get the first entry in the database for the mathcing email and password.
-            CUSTOMER customer = db.CUSTOMERS.FirstOrDefault(c => c.email_address == emailAddress);
+            CUSTOMER customer = db.CUSTOMERS.FirstOrDefault(c => c.username == username);
 
             if (customer != null)
             {

@@ -242,6 +242,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BindingModels\CustomerLoginBindingModel.cs" />
+    <Compile Include="Models\BindingModels\CustomerRegistrationBindingModel.cs" />
     <Compile Include="Models\CUSTOMER.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -260,6 +262,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\CustomerDTO.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -447,8 +450,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Customers\" />
-    <Folder Include="Views\Employees\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
