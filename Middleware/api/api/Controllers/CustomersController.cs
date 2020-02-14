@@ -16,14 +16,16 @@ using api.Utilities;
 
 namespace api.Controllers
 {
-    [Authorize]
+    //[Authorize]
     // Add RoutePrefix to specify the location of this resource.
-    [RoutePrefix("api/customers")]
+    [RoutePrefix("api/Customers")]
     public class CustomersController : ApiController
     {
         private Entities db = new Entities();
 
         // GET: api/Customers
+        [HttpGet]
+        [Route("")]
         public IQueryable<CustomerDTO> GetCUSTOMERS()
         {
             var customers = from c in db.CUSTOMERS
@@ -117,7 +119,7 @@ namespace api.Controllers
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(CustomerDTO))]
-        public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
+        public IHttpActionResult PostCUSTOMER(CustomerRegistrationBindingModel registrationDetails)
         {
             if (!ModelState.IsValid)
             {
@@ -193,7 +195,8 @@ namespace api.Controllers
 
             };
 
-            return CreatedAtRoute("GetCustomerDetailsById", new { id = customerDetails.CustomerId }, customerDetails);
+            //return CreatedAtRoute("GetCustomerDetailsById", new { id = customerDetails.CustomerId }, customerDetails);
+            return Ok();
         }
 
         // POST: api/Customers/Login

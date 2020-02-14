@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace api.Models.BindingModels
 {
+    //This class handles the JSON data for logging a customer into 
+    //the system when it is passed from the client
     public class CustomerLoginBindingModel
     {
         [JsonProperty("username")]
