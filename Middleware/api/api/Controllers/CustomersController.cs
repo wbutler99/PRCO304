@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.Http.Description;
 using api.Models;
 using api.Models.BindingModels;
@@ -16,8 +17,9 @@ using api.Utilities;
 
 namespace api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     // Add RoutePrefix to specify the location of this resource.
+    [EnableCors(origins: "http://localhost:44308", headers: "*", methods: "*")]
     [RoutePrefix("api/Customers")]
     public class CustomersController : ApiController
     {
@@ -65,7 +67,7 @@ namespace api.Controllers
                     AddressLineOne = c.address_line_one,
                     AddressLineTwo = c.address_line_two,
                     PostCode = c.postcode
-                }).SingleOrDefaultAsync(c => c.CustomerId == id);
+                }).SingleOrDefaultAsync(c => c.CustomerId == id).ConfigureAwait(false);
 
             // If the retrieved customer is null then return a 401 Not Found.
             if (customer == null)
@@ -113,11 +115,11 @@ namespace api.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Customers
+        // POST: api/Customers/Insert
         // Used to CREATE a new customer and add them to my database.
         [AllowAnonymous]
         [HttpPost]
-        [Route("")]
+        [Route("Insert")]
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER(CustomerRegistrationBindingModel registrationDetails)
         {
@@ -145,7 +147,6 @@ namespace api.Controllers
             // Create customer object based on the details received and processed.
             CUSTOMER customer = new CUSTOMER()
             {
-                customer_id = 0,
                 username = registrationDetails.Username,
                 email_address = registrationDetails.EmailAddress,
                 customer_hashed_password = hashedPassword,
@@ -157,6 +158,9 @@ namespace api.Controllers
                 address_line_two = registrationDetails.AddressLineTwo,
                 postcode = registrationDetails.PostCode,
             };
+
+            // Add the customer object to our database as a record.
+            db.CUSTOMERS.Add(customer);
 
             try
             {
