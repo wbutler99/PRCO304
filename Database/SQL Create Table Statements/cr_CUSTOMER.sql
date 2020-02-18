@@ -1,6 +1,6 @@
 CREATE TABLE CUSTOMERS(
     customer_id INT 
-        CONSTRAINT customers_customer_id_pk PRIMARY KEY,
+        CONSTRAINT customers_customer_id_pk PRIMARY KEY NOT NULL IDENTITY,
     username VARCHAR (50) 
         CONSTRAINT customers_username_un UNIQUE(username)
         CONSTRAINT customers_username_nn NOT NULL,
