@@ -255,6 +255,7 @@
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\DTO\CustomerDTO.cs" />
+    <Compile Include="Models\DTO\EmployeeDTO.cs" />
     <Compile Include="Models\EMPLOYEE.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>

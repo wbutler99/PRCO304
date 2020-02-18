@@ -19,6 +19,7 @@ namespace api.Providers
         {
             //return base.GrantResourceOwnerCredentials(context);
 
+#pragma warning disable CA2008 // Do not create tasks without passing a TaskScheduler
             return Task.Factory.StartNew(() =>
             {
                 var form = context.Request.ReadFormAsync().Result;
@@ -63,14 +64,14 @@ namespace api.Providers
                         {
                             var claims = new List<Claim>()
                             {
-                                new Claim(ClaimTypes.Sid, Convert.ToString(employee.employee_id)),
+                                new Claim(ClaimTypes.Sid, employee.employee_username),
                                 new Claim(ClaimTypes.Role, "Employee")
                             };
 
                             ClaimsIdentity oAuthIdentity = new ClaimsIdentity(claims, Startup.OAuthOptions.AuthenticationType);
 
-                            var properties = CreateProperties(employee.employee_id);
-                            var ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                            AuthenticationProperties properties = CreateProperties(employee.employee_username);
+                            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
                             context.Validated(ticket);
                         }
                         else
@@ -84,6 +85,7 @@ namespace api.Providers
                     context.SetError("login_type_error", "The login type was not specified or there was an error recognising the type.");
                 }
             });
+#pragma warning restore CA2008 // Do not create tasks without passing a TaskScheduler
         }
         #endregion
 

@@ -14,9 +14,11 @@ namespace api.Models
     
     public partial class EMPLOYEE
     {
-        public string employee_id { get; set; }
-        public string employeee_first_name { get; set; }
+        public int employee_id { get; set; }
+        public string employee_first_name { get; set; }
         public string employee_last_name { get; set; }
+        public string employee_username { get; set; }
+        public string employee_email_address { get; set; }
         public System.DateTime employee_date_of_birth { get; set; }
         public string employee_address_line_one { get; set; }
         public string employee_address_line_two { get; set; }

@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="customer_id" />
           </Key>
-          <Property Name="customer_id" Type="int" Nullable="false" />
+          <Property Name="customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="email_address" Type="varchar" MaxLength="62" Nullable="false" />
           <Property Name="customer_hashed_password" Type="varchar" MaxLength="100" Nullable="false" />
@@ -25,9 +25,11 @@
           <Key>
             <PropertyRef Name="employee_id" />
           </Key>
-          <Property Name="employee_id" Type="varchar" MaxLength="5" Nullable="false" />
-          <Property Name="employeee_first_name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="employee_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="employee_first_name" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="employee_last_name" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="employee_username" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="employee_email_address" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="employee_date_of_birth" Type="date" Nullable="false" />
           <Property Name="employee_address_line_one" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="employee_address_line_two" Type="varchar" MaxLength="50" />
@@ -92,20 +94,33 @@
         </EntityType>
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
-          <EntitySet Name="EMPLOYEES" EntityType="PRCO304_wbutlerModel.EMPLOYEE" />
           <EntitySet Name="SHOPS" EntityType="PRCO304_wbutlerModel.SHOP" />
+          <EntitySet Name="EMPLOYEES" EntityType="PRCO304_wbutlerModel.EMPLOYEE" />
           <AssociationSet Name="employees_employee_shop_id_fk" Association="PRCO304_wbutlerModel.employees_employee_shop_id_fk">
             <End Role="SHOP" EntitySet="SHOPS" />
             <End Role="EMPLOYEE" EntitySet="EMPLOYEES" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="SHOP">
+          <Key>
+            <PropertyRef Name="shop_id" />
+          </Key>
+          <Property Name="shop_id" Type="Int32" Nullable="false" />
+          <Property Name="shop_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shop_address_line_one" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shop_address_line_two" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="shop_postcode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EMPLOYEES" Relationship="PRCO304_wbutlerModel.employees_employee_shop_id_fk" FromRole="SHOP" ToRole="EMPLOYEE" />
+        </EntityType>
         <EntityType Name="EMPLOYEE">
           <Key>
             <PropertyRef Name="employee_id" />
           </Key>
-          <Property Name="employee_id" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="employeee_first_name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="employee_first_name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
           <Property Name="employee_last_name" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="employee_username" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="employee_email_address" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="employee_date_of_birth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="employee_address_line_one" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="employee_address_line_two" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -117,17 +132,6 @@
           <Property Name="employee_account_no" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="employee_shop_id" Type="Int32" />
           <NavigationProperty Name="SHOP" Relationship="PRCO304_wbutlerModel.employees_employee_shop_id_fk" FromRole="EMPLOYEE" ToRole="SHOP" />
-        </EntityType>
-        <EntityType Name="SHOP">
-          <Key>
-            <PropertyRef Name="shop_id" />
-          </Key>
-          <Property Name="shop_id" Type="Int32" Nullable="false" />
-          <Property Name="shop_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="shop_address_line_one" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="shop_address_line_two" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="shop_postcode" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="EMPLOYEES" Relationship="PRCO304_wbutlerModel.employees_employee_shop_id_fk" FromRole="SHOP" ToRole="EMPLOYEE" />
         </EntityType>
         <Association Name="employees_employee_shop_id_fk">
           <End Type="PRCO304_wbutlerModel.SHOP" Role="SHOP" Multiplicity="0..1" />
@@ -164,6 +168,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SHOPS">
+            <EntityTypeMapping TypeName="PRCO304_wbutlerModel.SHOP">
+              <MappingFragment StoreEntitySet="SHOPS">
+                <ScalarProperty Name="shop_postcode" ColumnName="shop_postcode" />
+                <ScalarProperty Name="shop_address_line_two" ColumnName="shop_address_line_two" />
+                <ScalarProperty Name="shop_address_line_one" ColumnName="shop_address_line_one" />
+                <ScalarProperty Name="shop_name" ColumnName="shop_name" />
+                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="EMPLOYEES">
             <EntityTypeMapping TypeName="PRCO304_wbutlerModel.EMPLOYEE">
               <MappingFragment StoreEntitySet="EMPLOYEES">
@@ -177,20 +192,11 @@
                 <ScalarProperty Name="employee_address_line_two" ColumnName="employee_address_line_two" />
                 <ScalarProperty Name="employee_address_line_one" ColumnName="employee_address_line_one" />
                 <ScalarProperty Name="employee_date_of_birth" ColumnName="employee_date_of_birth" />
+                <ScalarProperty Name="employee_email_address" ColumnName="employee_email_address" />
+                <ScalarProperty Name="employee_username" ColumnName="employee_username" />
                 <ScalarProperty Name="employee_last_name" ColumnName="employee_last_name" />
-                <ScalarProperty Name="employeee_first_name" ColumnName="employeee_first_name" />
+                <ScalarProperty Name="employee_first_name" ColumnName="employee_first_name" />
                 <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SHOPS">
-            <EntityTypeMapping TypeName="PRCO304_wbutlerModel.SHOP">
-              <MappingFragment StoreEntitySet="SHOPS">
-                <ScalarProperty Name="shop_postcode" ColumnName="shop_postcode" />
-                <ScalarProperty Name="shop_address_line_two" ColumnName="shop_address_line_two" />
-                <ScalarProperty Name="shop_address_line_one" ColumnName="shop_address_line_one" />
-                <ScalarProperty Name="shop_name" ColumnName="shop_name" />
-                <ScalarProperty Name="shop_id" ColumnName="shop_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -10,9 +10,9 @@ namespace api.Services
     {
         private Entities db = new Entities();
 
-        public EMPLOYEE ValidateEmployee(string employeeId, string password)
+        public EMPLOYEE ValidateEmployee(string username, string password)
         {
-            EMPLOYEE employee = db.EMPLOYEES.FirstOrDefault(e => e.employee_id == employeeId);
+            EMPLOYEE employee = db.EMPLOYEES.FirstOrDefault(e => e.employee_username == username);
 
             if (employee != null)
             {
