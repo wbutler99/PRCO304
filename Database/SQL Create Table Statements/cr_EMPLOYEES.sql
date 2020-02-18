@@ -1,11 +1,17 @@
 CREATE TABLE EMPLOYEES(
-    employee_id VARCHAR (5)
-        CONSTRAINT employees_employee_id_pk PRIMARY KEY
+    employee_id INT
+        CONSTRAINT employees_employee_id_pk PRIMARY KEY IDENTITY
         CONSTRAINT employees_employee_id_nn NOT NULL,
     employeee_first_name VARCHAR (35)
         CONSTRAINT employees_employee_first_name_nn NOT NULL,
     employee_last_name VARCHAR (35)
         CONSTRAINT employees_employee_last_name_nn NOT NULL,
+    employee_username VARCHAR (15)
+        CONSTRAINT employees_employee_username_nn NOT NULL
+        CONSTRAINT employees_employee_username_un UNIQUE,
+    employee_email_address VARCHAR (100)
+        CONSTRAINT employees_employee_email_address_nn NOT NULL
+        CONSTRAINT employees_employee_email_address_un UNIQUE,
     employee_date_of_birth DATE
         CONSTRAINT employees_employee_date_of_birth_nn NOT NULL,
     employee_address_line_one VARCHAR (50)
