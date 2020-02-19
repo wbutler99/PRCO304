@@ -2,7 +2,7 @@ CREATE TABLE EMPLOYEES(
     employee_id INT
         CONSTRAINT employees_employee_id_pk PRIMARY KEY IDENTITY
         CONSTRAINT employees_employee_id_nn NOT NULL,
-    employeee_first_name VARCHAR (35)
+    employee_first_name VARCHAR (35)
         CONSTRAINT employees_employee_first_name_nn NOT NULL,
     employee_last_name VARCHAR (35)
         CONSTRAINT employees_employee_last_name_nn NOT NULL,
