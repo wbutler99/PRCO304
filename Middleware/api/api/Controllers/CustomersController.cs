@@ -19,7 +19,7 @@ namespace api.Controllers
 {
     [Authorize]
     // Add RoutePrefix to specify the location of this resource.
-    [EnableCors(origins: "http://localhost:44308", headers: "*", methods: "*")]
+    //[EnableCors(origins: "http://localhost:44308", headers: "*", methods: "*")]
     [RoutePrefix("api/Customers")]
     public class CustomersController : ApiController
     {
@@ -121,7 +121,7 @@ namespace api.Controllers
         [HttpPost]
         [Route("Insert")]
         [ResponseType(typeof(CustomerDTO))]
-        public IHttpActionResult PostCUSTOMER(CustomerRegistrationBindingModel registrationDetails)
+        public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
             if (!ModelState.IsValid)
             {

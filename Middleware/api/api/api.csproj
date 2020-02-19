@@ -228,6 +228,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Models\BindingModels\EmployeeLoginBindingModel.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -236,6 +237,7 @@
     </Compile>
     <Compile Include="Models\BindingModels\CustomerLoginBindingModel.cs" />
     <Compile Include="Models\BindingModels\CustomerRegistrationBindingModel.cs" />
+    <Compile Include="Models\BindingModels\EmployeeCreationBindingModel.cs" />
     <Compile Include="Models\CUSTOMER.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -338,6 +340,9 @@
     </EntityDeploy>
     <Content Include="Models\DBModel.edmx.diagram">
       <DependentUpon>DBModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
     </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
