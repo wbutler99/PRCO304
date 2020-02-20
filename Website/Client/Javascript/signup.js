@@ -1,9 +1,15 @@
 window.onload = function(){
     $("#signUpForm").submit(function(web){
         web.preventDefault();
+
+        var localUrl = "http://localhost:44308/api/Customers/Insert"
+        var serverUrl = "http://web.socem.plymouth.ac.uk/fyp/wbutler/"
+
         var username = $("#username").val();
         var password = $("#password").val();
+        var confirmPassword = $("#confirmPassword").val();
         var email = $("#email").val();
+        var confirmEmail = $("#confirmEmail").val();
         var firstName = $("#firstName").val();
         var lastName = $("#lastName").val();
         var DOB = new Date($("#DOB").val());
@@ -21,22 +27,30 @@ window.onload = function(){
             "addressLineTwo" : addressTwo,
             "postCode" : postcode
         }
-        alert("Request has started!")
-        var post = $.ajax({
-            url:"http://localhost:44308/api/Customers",
-            type: "POST",
-            dataType: "json",
-            contentType: 'application/json; charset=utf-8',
-            data: registrationDetails,
-            success: function(data, textStatus, xhr){
-                window.location.href = "Index.html"
-                console.log(data)
-            },
-            fail: function(){
-                alert("request failed")
-            }
-        });
-        alert("Signing you up...");
+        if (email != confirmEmail){
+            alert("Make sure that your email matches your confirmation email!")
+        }
+        else if (password != confirmPassword){
+            alert("Make sure that your password matches your confirmation password!")
+        }
+        else{
+            var post = $.ajax({
+                url:localUrl,
+                type: "POST",
+                dataType: "json",
+                contentType: 'application/json; charset=utf-8',
+                body: registrationDetails,
+                success: function(data, textStatus, xhr){
+                    window.location.href = "Index.html"
+                    console.log(data)
+                },
+                fail: function(){
+                    alert("request failed")
+                }
+            });
+        }
+
+        
 
         // post.done(function(data, text, res){
         //     console.log("Post Done!")
