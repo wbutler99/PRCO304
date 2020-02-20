@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace CornerShopSecialistDesktop
 {
-    public partial class Form1 : Form
+    public partial class CreateAccount : Form
     {
-        public Form1()
+        public CreateAccount()
         {
             InitializeComponent();
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
