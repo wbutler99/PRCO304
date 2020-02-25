@@ -37,7 +37,7 @@ window.onload = function(){
         else{
             $.ajax({
                 type: "POST",
-                url:localUrl,
+                url:serverUrl,
                 contentType: 'application/json; charset=utf-8',
                 body: {
                     "username": username, 
