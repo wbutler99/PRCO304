@@ -113,7 +113,7 @@ namespace api.Controllers
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
         [Route("Insert")]
-        public async Task<ActionResult<CustomerDTO>> PostCustomers([FromBody] CustomerRegistrationBindingModel registrationDetails)
+        public async Task<ActionResult> PostCustomers([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
             if (registrationDetails == null)
             {
@@ -171,7 +171,7 @@ namespace api.Controllers
             };
 
             //return CreatedAtAction("GetCustomers", new { id = customers.CustomerId }, customerDetails);
-            return Ok(customerDetails);
+            return Ok();
         }
 
         // DELETE: api/Customers/5
