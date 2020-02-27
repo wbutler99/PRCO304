@@ -21,6 +21,14 @@ app.get('/', function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/Index.html"));
 });
 
+app.get("/login", function(request, response){
+    response.sendFile(path.join(__dirname + "/Client/HTML/Login.html"));
+});
+
+app.get("/Signup", function(request, response){
+    response.sendFile(path.join(__dirname + "/Client/HTML/Signup.html"));
+});
+
 app.listen(9000, function() {
     console.log("Listening on 9000");
 });
