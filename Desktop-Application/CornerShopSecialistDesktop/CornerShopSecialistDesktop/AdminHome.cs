@@ -16,5 +16,13 @@ namespace CornerShopSecialistDesktop
         {
             InitializeComponent();
         }
+
+        private void btnLogOut_Click(object sender, EventArgs e)
+        {
+            //TODO: Dispose of data when logging out & clear all other pages that may be open
+            Home home = new Home();
+            home.Show();
+            this.Hide();
+        }
     }
 }
