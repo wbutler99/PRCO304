@@ -50,8 +50,17 @@ window.onload = function(){
                     "addressLineTwo" : addressTwo,
                     "postCode" : postcode
                 },
+                success: function(data, text, res){
+                    alert("Account created! Please log in to continue.");
+                    $.get("http://localhost:9000/Login");
+                },
+                failure: function(data, text, res){
+                    alert("Sign up failed. Please try again.");
+                } 
             });
             //var post = $.post("http://localhost:44391/api/Customers/Insert", {registrationDetails}).always(function(){});
+
+
         }
         
 

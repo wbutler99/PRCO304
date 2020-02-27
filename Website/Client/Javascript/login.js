@@ -16,14 +16,14 @@ window.onload = function(){
             if(res.status == 200)
             {
                 alert("Welcome " + data.username + "!");
-                window.location.href = "home.html";
+                $.get("http://localhost:9000/auth", {username});
                 
                 
             }
             else
             {
                 alert("Log in Failed. Please check your credentials and try again.");
-                $("#errorBox").css("visibility", "visible");
+                //$("#errorBox").css("visibility", "visible");
             }
         });
     });

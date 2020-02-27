@@ -8,6 +8,8 @@ var router = express.Router();
 
 var app = express();
 
+var session;
+
 app.use(session({secret: "Shops!", resave : false, saveUninitialized : true}));
 //app.use(cookieParser());
 app.use(function(req, res, next){
@@ -27,6 +29,12 @@ app.get("/login", function(request, response){
 
 app.get("/Signup", function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/Signup.html"));
+});
+
+app.get("/auth", function(request, response){
+    session = request.session;
+    session.username = request.body.username;
+    response.sendFile(path.join(__dirname + "/Client/HTML/Home.html"));
 });
 
 app.listen(9000, function() {
