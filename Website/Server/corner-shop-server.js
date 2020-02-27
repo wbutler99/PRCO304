@@ -1,4 +1,7 @@
 var express = require("express");
+var mongoose = require("mongoose");
+var db = require("./db");
+var schemas = require("./schemas");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
