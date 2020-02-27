@@ -14,7 +14,7 @@ namespace WebApplication
 
         private static string BASE_URL = "http://web.socem.plymouth.ac.uk/FYP/WButler";
 
-        private static string TEST_URL = "http://localhost:60019/";
+        private static string TEST_URL = "http://localhost:44308/";
 
         static GlobalVariables()
         {

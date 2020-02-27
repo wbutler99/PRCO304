@@ -63,6 +63,7 @@
     </Compile>
     <Compile Include="GlobalVariables.cs" />
     <Compile Include="Objects\AccountCreation.cs" />
+    <Compile Include="Objects\LogIn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="CreateAccount.resx">
