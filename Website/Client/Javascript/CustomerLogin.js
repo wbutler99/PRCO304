@@ -16,7 +16,7 @@ window.onload = function(){
             if(res.status == 200)
             {
                 alert("Welcome " + data.username + "!");
-                $.get("http://localhost:9000/auth", {username});
+                $.get("http://localhost:9000/CustomerAuth", {username});
                 
                 
             }
