@@ -44,6 +44,7 @@
             this.btnLogIn.TabIndex = 0;
             this.btnLogIn.Text = "Log In";
             this.btnLogIn.UseVisualStyleBackColor = true;
+            this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
             // 
             // btnCreateUser
             // 
@@ -68,6 +69,7 @@
             this.txtPasswordInput.Name = "txtPasswordInput";
             this.txtPasswordInput.Size = new System.Drawing.Size(171, 20);
             this.txtPasswordInput.TabIndex = 4;
+            this.txtPasswordInput.UseSystemPasswordChar = true;
             // 
             // lblPassword
             // 
