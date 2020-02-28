@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="../Javascript/StaffLogin.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron text-center bg-primary text-white">
+            <h1>Corner Shop Specialist</h1>
+            <h2>Staff Portal</h2> 
+        </div>
+        <div class="container">
+            <h2>Please enter your log in details</h2>
+            <div class="alert alert-danger alert-dismissible" id="errorBox">
+                    <strong>Oops!</strong> Log in attempt failed. Please Try again.
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+            <form id="logInForm">
+                <div class="row">
+                    <div class="col">
+                        <label for="username">Username:</label>
+                        <input type="text" class="form-control" placeholder="Enter Username" id="username">
+                    </div>
+                    <div class="col">
+                        <label for="password">Password:</label>
+                        <input type="password" class="form-control" placeholder="Enter password" id="password">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Log In</button>
+            </form>
+          </div>
+    </body>
+</html>
