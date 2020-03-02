@@ -19,7 +19,7 @@ namespace api.Controllers
 {
     [Authorize]
     // Add RoutePrefix to specify the location of this resource.
-    //[EnableCors(origins: "http://localhost:44308", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [RoutePrefix("api/Customers")]
     public class CustomersController : ApiController
     {
@@ -119,7 +119,7 @@ namespace api.Controllers
         // Used to CREATE a new customer and add them to my database.
         [AllowAnonymous]
         [HttpPost]
-        [Route("Insert")]
+        //[Route("Insert")]
         [ResponseType(typeof(CustomerDTO))]
         public IHttpActionResult PostCUSTOMER([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {

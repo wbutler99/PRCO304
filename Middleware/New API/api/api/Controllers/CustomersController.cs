@@ -9,13 +9,16 @@ using api.Models;
 using System.Data;
 using System.Net;
 using System.Net.Http;
+using System.Web.Http.Cors;
 using System.Security.Claims;
 using api.Models.BindingModels;
 using api.Models.DTO;
 using api.Utilities;
 
+
 namespace api.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     [Route("api/[controller]")]
     [ApiController]
     public class CustomersController : ControllerBase
@@ -112,7 +115,7 @@ namespace api.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
         [HttpPost]
-        [Route("Insert")]
+        //[Route("Insert")]
         public async Task<ActionResult> PostCustomers([FromBody] CustomerRegistrationBindingModel registrationDetails)
         {
             if (registrationDetails == null)

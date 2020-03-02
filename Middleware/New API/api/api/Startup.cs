@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Web.Http;
 
 namespace api
 {
@@ -40,11 +41,11 @@ namespace api
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
+            //app.EnableCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
