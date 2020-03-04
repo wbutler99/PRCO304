@@ -1,1 +1,3 @@
 Scaffold-DbContext "Server=socem1.uopnet.plymouth.ac.uk;Database=PRCO304_wbutler;User Id=WButler; Password=SOFT549!"Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+
+Data Source=Socem1.uopnet.plymouth.ac.uk;Initial Catalog=PRCO304_wbutler;Persist Security Info=True;User ID=WButler;Password=***********
