@@ -2,8 +2,8 @@ window.onload = function(){
     $("#signUpForm").submit(function(web){
         web.preventDefault();
 
-        var localUrl = "http://localhost:44391/api/Customers/Insert"
-        var serverUrl = "http://web.socem.plymouth.ac.uk/FYP/wbutler/api/Customers/Insert"
+        var localUrl = "http://localhost:44391/api/Customers/"
+        var serverUrl = "http://web.socem.plymouth.ac.uk/FYP/wbutler/api/Customers/"
 
         var username = $("#username").val();
         var password = $("#password").val();
@@ -37,7 +37,7 @@ window.onload = function(){
         else{
             $.ajax({
                 type: "POST",
-                url:serverUrl,
+                url: serverUrl,
                 contentType: 'application/json; charset=utf-8',
                 body: {
                     "username": username, 
