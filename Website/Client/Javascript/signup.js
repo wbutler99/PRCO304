@@ -18,8 +18,8 @@ window.onload = function(){
         var postcode = $("#postcode").val();
         var registrationDetails = {
             "username" : username,
-            "customerPassword" : password,
-            "emailAddress" : email,
+            "Password" : password,
+            "email" : email,
             "firstName" : firstName,
             "lastName" : lastName,
             "dateOfBirth" : DOB,
