@@ -13,6 +13,7 @@ var router = express.Router();
 var app = express();
 
 var session;
+var uri = "mongodb://localhost:27017/CSSDB";
 
 app.use(session({secret: "Shops!", resave : false, saveUninitialized : true}));
 //app.use(cookieParser());
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true}));
 app.get('/', function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/Index.html"));
 });
-
+//TODO: REFACTOR ROUTING TO MIX WITH LOGIC!!
 app.get("/CustomerLogin", function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/CustomerLogin.html"));
 });
@@ -60,7 +61,7 @@ app.post("/Customer/Signup", function(request, response){
             response.send("A user with that username already exists");
         }
     });
-
+    //Check to see if email chosen is already used for an account
     db.GetCustomerEmail(newEmail).then(function(user){
         if(user.status == 200){
             response.status(403);
@@ -68,20 +69,30 @@ app.post("/Customer/Signup", function(request, response){
         }
     });
 
-    //Hashing and salting algorithms called on password
+    //Hashing and salting algorithms called on password TODO!
 
-    var newUser = new schemas.User({
+    var newCustomer = new schemas.Customer({
         username: newUsername,
-        password: newPassword,
-        email: newEmail
+        //password: newPassword, FIX AFTER DOING H&S!!
+        email: newEmail,
+        firstName: newFirstName,
+        lastName: newLastName,
+        DOB: newDateOfBirth,
+        addressLineOne: newAddressLineOne,
+        addressLineTwo: newAddressLineTwo,
+        postcode: newPostcode
+
     });
 
-    newUser.save();
-    sessionData = newUser.username;
+    newCustomer.save();
+    //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
     response.status(200);
     response.send("New user created!");
 })
 
 app.listen(9000, function() {
+    await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+    console.log("Connected to DB");
+
     console.log("Listening on 9000");
 });

@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 
 var Customer = mongoose.model("Customer", {
-    customerId: Number,
     username: String,
     customerHashedPassword: String,
     customerSalt: String,
@@ -15,9 +14,8 @@ var Customer = mongoose.model("Customer", {
 });
 
 var Staff = mongoose.model("Staff", {
-    staffId: Number,
     username: String,
-    staffHashedPassword,
+    staffHashedPassword: String,
     staffSalt:String,
     email: String,
     firstName: String,
