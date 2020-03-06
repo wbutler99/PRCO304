@@ -45,44 +45,59 @@ app.post("/Customer/Signup", function(request, response){
     var newAddressLineTwo = request.body.addressLineTwo;
     var newPostcode = request.body.postcode;
 
+    var repeatCheckUsername = 0;
+    var repeatCheckEmail = 0;
+
     //Check to see if username chosen is already in use
-    db.GetCustomer(newUsername).then(function(result){
-        if(result.status == 200){
-            response.status(403);
-            response.send("A user with that username already exists");
+    repeatCheckUsername = db.GetCustomer(newUsername).then(function(result){
+        if(result.username == newUsername){
+            return 1;
         }
     });
     //Check to see if email chosen is already used for an account
-    db.GetCustomerEmail(newEmail).then(function(result){
-        if(result.status == 200){
-            response.status(403);
-            response.send("A user with that email address already exists");
+    repeatCheckEmail = db.GetCustomerEmail(newEmail).then(function(result){
+        if(result.email == newEmail){
+            return 1;
         }
     });
+    if(repeatCheckEmail)
+    {
+        response.status(403);
+        response.send("A user with that email address already exists");
+    }
+    else if(repeatCheckUsername)
+    {
+        response.status(403);
+        response.send("A user with that username already exists");
+    }
+    else
+    {
+        //Hashing and salting algorithms called on password
+        // var saltString = security.genRandomString(16);
+        // var hashedData = security.sha512(newPassword, saltString);
+        var salt = bcrypt.genSaltSync(saltRounds);
+        var hash = bcrypt.hashSync(newPassword, salt);
 
-    //Hashing and salting algorithms called on password
-    // var saltString = security.genRandomString(16);
-    // var hashedData = security.sha512(newPassword, saltString);
-    var salt = bcrypt.genSaltSync(saltRounds);
-    var hash = bcrypt.hashSync(newPassword, salt);
+        var newCustomer = new schemas.Customer({
+            username: newUsername,
+            customerHashedPassword: hash,
+            email: newEmail,
+            firstName: newFirstName,
+            lastName: newLastName,
+            DOB: newDateOfBirth,
+            addressLineOne: newAddressLineOne,
+            addressLineTwo: newAddressLineTwo,
+            postcode: newPostcode
+        });
 
-    var newCustomer = new schemas.Customer({
-        username: newUsername,
-        customerHashedPassword: hash,
-        email: newEmail,
-        firstName: newFirstName,
-        lastName: newLastName,
-        DOB: newDateOfBirth,
-        addressLineOne: newAddressLineOne,
-        addressLineTwo: newAddressLineTwo,
-        postcode: newPostcode
-    });
-
-    newCustomer.save();
-    //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
-    console.log("New User: " + newUsername + " created!");
-    response.status(200);
-    response.send("New user created!");
+        newCustomer.save();
+        //app.session = newCustomer.username;
+        //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
+        console.log("New User: " + newUsername + " created!");
+        response.status(200);
+        response.send("New user created!");
+    }
+    //console.log(response);
 });
 
 app.listen(9000, async function() {
