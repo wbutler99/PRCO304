@@ -16,7 +16,16 @@ function sha512(password, salt){
     };
 };
 
-function saltHashPassword(userpassword) {
-    var salt = genRandomString(16); /** Gives us salt of length 16 */
-    var passwordData = sha512(userpassword, salt);
-}
+// function saltHashPassword(userpassword) {
+//     var salt = genRandomString(16); /** Gives us salt of length 16 */
+//     var passwordData = sha512(userpassword, salt);
+//     console.log('UserPassword = '+userpassword);
+//     console.log('Passwordhash = '+passwordData.passwordHash);
+//     console.log('nSalt = '+passwordData.salt);
+// }
+
+// saltHashPassword('MYPASSWORD');
+// saltHashPassword('MYPASSWORD');
+
+module.exports.genRandomString = genRandomString;
+module.exports.sha512 = sha512;

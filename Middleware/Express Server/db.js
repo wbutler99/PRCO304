@@ -15,3 +15,6 @@ async function UpdateCustomer(username, customer)
     return await schemas.Customer.updateOne({"username": username}, customer);
 }
 
+module.exports.GetCustomer = GetCustomer;
+module.exports.GetCustomerEmail = GetCustomerEmail;
+module.exports.UpdateCustomer = UpdateCustomer;

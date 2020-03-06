@@ -3,7 +3,6 @@ var mongoose = require("mongoose");
 var Customer = mongoose.model("Customer", {
     username: String,
     customerHashedPassword: String,
-    customerSalt: String,
     email: String,
     firstName: String,
     lastName: String,
@@ -26,6 +25,9 @@ var Staff = mongoose.model("Staff", {
     postcode: String,
     jobRole: String,
     sortCode: String,
-    accountNo: String
+    accountNo: String,
+    shopId: String
 });
 
+module.exports.Customer = Customer;
+module.exports.Staff = Staff;

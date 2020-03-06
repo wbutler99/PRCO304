@@ -8,12 +8,15 @@ var session = require("express-session");
 var http = require("http");
 var path = require("path");
 var crypto = require("crypto");
+var bcrypt = require("bcrypt");
+var security = require("./Security");
 var router = express.Router();
 
 var app = express();
 
 var session;
 var uri = "mongodb://localhost:27017/CSSDB";
+var saltRounds = 10;
 
 app.use(session({secret: "Shops!", resave : false, saveUninitialized : true}));
 //app.use(cookieParser());
@@ -24,17 +27,6 @@ app.use(function(req, res, next){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
-app.get('/', function(request, response){
-    response.sendFile(path.join(__dirname + "/Client/HTML/Index.html"));
-});
-//TODO: REFACTOR ROUTING TO MIX WITH LOGIC!!
-app.get("/CustomerLogin", function(request, response){
-    response.sendFile(path.join(__dirname + "/Client/HTML/CustomerLogin.html"));
-});
-
-app.get("/Signup", function(request, response){
-    response.sendFile(path.join(__dirname + "/Client/HTML/CustomerSignup.html"));
-});
 
 app.get("/CustomerAuth", function(request, response){
     session = request.session;
@@ -53,27 +45,30 @@ app.post("/Customer/Signup", function(request, response){
     var newAddressLineTwo = request.body.addressLineTwo;
     var newPostcode = request.body.postcode;
 
+    // //Check to see if username chosen is already in use
+    // db.GetCustomer(newUsername).then(function(result){
+    //     if(result.status == 200){
+    //         response.status(403);
+    //         response.send("A user with that username already exists");
+    //     }
+    // });
+    // //Check to see if email chosen is already used for an account
+    // db.GetCustomerEmail(newEmail).then(function(result){
+    //     if(result.status == 200){
+    //         response.status(403);
+    //         response.send("A user with that email address already exists");
+    //     }
+    // });
 
-    //Check to see if username chosen is already in use
-    db.GetCustomer(newUsername).then(function(user){
-        if(user.status == 200){
-            response.status(403);
-            response.send("A user with that username already exists");
-        }
-    });
-    //Check to see if email chosen is already used for an account
-    db.GetCustomerEmail(newEmail).then(function(user){
-        if(user.status == 200){
-            response.status(403);
-            response.send("A user with that email address already exists");
-        }
-    });
-
-    //Hashing and salting algorithms called on password TODO!
+    //Hashing and salting algorithms called on password
+    // var saltString = security.genRandomString(16);
+    // var hashedData = security.sha512(newPassword, saltString);
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(newPassword, salt);
 
     var newCustomer = new schemas.Customer({
         username: newUsername,
-        //password: newPassword, FIX AFTER DOING H&S!!
+        customerHashedPassword: hash,
         email: newEmail,
         firstName: newFirstName,
         lastName: newLastName,
@@ -81,7 +76,6 @@ app.post("/Customer/Signup", function(request, response){
         addressLineOne: newAddressLineOne,
         addressLineTwo: newAddressLineTwo,
         postcode: newPostcode
-
     });
 
     newCustomer.save();
@@ -90,7 +84,7 @@ app.post("/Customer/Signup", function(request, response){
     response.send("New user created!");
 })
 
-app.listen(9000, function() {
+app.listen(9000, async function() {
     await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
     console.log("Connected to DB");
 
