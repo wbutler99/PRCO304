@@ -45,20 +45,20 @@ app.post("/Customer/Signup", function(request, response){
     var newAddressLineTwo = request.body.addressLineTwo;
     var newPostcode = request.body.postcode;
 
-    // //Check to see if username chosen is already in use
-    // db.GetCustomer(newUsername).then(function(result){
-    //     if(result.status == 200){
-    //         response.status(403);
-    //         response.send("A user with that username already exists");
-    //     }
-    // });
-    // //Check to see if email chosen is already used for an account
-    // db.GetCustomerEmail(newEmail).then(function(result){
-    //     if(result.status == 200){
-    //         response.status(403);
-    //         response.send("A user with that email address already exists");
-    //     }
-    // });
+    //Check to see if username chosen is already in use
+    db.GetCustomer(newUsername).then(function(result){
+        if(result.status == 200){
+            response.status(403);
+            response.send("A user with that username already exists");
+        }
+    });
+    //Check to see if email chosen is already used for an account
+    db.GetCustomerEmail(newEmail).then(function(result){
+        if(result.status == 200){
+            response.status(403);
+            response.send("A user with that email address already exists");
+        }
+    });
 
     //Hashing and salting algorithms called on password
     // var saltString = security.genRandomString(16);
@@ -80,9 +80,10 @@ app.post("/Customer/Signup", function(request, response){
 
     newCustomer.save();
     //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
+    console.log("New User: " + newUsername + " created!");
     response.status(200);
     response.send("New user created!");
-})
+});
 
 app.listen(9000, async function() {
     await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});

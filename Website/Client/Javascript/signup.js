@@ -46,7 +46,7 @@ window.onload = function(){
                 //window.location.href = "http://localhost:9001/Home";
                 console.log(data)
             }
-            else if(res.status == 404){
+            else if(res.status == 403){
                 alert("A user with that username or email already exists. Please use a different username or email.");
             }
             else{
