@@ -7,9 +7,10 @@
         <script>
             window.onload = function(){
                 var localUrl = "http://localhost:44391/api/Customers/"
+                var serverUrl = "http://web.socem.plymouth.ac.uk/FYP/wbutler/api/Customers/"
                 var get = $.ajax({
                     type: "GET",
-                    url:localUrl,
+                    url:serverUrl,
                     contentType: 'application/json; charset=utf-8'
                 });
                 get.done(function(data){

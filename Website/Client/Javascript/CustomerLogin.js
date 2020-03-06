@@ -5,25 +5,15 @@ window.onload = function(){
         var username = $("#username").val();
         var password = $("#password").val();
 
-        var loginDetails = {
-            "username" : username,
-            "password" : password
-        };
-        var post = $.post("http://localhost:44308/api/Customers/login", {loginDetails}).always(function(){});
+        var post = $.post("http://localhost:9000/Customer/login", {"username": username, "password": password}).always(function(){});
         alert("Logging you in...");
         post.done(function(data, text, res){
-            //alert(res.status);
+            alert(data);
             if(res.status == 200)
             {
-                alert("Welcome " + data.username + "!");
-                $.get("http://localhost:9000/CustomerAuth", {username});
-                
-                
-            }
-            else
-            {
-                alert("Log in Failed. Please check your credentials and try again.");
-                //$("#errorBox").css("visibility", "visible");
+                //alert("Welcome " + data.username + "!");
+                //$.get("http://localhost:9001/CustomerAuth", {username});
+                window.location.href = "CustomerHome.html";
             }
         });
     });
