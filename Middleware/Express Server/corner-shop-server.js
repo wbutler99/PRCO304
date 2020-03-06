@@ -6,10 +6,7 @@ var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var http = require("http");
-var path = require("path");
-var crypto = require("crypto");
 var bcrypt = require("bcrypt");
-var security = require("./Security");
 var router = express.Router();
 
 var app = express();
@@ -48,18 +45,34 @@ app.post("/Customer/Signup", function(request, response){
     var repeatCheckUsername = 0;
     var repeatCheckEmail = 0;
 
-    //Check to see if username chosen is already in use
-    repeatCheckUsername = db.GetCustomer(newUsername).then(function(result){
-        if(result.username == newUsername){
-            return 1;
-        }
-    });
-    //Check to see if email chosen is already used for an account
-    repeatCheckEmail = db.GetCustomerEmail(newEmail).then(function(result){
-        if(result.email == newEmail){
-            return 1;
-        }
-    });
+    // //Check to see if username chosen is already in use
+    // repeatCheckUsername = db.GetCustomer(newUsername).then(function(result){
+    //     if(result == null)
+    //     {
+    //         return 0;
+    //     }
+    //     else if(result.username == newUsername){
+    //         return 1;
+    //     }
+    //     else 
+    //     {
+    //         return 0;
+    //     }
+    // });
+    // //Check to see if email chosen is already used for an account
+    // repeatCheckEmail = db.GetCustomerEmail(newEmail).then(function(result){
+    //     if(result == null)
+    //     {
+    //         return 0;
+    //     }
+    //     else if(result.email == newEmail){
+    //         return 1;
+    //     }
+    //     else
+    //     {
+    //         return 0;
+    //     }
+    // });
     if(repeatCheckEmail)
     {
         response.status(403);
@@ -95,9 +108,32 @@ app.post("/Customer/Signup", function(request, response){
         //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
         console.log("New User: " + newUsername + " created!");
         response.status(200);
-        response.send("New user created!");
+        response.send("Sign up complete. Please log in to continue");
     }
     //console.log(response);
+});
+
+app.post("/Customer/Login", function(request, response){
+    var inputUsername = request.body.username;
+    var inputPassword = request.body.password;
+
+    db.GetCustomer(inputUsername).then(function(authuser){
+        var hash = authuser.customerHashedPassword;
+        bcrypt.compare(inputPassword, hash, function(err, result){
+            if (result == true)
+            {
+                console.log("Successful login by: " + inputUsername);
+                response.status(200);
+                response.send("Welcome " + inputUsername);
+            }
+            else
+            {
+                console.log("Attempted login by: " + inputUsername);
+                response.status(401);
+                response.send("Login failed. Check your credentials and try again.")
+            }
+        });
+    });
 });
 
 app.listen(9000, async function() {

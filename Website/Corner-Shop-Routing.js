@@ -1,7 +1,4 @@
 var express = require("express");
-var mongoose = require("mongoose");
-var db = require("./db");
-var schemas = require("./schemas");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
@@ -17,19 +14,22 @@ app.use(function(req, res, next){
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(router);
 
 //Routes to serve files for the website.
 
-app.get('/', function(request, response){
+router.get('/', function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/Index.html"));
 });
 
-app.get("/CustomerLogin", function(request, response){
+router.get("/CustomerLogin", function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/CustomerLogin.html"));
+    response.sendFile(path.join(__dirname + "/Client/Javascript/CustomerLogin.js"));
 });
 
-app.get("/Signup", function(request, response){
+router.get("/Signup", function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/CustomerSignup.html"));
+    response.sendFile(path.join(__dirname + "/Client/Javascript/signup.js"));
 });
 
 app.listen(9001, function() {

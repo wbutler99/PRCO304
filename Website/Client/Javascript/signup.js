@@ -40,11 +40,12 @@ window.onload = function(){
         
 
         post.done(function(data, text, res){
-            console.log("Post Done!")
+            console.log("Post Done!");
+            alert(data)
             if(res.status == 200){
-                alert("Sign up complete.");
-                //window.location.href = "http://localhost:9001/Home";
-                console.log(data)
+                //window.location.href = "http://localhost:9001/CustomerLogin";
+                window.location.href = "CustomerLogin.html";
+                console.log(data);
             }
             else if(res.status == 403){
                 alert("A user with that username or email already exists. Please use a different username or email.");
