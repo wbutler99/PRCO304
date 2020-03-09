@@ -15,6 +15,12 @@ async function UpdateCustomer(username, customer)
     return await schemas.Customer.updateOne({"username": username}, customer);
 }
 
+async function GetStaff(username)
+{
+    return await schemas.Staff.findOne({"username": username});
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
+module.exports.GetStaff = GetStaff;

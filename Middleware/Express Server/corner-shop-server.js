@@ -24,13 +24,6 @@ app.use(function(req, res, next){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
-
-app.get("/CustomerAuth", function(request, response){
-    session = request.session;
-    session.username = request.body.username;
-    response.sendFile(path.join(__dirname + "/Client/HTML/Home.html"));
-});
-
 app.post("/Customer/Signup", function(request, response){
     var newUsername = request.body.username;
     var newPassword = request.body.password;
@@ -85,9 +78,6 @@ app.post("/Customer/Signup", function(request, response){
     }
     else
     {
-        //Hashing and salting algorithms called on password
-        // var saltString = security.genRandomString(16);
-        // var hashedData = security.sha512(newPassword, saltString);
         var salt = bcrypt.genSaltSync(saltRounds);
         var hash = bcrypt.hashSync(newPassword, salt);
 
@@ -131,6 +121,69 @@ app.post("/Customer/Login", function(request, response){
                 console.log("Attempted login by: " + inputUsername);
                 response.status(401);
                 response.send("Login failed. Check your credentials and try again.")
+            }
+        });
+    });
+});
+
+app.post("/Staff/Signup", function(request, response){
+    var newUsername = request.body.username;
+    var newPassword = request.body.password;
+    var newEmail = request.body.email;
+    var newFirstName = request.body.firstName;
+    var newLastName = request.body.lastName;
+    var newDateOfBirth = request.body.dateOfBirth;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
+    var newJobRole = request.body.jobRole;
+    var newAccountNo = request.body.accountNo;
+    var newSortCode = request.body.sortCode;
+    var newShopId = request.body.shopId;
+
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(newPassword, salt);
+
+    var newStaff = new schemas.Staff({
+        username: newUsername,
+        staffHashedPassword: hash,
+        email: newEmail,
+        firstName: newFirstName,
+        lastName: newLastName,
+        DOB: newDateOfBirth,
+        addressLineOne: newAddressLineOne,
+        addressLineTwo: newAddressLineTwo,
+        postcode: newPostcode,
+        jobRole: newJobRole,
+        sortCode: newSortCode,
+        accountNo: newAccountNo,
+        shopId: newShopId
+    });
+
+    newStaff.save();
+    console.log("New Staff Member: " + newUsername + " created!");
+    response.status(200);
+    response.send("Sign up complete. Please log in to continue");
+});
+
+app.post("Staff/Login", function(request, response){
+    var inputUsername = request.body.username;
+    var inputPassword = request.body.password;
+
+    db.GetStaff(inputUsername).then(function(authuser){
+        var hash = authuser.customerHashedPassword;
+        bcrypt.compare(inputPassword, hash, function(err, result){
+            if (result == true)
+            {
+                console.log("Successful Staff login by: " + inputUsername);
+                response.status(200);
+                response.send("Welcome " + inputUsername);
+            }
+            else
+            {
+                console.log("Attempted Staff login by: " + inputUsername);
+                response.status(401);
+                response.send("Login failed. Check your credentials and try again.");
             }
         });
     });
