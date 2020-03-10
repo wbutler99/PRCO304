@@ -57,9 +57,14 @@ namespace CornerShopSecialistDesktop
                     AdminHome home = new AdminHome();
                     home.Show();
                 }
-                else
+                else if(employee.jobRole == "Manager")
                 {
                     ManagerHome home = new ManagerHome();
+                    home.Show();
+                }
+                else
+                {
+                    StaffHome home = new StaffHome();
                     home.Show();
                 }
                 txtUsernameInput.Clear();
