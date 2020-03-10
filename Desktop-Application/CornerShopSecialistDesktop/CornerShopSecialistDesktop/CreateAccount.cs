@@ -57,6 +57,7 @@ namespace CornerShopSecialistDesktop
                 txtPostcode.Clear();
                 txtAccountNo.Clear();
                 txtSortCode.Clear();
+                this.Hide();
             }
             else
             {
