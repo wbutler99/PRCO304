@@ -43,7 +43,7 @@ window.onload = function(){
             console.log("Post Done!");
             alert(data)
             if(res.status == 200){
-                //window.location.href = "http://localhost:9001/CustomerLogin";
+                //window.location.href = "http://localhost:9001/CustomerLogin"; //TODO: Sort out routing!!
                 window.location.href = "CustomerLogin.html";
                 console.log(data);
             }

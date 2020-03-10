@@ -37,14 +37,16 @@ namespace CornerShopSecialistDesktop
         private void btnLogIn_Click(object sender, EventArgs e)
         {
             var employee = new EmployeeViewModel();
-            string username = txtUsernameInput.ToString();
-            string password = txtPasswordInput.ToString();
+            string username = txtUsernameInput.Text;
+            string password = txtPasswordInput.Text;
 
             LogIn logInDetails = new LogIn(username, password);
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://web.socem.plymouth.ac.uk/FYP/WButler/api/");
-            var response = client.PostAsJsonAsync("employee/login", logInDetails).Result;
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:9000/")
+            };
+            var response = client.PostAsJsonAsync("Staff/Login", logInDetails).Result;
 
             if(response.IsSuccessStatusCode)
             {
@@ -55,9 +57,14 @@ namespace CornerShopSecialistDesktop
                     AdminHome home = new AdminHome();
                     home.Show();
                 }
-                else
+                else if(employee.jobRole == "Manager")
                 {
                     ManagerHome home = new ManagerHome();
+                    home.Show();
+                }
+                else
+                {
+                    StaffHome home = new StaffHome();
                     home.Show();
                 }
                 txtUsernameInput.Clear();

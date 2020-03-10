@@ -1,0 +1,128 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script>
+            window.onload = function(){
+                $.get("http://localhost:9000/Customer").then(function(customer){
+                    $("#username").append(customer.username);
+                    $("#DOB").append(customer.DOB.split('T')[0]);
+
+                    $("#email").val(customer.email);
+                    $("#firstName").val(customer.firstName);
+                    $("#lastName").val(customer.lastName);
+                    $("#addressLineOne").val(customer.addressLineOne);
+                    $("#addressLineTwo").val(customer.addressLineTwo);
+                    $("#postcode").val(customer.postcode);
+                });
+
+                $("#updateForm").submit(function(){
+                    var newEmail = $("#email").val();
+                    var newFirstName = $("#firstName").val();
+                    var newLastName = $("#lastName").val();
+                    var newAddressLineOne = $("#addressLineOne").val();
+                    var newAddressLineTwo = $("#addressLineTwo").val();
+                    var newPostcode = $("#postcode").val
+                    var post = $.post("http://localhost:9000/Customer/Update", {
+                        "email" : newEmail,
+                        "firstname" : newFirstName,
+                        "lastName" : newLastName,
+                        "addressLineOne" : newAddressLineOne,
+                        "addressLineTwo" : newAddressLineTwo,
+                        "postcode" : newPostcode
+                    })
+                    .always(function(){});
+                    alert("Updating your account...")
+                    post.done(function(data, text, res){
+                        if(res.status == 200)
+                        {
+                            alert("Account updated successfully!");
+                            window.location.href = "account.html";
+                        }
+                        else
+                        {
+                            alert("Oops! Something went wrong. Please try again.");
+                        }
+                    });
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div class="jumbotron text-center bg-primary text-white">
+            <h1>Corner Shop Specialist</h1>
+            <h2>Customer Portal</h2> 
+        </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" onclick="window.location.href = 'CustomerHome.html'">Corner Shop Specialist</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="shops">Shops</a>
+                </li>                        
+                <li class="nav-item">
+                    <a class="nav-link" id="products">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="news">News Deliveries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="account" onclick="window.location.href = 'CustomerAccount.html'">Account</a>
+                  </li>
+                <div class="nav navbar-right">
+                    <li class="nav-item">
+                        <button class="btn btn-primary mt-3" id="login">Log In</button>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+
+        <h1>Update Account Details</h1>
+
+        <div class="container">
+            <h2>Please edit your details here</h2>                
+            <label for="username">Username:</label>
+            <p id="username"></p>
+            <label for="DOB">Date of Birth</label>
+            <p id="DOB"></p>
+            <form id="updateForm" class="was-validated">
+                <div class="form-group">
+                    <label for="email">email:</label>
+                    <input type="email" class="form-control" id="email" required>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="input-group">
+                    <div class="form-group col-sm-6">
+                        <label for="firstName">First Name:</label>
+                        <input type="text" class="form-control" id="firstName" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" class="form-control" id="lastName" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="addressLineOne">Address Line One:</label>
+                    <input type="text" class="form-control" id="addressLineOne" required>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                    <label for="addressLineTwo">Address Line Two:</label>
+                    <input type="text" class="form-control" id="addressLineTwo" required>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="form-group">
+                    <label for="postcode">Postcode:</label>
+                    <input type="text" class="form-control" id="postcode" required>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Update Your Details</button>
+            </form>
+        </div>
+    </body>
+</html>

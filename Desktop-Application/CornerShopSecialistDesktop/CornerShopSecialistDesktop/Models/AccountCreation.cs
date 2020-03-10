@@ -8,7 +8,6 @@ namespace CornerShopSecialistDesktop.Models
 {
     public class AccountCreation
     {
-        private string email;
 
         [JsonProperty("firstName")]
         public string firstName { get; set; }
@@ -46,16 +45,17 @@ namespace CornerShopSecialistDesktop.Models
         [JsonProperty("accountNo")]
         public string accountNo { get; set; }
 
-        [JsonProperty("shopId")]
-        public int shopId { get; set; }
+        //[JsonProperty("shopId")]
+        //public int shopId { get; set; }
 
-        public AccountCreation(string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo, 
-            string postcode, string jobRole, string sortCode, string accountNo, int shopId)
+        public AccountCreation(string username, string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo, 
+            string postcode, string jobRole, string sortCode, string accountNo)
         {
+            this.username = username;
             this.firstName = firstName;
             this.lastName = lastName;
             this.password = password;
-            this.email = email;
+            this.emailAddress = email;
             DOB = dOB;
             this.addressLineOne = addressLineOne;
             this.addressLineTwo = addressLineTwo;
@@ -63,7 +63,7 @@ namespace CornerShopSecialistDesktop.Models
             this.jobRole = jobRole;
             this.sortCode = sortCode;
             this.accountNo = accountNo;
-            this.shopId = shopId;
+            //this.shopId = shopId;
         }
     }
 }

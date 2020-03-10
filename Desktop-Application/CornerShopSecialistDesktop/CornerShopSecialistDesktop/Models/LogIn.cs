@@ -10,11 +10,9 @@ namespace CornerShopSecialistDesktop.Models
     class LogIn
     {
         [JsonProperty("username")]
-        [JsonRequired]
         private string employeeUsername { get; set; }
 
         [JsonProperty("password")]
-        [JsonRequired]
         private string employeePassword { get; set; }
 
         public LogIn(string username, string password)

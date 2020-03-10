@@ -11,7 +11,8 @@ var router = express.Router();
 
 var app = express();
 
-var session;
+var customerSession;
+var staffSession;
 var uri = "mongodb://localhost:27017/CSSDB";
 var saltRounds = 10;
 
@@ -24,12 +25,16 @@ app.use(function(req, res, next){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+app.get("/Customer", function(request, response){
+    var username = customerSession;
 
-app.get("/CustomerAuth", function(request, response){
-    session = request.session;
-    session.username = request.body.username;
-    response.sendFile(path.join(__dirname + "/Client/HTML/Home.html"));
-});
+    db.GetCustomer(username).then(function(customer){
+        //TODO: limit data being sent back to end user. I dont need password here!
+        response.setHeader("Content-Type", "application/json");
+        response.status(200);
+        response.send(customer);
+    })
+})
 
 app.post("/Customer/Signup", function(request, response){
     var newUsername = request.body.username;
@@ -85,9 +90,6 @@ app.post("/Customer/Signup", function(request, response){
     }
     else
     {
-        //Hashing and salting algorithms called on password
-        // var saltString = security.genRandomString(16);
-        // var hashedData = security.sha512(newPassword, saltString);
         var salt = bcrypt.genSaltSync(saltRounds);
         var hash = bcrypt.hashSync(newPassword, salt);
 
@@ -108,9 +110,8 @@ app.post("/Customer/Signup", function(request, response){
         //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
         console.log("New User: " + newUsername + " created!");
         response.status(200);
-        response.send("Sign up complete. Please log in to continue");
+        response.send("Sign up complete. Please log in to continue.");
     }
-    //console.log(response);
 });
 
 app.post("/Customer/Login", function(request, response){
@@ -123,6 +124,7 @@ app.post("/Customer/Login", function(request, response){
             if (result == true)
             {
                 console.log("Successful login by: " + inputUsername);
+                customerSession = inputUsername;
                 response.status(200);
                 response.send("Welcome " + inputUsername);
             }
@@ -130,7 +132,99 @@ app.post("/Customer/Login", function(request, response){
             {
                 console.log("Attempted login by: " + inputUsername);
                 response.status(401);
-                response.send("Login failed. Check your credentials and try again.")
+                response.send("Login failed. Check your credentials and try again.");
+            }
+        });
+    });
+});
+
+app.post("/Customer/Update", function(request, response){
+    var newEmail = request.body.email;
+    var newFirstName = request.body.firstName;
+    var newLastName = request.body.lastName;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
+
+    var updatedCustomer = {
+        $set:
+        {
+            email : newEmail,
+            firstName : newFirstName,
+            lastName : newLastName,
+            addressLineOne : newAddressLineOne,
+            addressLineTwo : newAddressLineTwo,
+            postcode : newPostcode
+        }
+    }
+
+    db.UpdateCustomer(session, updatedCustomer).then(function(res){
+        response.sendStatus(200);
+    });
+});
+
+app.get("/Staff", function(request, response){
+
+});
+
+app.post("/Staff/Signup", function(request, response){
+    var newUsername = request.body.username;
+    var newPassword = request.body.password;
+    var newEmail = request.body.emailAddress;
+    var newFirstName = request.body.firstName;
+    var newLastName = request.body.lastName;
+    var newDateOfBirth = request.body.DOB;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
+    var newJobRole = request.body.jobRole;
+    var newAccountNo = request.body.accountNo;
+    var newSortCode = request.body.sortCode;
+    var newShopId = request.body.shopId;
+
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(newPassword, salt);
+
+    var newStaff = new schemas.Staff({
+        username: newUsername,
+        staffHashedPassword: hash,
+        email: newEmail,
+        firstName: newFirstName,
+        lastName: newLastName,
+        DOB: newDateOfBirth,
+        addressLineOne: newAddressLineOne,
+        addressLineTwo: newAddressLineTwo,
+        postcode: newPostcode,
+        jobRole: newJobRole,
+        sortCode: newSortCode,
+        accountNo: newAccountNo,
+        shopId: newShopId
+    });
+
+    newStaff.save();
+    console.log("New Staff Member: " + newUsername + " created!");
+    response.status(200);
+    response.send("Sign up complete. Please log in to continue");
+});
+
+app.post("/Staff/Login", function(request, response){
+    var inputUsername = request.body.username;
+    var inputPassword = request.body.password;
+
+    db.GetStaff(inputUsername).then(function(authuser){
+        var hash = authuser.staffHashedPassword;
+        bcrypt.compare(inputPassword, hash, function(err, result){
+            if (result == true)
+            {
+                console.log("Successful Staff login by: " + inputUsername);
+                response.status(200);
+                response.send("Welcome " + inputUsername);
+            }
+            else
+            {
+                console.log("Attempted Staff login by: " + inputUsername);
+                response.status(401);
+                response.send("Login failed. Check your credentials and try again.");
             }
         });
     });

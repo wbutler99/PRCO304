@@ -15,7 +15,6 @@ var Customer = mongoose.model("Customer", {
 var Staff = mongoose.model("Staff", {
     username: String,
     staffHashedPassword: String,
-    staffSalt:String,
     email: String,
     firstName: String,
     lastName: String,
@@ -29,5 +28,15 @@ var Staff = mongoose.model("Staff", {
     shopId: String
 });
 
+var Shop = mongoose.model("Shop", {
+    shopId: String,
+    storeName: String,
+    addressLineOne: String,
+    addressLineTwo: String,
+    postcode: String,
+
+});
+
 module.exports.Customer = Customer;
 module.exports.Staff = Staff;
+module.exports.Shop = Shop;

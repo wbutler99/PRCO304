@@ -4,6 +4,21 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script>
+            window.onload = function(){
+                $.get("http://localhost:9000/Customer").then(function(customer){
+                    $("#username").append(customer.username);
+                    $("#email").append(customer.email);
+                    $("#name").append(customer.firstName + " " + customer.lastName);
+                    $("#DOB").append(customer.DOB.split('T')[0]);
+                    $("#address").append(customer.addressLineOne + "<br>" + customer.addressLineTwo + "<br>" + customer.postcode);
+                });
+
+                $("#updatebtn").click(function(){
+                    window.location.href = "CustomerUpdateAccount.html";
+                })
+            }
+        </script>
     </head>
     <body>
         <div class="jumbotron text-center bg-primary text-white">
@@ -34,5 +49,21 @@
                 </div>
             </ul>
         </nav>
+        <div class="container">
+            <h1>Customer Account Details</h1>
+            <h2>Username</h2>
+            <p id="username"></p>
+            <h2>Email Address</h2>
+            <p id="email"></p>
+            <h2>Name</h2>
+            <p id="name"></p>
+            <h2>Date of Birth</h2>
+            <p id="DOB"></p>
+            <h2>Address</h2>
+            <p id="address"></p>
+            <button id="updatebtn">Update Account Details</button>
+            <button id="passwordbtn">Update Password</button>
+        </div>
+
     </body>
 </html>
