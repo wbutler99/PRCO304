@@ -51,6 +51,7 @@ namespace CornerShopSecialistDesktop.Models
         public AccountCreation(string username, string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo, 
             string postcode, string jobRole, string sortCode, string accountNo)
         {
+            this.username = username;
             this.firstName = firstName;
             this.lastName = lastName;
             this.password = password;

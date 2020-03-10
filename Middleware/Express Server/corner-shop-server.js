@@ -129,10 +129,10 @@ app.post("/Customer/Login", function(request, response){
 app.post("/Staff/Signup", function(request, response){
     var newUsername = request.body.username;
     var newPassword = request.body.password;
-    var newEmail = request.body.email;
+    var newEmail = request.body.emailAddress;
     var newFirstName = request.body.firstName;
     var newLastName = request.body.lastName;
-    var newDateOfBirth = request.body.dateOfBirth;
+    var newDateOfBirth = request.body.DOB;
     var newAddressLineOne = request.body.addressLineOne;
     var newAddressLineTwo = request.body.addressLineTwo;
     var newPostcode = request.body.postcode;

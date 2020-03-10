@@ -22,18 +22,18 @@ namespace CornerShopSecialistDesktop
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
-            string firstName = txtFirstName.ToString();
-            string lastName = txtLastName.ToString();
-            string username = txtUsername.ToString();
-            string password = txtPassword.ToString();
-            string email = txtEmail.ToString();
+            string firstName = txtFirstName.Text;
+            string lastName = txtLastName.Text;
+            string username = txtUsername.Text;
+            string password = txtPassword.Text;
+            string email = txtEmail.Text;
             DateTime DOB = dtpDOB.Value.Date;
-            string addressLineOne = txtAddressLineOne.ToString();
-            string addressLineTwo = txtAddressLineTwo.ToString();
-            string postcode = txtPostcode.ToString();
+            string addressLineOne = txtAddressLineOne.Text;
+            string addressLineTwo = txtAddressLineTwo.Text;
+            string postcode = txtPostcode.Text;
             string jobRole = comJobRole.SelectedItem.ToString();
-            string accountNo = txtAccountNo.ToString();
-            string sortCode = txtSortCode.ToString();
+            string accountNo = txtAccountNo.Text;
+            string sortCode = txtSortCode.Text;
             //int shopId = System.Convert.ToInt32(comShopId.SelectedItem.ToString());
 
             AccountCreation employee = new AccountCreation(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
