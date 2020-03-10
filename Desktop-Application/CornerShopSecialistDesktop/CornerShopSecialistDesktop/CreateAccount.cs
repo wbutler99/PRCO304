@@ -46,6 +46,17 @@ namespace CornerShopSecialistDesktop
             if (response.IsSuccessStatusCode)
             {
                 MessageBox.Show("Sign Up Succeded.", "Sign Up Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtFirstName.Clear();
+                txtLastName.Clear();
+                txtUsername.Clear();
+                txtPassword.Clear();
+                txtEmail.Clear();
+                dtpDOB.ResetText();
+                txtAddressLineOne.Clear();
+                txtAddressLineTwo.Clear();
+                txtPostcode.Clear();
+                txtAccountNo.Clear();
+                txtSortCode.Clear();
             }
             else
             {
