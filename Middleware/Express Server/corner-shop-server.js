@@ -164,6 +164,9 @@ app.post("/Customer/Update", function(request, response){
     });
 });
 
+app.get("/Staff", function(request, response){
+
+});
 
 app.post("/Staff/Signup", function(request, response){
     var newUsername = request.body.username;

@@ -4,26 +4,15 @@ window.onload = function(){
         web.preventDefault();
         var username = $("#username").val();
         var password = $("#password").val();
-
-        var loginDetails = {
-            "username" : username,
-            "password" : password
-        };
-        var post = $.post("http://localhost:44308/api/Staff/login", {loginDetails}).always(function(){});
-        alert("Logging you in...");
+        
+        var post = $.post("http://localhost:9000/Staff/Login", {"username" : username, "password" : password}).always(function(){});
         post.done(function(data, text, res){
-            //alert(res.status);
+            alert(data);
             if(res.status == 200)
             {
-                alert("Welcome " + data.username + "!");
-                $.get("http://localhost:9000/StaffAuth", {username});
-                
-                
-            }
-            else
-            {
-                alert("Log in Failed. Please check your credentials and try again.");
-                //$("#errorBox").css("visibility", "visible");
+                // alert("Welcome " + data.username + "!");
+                // $.get("http://localhost:9000/StaffAuth", {username});
+                window.location.href = "StaffHome.html"; 
             }
         });
     });

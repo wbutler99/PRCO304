@@ -6,7 +6,6 @@ window.onload = function(){
         var password = $("#password").val();
 
         var post = $.post("http://localhost:9000/Customer/Login", {"username": username, "password": password}).always(function(){});
-        alert("Logging you in...");
         post.done(function(data, text, res){
             alert(data);
             if(res.status == 200)
