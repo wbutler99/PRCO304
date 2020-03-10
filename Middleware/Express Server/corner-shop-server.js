@@ -112,7 +112,6 @@ app.post("/Customer/Signup", function(request, response){
         response.status(200);
         response.send("Sign up complete. Please log in to continue.");
     }
-    //console.log(response);
 });
 
 app.post("/Customer/Login", function(request, response){
@@ -133,7 +132,7 @@ app.post("/Customer/Login", function(request, response){
             {
                 console.log("Attempted login by: " + inputUsername);
                 response.status(401);
-                response.send("Login failed. Check your credentials and try again.")
+                response.send("Login failed. Check your credentials and try again.");
             }
         });
     });
@@ -208,12 +207,12 @@ app.post("/Staff/Signup", function(request, response){
     response.send("Sign up complete. Please log in to continue");
 });
 
-app.post("Staff/Login", function(request, response){
+app.post("/Staff/Login", function(request, response){
     var inputUsername = request.body.username;
     var inputPassword = request.body.password;
 
     db.GetStaff(inputUsername).then(function(authuser){
-        var hash = authuser.customerHashedPassword;
+        var hash = authuser.staffHashedPassword;
         bcrypt.compare(inputPassword, hash, function(err, result){
             if (result == true)
             {

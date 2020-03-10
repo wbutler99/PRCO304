@@ -4,7 +4,7 @@ window.onload = function(){
         web.preventDefault();
         var username = $("#username").val();
         var password = $("#password").val();
-        
+
         var post = $.post("http://localhost:9000/Staff/Login", {"username" : username, "password" : password}).always(function(){});
         post.done(function(data, text, res){
             alert(data);
