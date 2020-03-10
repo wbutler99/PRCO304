@@ -11,7 +11,8 @@ var router = express.Router();
 
 var app = express();
 
-var session;
+var customerSession;
+var staffSession;
 var uri = "mongodb://localhost:27017/CSSDB";
 var saltRounds = 10;
 
@@ -23,6 +24,17 @@ app.use(function(req, res, next){
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+
+app.get("/Customer", function(request, response){
+    var username = customerSession;
+
+    db.GetCustomer(username).then(function(customer){
+        //TODO: limit data being sent back to end user. I dont need password here!
+        response.setHeader("Content-Type", "application/json");
+        response.status(200);
+        response.send(customer);
+    })
+})
 
 app.post("/Customer/Signup", function(request, response){
     var newUsername = request.body.username;
@@ -98,7 +110,7 @@ app.post("/Customer/Signup", function(request, response){
         //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
         console.log("New User: " + newUsername + " created!");
         response.status(200);
-        response.send("Sign up complete. Please log in to continue");
+        response.send("Sign up complete. Please log in to continue.");
     }
     //console.log(response);
 });
@@ -113,6 +125,7 @@ app.post("/Customer/Login", function(request, response){
             if (result == true)
             {
                 console.log("Successful login by: " + inputUsername);
+                customerSession = inputUsername;
                 response.status(200);
                 response.send("Welcome " + inputUsername);
             }
@@ -125,6 +138,32 @@ app.post("/Customer/Login", function(request, response){
         });
     });
 });
+
+app.post("/Customer/Update", function(request, response){
+    var newEmail = request.body.email;
+    var newFirstName = request.body.firstName;
+    var newLastName = request.body.lastName;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
+
+    var updatedCustomer = {
+        $set:
+        {
+            email : newEmail,
+            firstName : newFirstName,
+            lastName : newLastName,
+            addressLineOne : newAddressLineOne,
+            addressLineTwo : newAddressLineTwo,
+            postcode : newPostcode
+        }
+    }
+
+    db.UpdateCustomer(session, updatedCustomer).then(function(res){
+        response.sendStatus(200);
+    });
+});
+
 
 app.post("/Staff/Signup", function(request, response){
     var newUsername = request.body.username;
