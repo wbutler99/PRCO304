@@ -43,8 +43,8 @@ namespace CornerShopSecialistDesktop
             LogIn logInDetails = new LogIn(username, password);
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://web.socem.plymouth.ac.uk/FYP/WButler/api/");
-            var response = client.PostAsJsonAsync("employee/login", logInDetails).Result;
+            client.BaseAddress = new Uri("http://localhost:9000/");
+            var response = client.PostAsJsonAsync("Staff/Login", logInDetails).Result;
 
             if(response.IsSuccessStatusCode)
             {

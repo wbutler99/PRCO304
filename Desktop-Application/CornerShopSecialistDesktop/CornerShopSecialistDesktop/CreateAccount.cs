@@ -34,14 +34,14 @@ namespace CornerShopSecialistDesktop
             string jobRole = comJobRole.SelectedItem.ToString();
             string accountNo = txtAccountNo.ToString();
             string sortCode = txtSortCode.ToString();
-            int shopId = System.Convert.ToInt32(comShopId.SelectedItem.ToString());
+            //int shopId = System.Convert.ToInt32(comShopId.SelectedItem.ToString());
 
-            AccountCreation employee = new AccountCreation(firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
-                accountNo, shopId);
+            AccountCreation employee = new AccountCreation(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
+                accountNo);
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://web.socem.plymouth.ac.uk/FYP/WButler/api/");
-            var response = client.PostAsJsonAsync("employee", employee).Result;
+            client.BaseAddress = new Uri("http://localhost:9000/");
+            var response = client.PostAsJsonAsync("Staff/Signup", employee).Result;
 
             if (response.IsSuccessStatusCode)
             {
