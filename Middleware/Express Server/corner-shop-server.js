@@ -158,10 +158,43 @@ app.post("/Customer/Update", function(request, response){
         }
     }
 
-    db.UpdateCustomer(session, updatedCustomer).then(function(res){
+    db.UpdateCustomer(customerSession, updatedCustomer).then(function(res){
         response.sendStatus(200);
     });
 });
+
+app.post("/Customer/UpdatePassword", function(request, response){
+    var oldPassword = request.body.oldPassword;
+    var newPassword = request.body.newPassword;
+
+    db.GetCustomer(customerSession).then(function(customer){
+        var password = customer.customerHashedPassword;
+        bcrypt.compare(oldPassword, password, function(err, result){
+            if(result == true)
+            {
+                var salt = bcrypt.genSaltSync(saltRounds);
+                var hash = bcrypt.hashSync(newPassword, salt);
+                var updatedCustomer = {
+                    $set:
+                    {
+                        staffHashedPassword : hash
+                    }
+                }
+
+                db.UpdateCustomer(customerSession, updatedCustomer).then(function(res){
+                    response.sendStatus(200);
+                })
+            }
+            else
+            {
+                response.status(401);
+                response.send("Authentication failed. Please check your credentials and try again.");
+            }
+        });
+    })
+});
+
+
 
 app.get("/Staff", function(request, response){
     var username = staffSession;
