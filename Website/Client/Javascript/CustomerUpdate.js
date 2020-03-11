@@ -32,7 +32,7 @@ window.onload = function(){
             if(res.status == 200)
             {
                 alert("Account updated successfully!");
-                window.location.href = "account.html";
+                window.location.href = "CustomerAccount.html";
             }
             else
             {

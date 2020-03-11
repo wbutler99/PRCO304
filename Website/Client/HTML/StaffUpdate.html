@@ -4,12 +4,50 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="../Javascript/CustomerUpdate.js"></script>
+        <script>
+            window.onload = function(){
+                $.get("http://localhost:9000/Customer").then(function(customer){
+                $("#username").append(customer.username);
+                $("#DOB").append(customer.DOB.split('T')[0]);
+                $("#name").append(staff.firstName + " " + staff.lastName);
+                $("#jobrole").append(staff.jobRole);
+
+                $("#email").val(customer.email);
+                $("#addressLineOne").val(customer.addressLineOne);
+                $("#addressLineTwo").val(customer.addressLineTwo);
+                $("#postcode").val(customer.postcode);
+                });
+
+                $("#updateForm").submit(function(){
+                    var newEmail = $("#email").val();
+                    var newAddressLineOne = $("#addressLineOne").val();
+                    var newAddressLineTwo = $("#addressLineTwo").val();
+                    var newPostcode = $("#postcode").val();
+                    var post = $.post("http://localhost:9000/Staff/Web/Update", {
+                        "email" : newEmail,
+                        "addressLineOne" : newAddressLineOne,
+                        "addressLineTwo" : newAddressLineTwo,
+                        "postcode" : newPostcode
+                    }).always(function(){});
+                    post.done(function(data, text, res){
+                        if(res.status == 200)
+                        {
+                            alert("Account updated successfully!");
+                            window.location.href = "StaffAccount.html";
+                        }
+                        else
+                        {
+                            alert("Oops! Something went wrong. Please try again.");
+                        }
+                    });
+                });
+            }
+        </script>
     </head>
     <body>
         <div class="jumbotron text-center bg-primary text-white">
             <h1>Corner Shop Specialist</h1>
-            <h2>Customer Portal</h2> 
+            <h2>Staff Portal</h2> 
         </div>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
             <ul class="navbar-nav">
@@ -26,17 +64,15 @@
                   <a class="nav-link" id="news">News Deliveries</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="account" onclick="window.location.href = 'CustomerAccount.html'">Account</a>
+                    <a class="nav-link" id="account" onclick="window.location.href = 'StaffAccount.html'">Account</a>
                   </li>
                 <div class="nav navbar-right">
                     <li class="nav-item">
-                        <button class="btn btn-primary mt-3" id="login">Log In</button>
+                        <button class="btn btn-primary mt-3" id="logout">Log Out</button>
                     </li>
                 </div>
             </ul>
         </nav>
-
-        <h1>Update Account Details</h1>
 
         <div class="container">
             <h2>Please edit your details here</h2>                
@@ -44,23 +80,15 @@
             <p id="username"></p>
             <label for="DOB">Date of Birth:</label>
             <p id="DOB"></p>
+            <label for="name">Name:</label>
+            <p id="name"></p>
+            <label for="jobrole">Job Role:</label>
+            <p id="jobrole"></p>
             <form id="updateForm" class="was-validated">
                 <div class="form-group">
                     <label for="email">email:</label>
                     <input type="email" class="form-control" id="email" required>
                     <div class="invalid-feedback">Please fill out this field.</div>
-                </div>
-                <div class="input-group">
-                    <div class="form-group col-sm-6">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" class="form-control" id="firstName" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
-                    <div class="form-group col-sm-6">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" class="form-control" id="lastName" required>
-                        <div class="invalid-feedback">Please fill out this field.</div>
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="addressLineOne">Address Line One:</label>
@@ -82,3 +110,5 @@
         </div>
     </body>
 </html>
+            
+    

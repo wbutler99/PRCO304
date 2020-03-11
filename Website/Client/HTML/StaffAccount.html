@@ -14,6 +14,15 @@
                     $("#address").append(staff.addressLineOne + "<br>" + staff.addressLineTwo + "<br>" + staff.postcode);
                     $("#jobrole").append(staff.jobRole);
                 });
+
+                
+                $("#updatebtn").click(function(){
+                    window.location.href = "StaffUpdateAccount.html";
+                });
+
+                $("#passwordbtn").click(function(){
+                    window.location.href = "StaffUpdatePassword.html"
+                });
             }
         </script>
     </head>

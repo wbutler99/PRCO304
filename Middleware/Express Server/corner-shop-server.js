@@ -137,7 +137,7 @@ app.post("/Customer/UpdatePassword", function(request, response){
                 var updatedCustomer = {
                     $set:
                     {
-                        staffHashedPassword : hash
+                        customerHashedPassword : hash
                     }
                 }
 
@@ -151,7 +151,7 @@ app.post("/Customer/UpdatePassword", function(request, response){
                 response.send("Authentication failed. Please check your credentials and try again.");
             }
         });
-    })
+    });
 });
 
 
@@ -232,7 +232,55 @@ app.post("/Staff/Login", function(request, response){
 });
 
 app.post("Staff/Web/Update", function(request, response){
+    var newEmail = request.body.email;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
 
+    var updatedStaff = {
+        $set:
+        {
+            email : newEmail,
+            addressLineOne : newAddressLineOne,
+            addressLineTwo : newAddressLineTwo,
+            postcode : newPostcode
+        }
+    }
+
+    db.UpdateCustomer(staffSession, updatedStaff).then(function(res){
+        response.sendStatus(200);
+    });
+});
+
+app.post("Staff/Web/UpdatePassword", function(request, response){
+    var oldPassword = request.body.oldPassword;
+    var newPassword = request.body.newPassword;
+
+    db.GetStaff(staffSession).then(function(staff){
+        var password = staff.staffHashedPassword;
+        bcrypt.compare(oldPassword, password, function(err, result){
+            if(result == true)
+            {
+                var salt = bcrypt.genSaltSync(saltRounds);
+                var hash = bcrypt.hashSync(newPassword, salt);
+                var updatedStaff = {
+                    $set:
+                    {
+                        staffHashedPassword : hash
+                    }
+                }
+
+                db.UpdateCustomer(staffSession, updatedStaff).then(function(res){
+                    response.sendStatus(200);
+                })
+            }
+            else
+            {
+                response.status(401);
+                response.send("Authentication failed. Please check your credentials and try again.");
+            }
+        });
+    });
 });
 
 app.post("Staff/Desktop/Update", function(request, response){
