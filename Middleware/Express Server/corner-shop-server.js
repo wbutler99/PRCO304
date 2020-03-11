@@ -29,7 +29,7 @@ app.get("/Customer", function(request, response){
     var username = customerSession;
 
     db.GetCustomer(username).then(function(customer){
-        //TODO: limit data being sent back to end user. I dont need password here!
+        customer.customerHashedPassword = undefined;
         response.setHeader("Content-Type", "application/json");
         response.status(200);
         response.send(customer);
@@ -160,7 +160,7 @@ app.get("/Staff", function(request, response){
     var username = staffSession;
 
     db.GetStaff(username).then(function(staff){
-        //TODO: limit data being sent back to end user. I dont need password here!
+        staff.staffHashedPassword = undefined;
         response.setHeader("Content-Type", "application/json");
         response.status(200);
         response.send(staff);
