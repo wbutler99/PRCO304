@@ -33,7 +33,7 @@ app.get("/Customer", function(request, response){
         response.setHeader("Content-Type", "application/json");
         response.status(200);
         response.send(customer);
-    })
+    });
 })
 
 app.post("/Customer/Signup", function(request, response){
@@ -164,7 +164,14 @@ app.post("/Customer/Update", function(request, response){
 });
 
 app.get("/Staff", function(request, response){
+    var username = staffSession;
 
+    db.GetStaff(username).then(function(staff){
+        //TODO: limit data being sent back to end user. I dont need password here!
+        response.setHeader("Content-Type", "application/json");
+        response.status(200);
+        response.send(staff);
+    })
 });
 
 app.post("/Staff/Signup", function(request, response){
@@ -217,6 +224,7 @@ app.post("/Staff/Login", function(request, response){
             if (result == true)
             {
                 console.log("Successful Staff login by: " + inputUsername);
+                staffSession = inputUsername;
                 response.status(200);
                 response.send("Welcome " + inputUsername);
             }
@@ -228,6 +236,14 @@ app.post("/Staff/Login", function(request, response){
             }
         });
     });
+});
+
+app.post("Staff/Web/Update", function(request, response){
+
+});
+
+app.post("Staff/Desktop/Update", function(request, response){
+
 });
 
 app.listen(9000, async function() {

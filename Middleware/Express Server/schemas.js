@@ -37,6 +37,16 @@ var Shop = mongoose.model("Shop", {
 
 });
 
+var Delivery = mongoose.model("Delivery", {
+
+});
+
+var Stock = mongoose.model("Stock", {
+
+});
+
 module.exports.Customer = Customer;
 module.exports.Staff = Staff;
 module.exports.Shop = Shop;
+module.exports.Stock = Stock;
+module.exports.Delivery = Delivery;
