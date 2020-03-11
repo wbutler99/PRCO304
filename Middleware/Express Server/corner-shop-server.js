@@ -50,68 +50,28 @@ app.post("/Customer/Signup", function(request, response){
     var repeatCheckUsername = 0;
     var repeatCheckEmail = 0;
 
-    // //Check to see if username chosen is already in use
-    // repeatCheckUsername = db.GetCustomer(newUsername).then(function(result){
-    //     if(result == null)
-    //     {
-    //         return 0;
-    //     }
-    //     else if(result.username == newUsername){
-    //         return 1;
-    //     }
-    //     else 
-    //     {
-    //         return 0;
-    //     }
-    // });
-    // //Check to see if email chosen is already used for an account
-    // repeatCheckEmail = db.GetCustomerEmail(newEmail).then(function(result){
-    //     if(result == null)
-    //     {
-    //         return 0;
-    //     }
-    //     else if(result.email == newEmail){
-    //         return 1;
-    //     }
-    //     else
-    //     {
-    //         return 0;
-    //     }
-    // });
-    if(repeatCheckEmail)
-    {
-        response.status(403);
-        response.send("A user with that email address already exists");
-    }
-    else if(repeatCheckUsername)
-    {
-        response.status(403);
-        response.send("A user with that username already exists");
-    }
-    else
-    {
-        var salt = bcrypt.genSaltSync(saltRounds);
-        var hash = bcrypt.hashSync(newPassword, salt);
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(newPassword, salt);
 
-        var newCustomer = new schemas.Customer({
-            username: newUsername,
-            customerHashedPassword: hash,
-            email: newEmail,
-            firstName: newFirstName,
-            lastName: newLastName,
-            DOB: newDateOfBirth,
-            addressLineOne: newAddressLineOne,
-            addressLineTwo: newAddressLineTwo,
-            postcode: newPostcode
-        });
+    var newCustomer = new schemas.Customer({
+        username: newUsername,
+        customerHashedPassword: hash,
+        email: newEmail,
+        firstName: newFirstName,
+        lastName: newLastName,
+        DOB: newDateOfBirth,
+        addressLineOne: newAddressLineOne,
+        addressLineTwo: newAddressLineTwo,
+        postcode: newPostcode
+    });
 
-        newCustomer.save();
-        //app.session = newCustomer.username;
-        //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
-        console.log("New User: " + newUsername + " created!");
-        response.status(200);
-        response.send("Sign up complete. Please log in to continue.");
-    }
+    newCustomer.save();
+    //app.session = newCustomer.username;
+    //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
+    console.log("New User: " + newUsername + " created!");
+    response.status(200);
+    response.send("Sign up complete. Please log in to continue.");
+    
 });
 
 app.post("/Customer/Login", function(request, response){

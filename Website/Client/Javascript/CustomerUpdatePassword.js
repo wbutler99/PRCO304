@@ -18,7 +18,7 @@ window.onload = function(){
             post.done(function(data, text, res){
                 if(res.status == 200)
                 {
-                    alert("Account updated successfully!");
+                    alert("Password updated successfully!");
                     window.location.href = "account.html";
                 }
                 else
