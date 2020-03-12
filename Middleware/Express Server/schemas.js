@@ -41,20 +41,39 @@ var Staff = mongoose.model("Staff", {
 });
 
 var Shop = mongoose.model("Shop", {
-    shopId: String,
-    storeName: String,
+    storeName: {
+        type: String,
+        unique: true
+    },
     addressLineOne: String,
     addressLineTwo: String,
     postcode: String,
-
 });
 
 var Delivery = mongoose.model("Delivery", {
+    shopId: String,
+    deliveryDate: Date,
+    deliveryType: String,
+});
 
+var DeliveryItem = mongoose.model("DeliveryItem", {
+    deliveryId: String,
+    productId: String
+});
+
+var Product = mongoose.model("Product", {
+    name: {
+      type: String,
+      unique: true
+    },
+    stockType: String,
+    description: String,
 });
 
 var Stock = mongoose.model("Stock", {
-
+    productId: String,
+    storeId: String,
+    quantity: Number
 });
 
 module.exports.Customer = Customer;
@@ -62,3 +81,5 @@ module.exports.Staff = Staff;
 module.exports.Shop = Shop;
 module.exports.Stock = Stock;
 module.exports.Delivery = Delivery;
+module.exports.DeliveryItem = DeliveryItem;
+module.exports.Product = Product;
