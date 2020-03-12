@@ -11,7 +11,7 @@ window.onload = function(){
         }
         else
         {
-            var post = $.post("http://localhost:9000/Customer/UpdatePassword", {
+            var post = $.post("http://localhost:9000/Staff/UpdatePassword", {
                 "oldPassword" : oldPassword,
                 "newPassword" : newPassword
             }).always(function(){});
@@ -19,7 +19,7 @@ window.onload = function(){
                 if(res.status == 200)
                 {
                     alert("Password updated successfully!");
-                    window.location.href = "CustomerAccount.html";
+                    window.location.href = "StaffAccount.html";
                 }
                 else
                 {

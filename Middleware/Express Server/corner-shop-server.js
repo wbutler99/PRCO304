@@ -252,7 +252,7 @@ app.post("Staff/Web/Update", function(request, response){
     });
 });
 
-app.post("Staff/Web/UpdatePassword", function(request, response){
+app.post("Staff/UpdatePassword", function(request, response){
     var oldPassword = request.body.oldPassword;
     var newPassword = request.body.newPassword;
 
