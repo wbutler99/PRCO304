@@ -28,9 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.logInBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.employeeViewModelBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logInBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeViewModelBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -50,19 +55,29 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 50);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(782, 393);
+            this.dataGridView1.Size = new System.Drawing.Size(1271, 393);
             this.dataGridView1.TabIndex = 2;
+            // 
+            // logInBindingSource
+            // 
+            this.logInBindingSource.DataSource = typeof(CornerShopSecialistDesktop.Models.LogIn);
+            // 
+            // employeeViewModelBindingSource
+            // 
+            this.employeeViewModelBindingSource.DataSource = typeof(CornerShopSecialistDesktop.Models.EmployeeViewModel);
             // 
             // Stock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1295, 595);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Name = "Stock";
             this.Text = "Stock";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.logInBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeViewModelBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -72,5 +87,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource logInBindingSource;
+        private System.Windows.Forms.BindingSource employeeViewModelBindingSource;
     }
 }
