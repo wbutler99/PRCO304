@@ -38,7 +38,7 @@ async function GetShops()
 
 async function GetShop(id)
 {
-    return await schemas.Shop.findOne();
+    return await schemas.Shop.findOne({"_id" : id});
 }
 
 module.exports.GetCustomer = GetCustomer;
@@ -47,3 +47,4 @@ module.exports.UpdateCustomer = UpdateCustomer;
 module.exports.GetStaff = GetStaff;
 module.exports.UpdateStaff = UpdateStaff;
 module.exports.GetShops = GetShops;
+module.exports.GetShop = GetShop;

@@ -2,6 +2,7 @@ var express = require("express");
 var mongoose = require("mongoose");
 var db = require("./db");
 var schemas = require("./schemas");
+var DTO = require("./DTO");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
@@ -302,11 +303,15 @@ app.get("/Shop", function(request, response){
 
 app.get("/Staff/Shop", function(request, response){
     //TODO: get staff info to find the shop associated
-    db.GetShops(staffId).then(function(shop){
+    db.GetShop(staffId).then(function(shop){
         response.status(200);
         response.send(shop);
     });
 });
+
+//Endpoints for stock
+
+
 
 app.listen(9000, async function() {
     await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
