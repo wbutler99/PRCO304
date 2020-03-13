@@ -311,7 +311,38 @@ app.get("/Staff/Shop", function(request, response){
 
 //Endpoints for stock
 
+app.get("/Staff/Stock", function(request, response){
+    var allStock = [];
+    db.GetStaff(staffSession).then(function(staff){
+        var shop = staff.shopId;
+        console.log("Stock for shop: " + shop + "Requested.");
+        db.GetStock(shop).then(function(stock){
+            for(var i = 0; i < Object.keys(stock).length; i++)
+            {
+                var productId = stock[i].productId;
+                db.GetProduct(productId).then(function(product){
+                    allStock.push({
+                        "productName": product.name,
+                        "stockType": product.stockType,
+                        "description": product.description,
+                        "quantity": stock.quantity
+                    });
+                });
+            }
+        });
+    });
+    response.status(200);
+    response.send(allStock);
+});
 
+//Endpoints for products
+
+app.get("/Products", function(request, response){
+    db.GetProducts().then(function(products){
+        response.status(200);
+        response.send(products);
+    });
+});
 
 app.listen(9000, async function() {
     await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
