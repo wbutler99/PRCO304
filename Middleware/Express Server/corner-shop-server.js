@@ -9,6 +9,8 @@ var http = require("http");
 var bcrypt = require("bcrypt");
 var router = express.Router();
 
+//Initial setup
+
 var app = express();
 
 var customerSession;
@@ -24,6 +26,8 @@ app.use(function(req, res, next){
 });
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+
+//Endpoints for Customer
 
 app.get("/Customer", function(request, response){
     var username = customerSession;
@@ -201,7 +205,7 @@ app.post("/Staff/Signup", function(request, response){
         shopId: newShopId
     });
 
-    newStaff.save();
+    newStaff.save(); //TODO: Add fail response for unique elements
     console.log("New Staff Member: " + newUsername + " created!");
     response.status(200);
     response.send("Sign up complete. Please log in to continue");
@@ -231,7 +235,7 @@ app.post("/Staff/Login", function(request, response){
     });
 });
 
-app.post("Staff/Web/Update", function(request, response){
+app.post("/Staff/Web/Update", function(request, response){
     var newEmail = request.body.email;
     var newAddressLineOne = request.body.addressLineOne;
     var newAddressLineTwo = request.body.addressLineTwo;
@@ -252,7 +256,7 @@ app.post("Staff/Web/Update", function(request, response){
     });
 });
 
-app.post("Staff/UpdatePassword", function(request, response){
+app.post("/Staff/UpdatePassword", function(request, response){
     var oldPassword = request.body.oldPassword;
     var newPassword = request.body.newPassword;
 
@@ -283,8 +287,25 @@ app.post("Staff/UpdatePassword", function(request, response){
     });
 });
 
-app.post("Staff/Desktop/Update", function(request, response){
+app.post("/Staff/Desktop/Update", function(request, response){
     
+});
+
+//Endpoints for shops
+
+app.get("/Shop", function(request, response){
+    db.GetShops().then(function(shops){
+        response.status(200);
+        response.send(shops);
+    });
+});
+
+app.get("/Staff/Shop", function(request, response){
+    //TODO: get staff info to find the shop associated
+    db.GetShops(staffId).then(function(shop){
+        response.status(200);
+        response.send(shop);
+    });
 });
 
 app.listen(9000, async function() {

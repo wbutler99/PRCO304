@@ -29,8 +29,21 @@ async function UpdateStaff(username, staff)
     return await schemas.Staff.updateOne({"username": username}, staff);
 }
 
+//DB functions for shop
+
+async function GetShops()
+{
+    return await schemas.Shop.find();
+}
+
+async function GetShop(id)
+{
+    return await schemas.Shop.findOne();
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
 module.exports.GetStaff = GetStaff;
 module.exports.UpdateStaff = UpdateStaff;
+module.exports.GetShops = GetShops;
