@@ -24,5 +24,12 @@ namespace CornerShopSecialistDesktop
             home.Show();
             this.Hide();
         }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            Stock stockPage = new Stock();
+            stockPage.Show();
+
+        }
     }
 }

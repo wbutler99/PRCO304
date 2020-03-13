@@ -64,6 +64,12 @@
     <Compile Include="CreateAccount.Designer.cs">
       <DependentUpon>CreateAccount.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateManager.Designer.cs">
+      <DependentUpon>CreateManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,11 +93,20 @@
     <Compile Include="StaffHome.Designer.cs">
       <DependentUpon>StaffHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Stock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Stock.Designer.cs">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdminHome.resx">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CreateAccount.resx">
       <DependentUpon>CreateAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateManager.resx">
+      <DependentUpon>CreateManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -108,6 +123,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Stock.resx">
+      <DependentUpon>Stock.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

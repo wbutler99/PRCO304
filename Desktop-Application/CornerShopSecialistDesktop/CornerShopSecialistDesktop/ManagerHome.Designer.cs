@@ -41,6 +41,7 @@
             this.btnStock.TabIndex = 0;
             this.btnStock.Text = "Stock";
             this.btnStock.UseVisualStyleBackColor = true;
+            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
             // 
             // btnDeliveries
             // 

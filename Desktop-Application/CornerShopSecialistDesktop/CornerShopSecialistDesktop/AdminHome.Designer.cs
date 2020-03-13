@@ -31,6 +31,7 @@
             this.btnShops = new System.Windows.Forms.Button();
             this.btnNewDelivery = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.btnNewManager = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnShops
@@ -61,11 +62,21 @@
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
+            // btnNewManager
+            // 
+            this.btnNewManager.Location = new System.Drawing.Point(423, 61);
+            this.btnNewManager.Name = "btnNewManager";
+            this.btnNewManager.Size = new System.Drawing.Size(121, 23);
+            this.btnNewManager.TabIndex = 3;
+            this.btnNewManager.Text = "New Manager";
+            this.btnNewManager.UseVisualStyleBackColor = true;
+            // 
             // AdminHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnNewManager);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnNewDelivery);
             this.Controls.Add(this.btnShops);
@@ -80,5 +91,6 @@
         private System.Windows.Forms.Button btnShops;
         private System.Windows.Forms.Button btnNewDelivery;
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnNewManager;
     }
 }
