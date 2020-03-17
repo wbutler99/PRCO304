@@ -10,18 +10,18 @@ namespace CornerShopSecialistDesktop.Models
     class StockViewModel
     {
         [JsonProperty("productName")]
-        private string productName { get; set; }
+        public string productName { get; set; }
 
         [JsonProperty("stockType")]
-        private string stockType { get; set; }
+        public string stockType { get; set; }
 
         [JsonProperty("description")]
-        private string productDescription { get; set; }
+        public string productDescription { get; set; }
 
         [JsonProperty("quantity")]
-        private string quantity { get; set; }
+        public int quantity { get; set; }
 
-        public StockViewModel(string productName, string stockType, string productDescription, string quantity)
+        public StockViewModel(string productName, string stockType, string productDescription, int quantity)
         {
             this.productName = productName;
             this.stockType = stockType;
