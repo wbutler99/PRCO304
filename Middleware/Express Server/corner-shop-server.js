@@ -344,6 +344,14 @@ app.get("/Products", function(request, response){
     });
 });
 
+app.get("/Products/Search", function(request, response){
+    var searchInput = request.body.searchInput;
+    db.SearchProducts(searchInput).then(function(products){
+        response.status(200);
+        response.send(products);
+    })
+});
+
 app.listen(9000, async function() {
     await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
     console.log("Connected to DB");

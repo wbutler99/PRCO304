@@ -16,11 +16,22 @@
                         //insert data to the table
                         //TODO: Ask Dan about redirect button.
                         $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
-                             "<a class='btn btn-primary mt-3'>" + View + "</a>" + "</td></tr>"); 
+                             "<a class='btn btn-primary mt-3'>" + "View" + "</a>" + "</td></tr>"); 
                     }
                 });
-                $("#bookbtn").click(function(){
-                    window.location.href = "booktrain.html";
+                $("#searchbtn").click(function(){
+                    var searchInput = $("#search").val();
+                    $.get("http://localhost:9000/Products/Search", {"searchInput": searchInput}).then(function(products){
+                        $("#productTable tbody").remove();
+                        for (var i = 0; i <= products.length; i++)
+                        {
+                            var product = products[i];
+                            //insert data to the table
+                            //TODO: Ask Dan about redirect button.
+                            $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
+                                "<a class='btn btn-primary mt-3'>" + "View" + "</a>" + "</td></tr>"); 
+                        }
+                    });
                 });
             }
         </script>
@@ -55,13 +66,21 @@
             </ul>
         </nav>
         <!--TODO: Add search bar and have it call the search endpoint-->
+        <label for="search">Search:</label>
+        <input type="text" class="form-control mr-sm-2" id="search" placeholder="Search for products...">
+        <button class="btn btn-success" type="submit" id="searchbtn">Search</button>
         <table id="productTable" class="table table-striped">
-            <tr>
-                <th>Name</th>
-                <th>Product Type</th>
-                <th>Description</th>
-                <th>View Product</th>
-            </tr>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Product Type</th>
+                    <th>Description</th>
+                    <th>View Product</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
         </table>
     </body>
 </html>
