@@ -159,7 +159,7 @@ app.post("/Customer/UpdatePassword", function(request, response){
     });
 });
 
-
+//Endpoints for staff
 
 app.get("/Staff", function(request, response){
     var username = staffSession;
@@ -172,7 +172,7 @@ app.get("/Staff", function(request, response){
     })
 });
 
-app.post("/Staff/Signup", function(request, response){
+app.post("Admin/Staff/Signup", function(request, response){
     var newUsername = request.body.username;
     var newPassword = request.body.password;
     var newEmail = request.body.emailAddress;
@@ -186,6 +186,50 @@ app.post("/Staff/Signup", function(request, response){
     var newAccountNo = request.body.accountNo;
     var newSortCode = request.body.sortCode;
     var newShopId = request.body.shopId;
+
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(newPassword, salt);
+
+    var newStaff = new schemas.Staff({
+        username: newUsername,
+        staffHashedPassword: hash,
+        email: newEmail,
+        firstName: newFirstName,
+        lastName: newLastName,
+        DOB: newDateOfBirth,
+        addressLineOne: newAddressLineOne,
+        addressLineTwo: newAddressLineTwo,
+        postcode: newPostcode,
+        jobRole: newJobRole,
+        sortCode: newSortCode,
+        accountNo: newAccountNo,
+        shopId: newShopId
+    });
+
+    newStaff.save(); //TODO: Add fail response for unique elements
+    console.log("New Staff Member: " + newUsername + " created!");
+    response.status(200);
+    response.send("Sign up complete. Please log in to continue");
+});
+
+app.post("Manager/Staff/Signup", function(request, response){
+    var newUsername = request.body.username;
+    var newPassword = request.body.password;
+    var newEmail = request.body.emailAddress;
+    var newFirstName = request.body.firstName;
+    var newLastName = request.body.lastName;
+    var newDateOfBirth = request.body.DOB;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
+    var newJobRole = request.body.jobRole;
+    var newAccountNo = request.body.accountNo;
+    var newSortCode = request.body.sortCode;
+    var newShopId;
+
+    db.GetStaff(staffSession).then(function(manager){
+        newShopId = manager.shopId;
+    });
 
     var salt = bcrypt.genSaltSync(saltRounds);
     var hash = bcrypt.hashSync(newPassword, salt);
@@ -349,7 +393,7 @@ app.get("/Products/Search", function(request, response){
     db.SearchProducts(searchInput).then(function(products){
         response.status(200);
         response.send(products);
-    })
+    });
 });
 
 app.listen(9000, async function() {

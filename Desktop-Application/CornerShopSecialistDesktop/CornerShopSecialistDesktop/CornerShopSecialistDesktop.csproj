@@ -64,11 +64,11 @@
     <Compile Include="CreateAccount.Designer.cs">
       <DependentUpon>CreateAccount.cs</DependentUpon>
     </Compile>
-    <Compile Include="CreateManager.cs">
+    <Compile Include="CreateStaff.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CreateManager.Designer.cs">
-      <DependentUpon>CreateManager.cs</DependentUpon>
+    <Compile Include="CreateStaff.Designer.cs">
+      <DependentUpon>CreateStaff.cs</DependentUpon>
     </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
@@ -85,6 +85,7 @@
     <Compile Include="Models\AccountCreation.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\LogIn.cs" />
+    <Compile Include="Models\ShopViewModel.cs" />
     <Compile Include="Models\StockViewModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,8 +107,8 @@
     <EmbeddedResource Include="CreateAccount.resx">
       <DependentUpon>CreateAccount.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CreateManager.resx">
-      <DependentUpon>CreateManager.cs</DependentUpon>
+    <EmbeddedResource Include="CreateStaff.resx">
+      <DependentUpon>CreateStaff.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>

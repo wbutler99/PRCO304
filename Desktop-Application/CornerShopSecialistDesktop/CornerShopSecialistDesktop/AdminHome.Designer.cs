@@ -68,8 +68,9 @@
             this.btnNewManager.Name = "btnNewManager";
             this.btnNewManager.Size = new System.Drawing.Size(121, 23);
             this.btnNewManager.TabIndex = 3;
-            this.btnNewManager.Text = "New Manager";
+            this.btnNewManager.Text = "New Staff Member";
             this.btnNewManager.UseVisualStyleBackColor = true;
+            this.btnNewManager.Click += new System.EventHandler(this.btnNewManager_Click);
             // 
             // AdminHome
             // 

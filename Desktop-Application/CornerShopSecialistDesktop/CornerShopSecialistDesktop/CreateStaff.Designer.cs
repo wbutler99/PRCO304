@@ -1,6 +1,6 @@
 ﻿namespace CornerShopSecialistDesktop
 {
-    partial class CreateManager
+    partial class CreateStaff
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,11 @@
         {
             this.btnRegister = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
-            this.comShopId = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.txtSortCode = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtAccountNo = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.comJobRole = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
             this.txtPostcode = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txtAddressLineTwo = new System.Windows.Forms.TextBox();
@@ -61,7 +57,7 @@
             // 
             // btnRegister
             // 
-            this.btnRegister.Location = new System.Drawing.Point(340, 420);
+            this.btnRegister.Location = new System.Drawing.Point(334, 339);
             this.btnRegister.Name = "btnRegister";
             this.btnRegister.Size = new System.Drawing.Size(148, 23);
             this.btnRegister.TabIndex = 57;
@@ -79,39 +75,6 @@
             this.label15.TabIndex = 56;
             this.label15.Text = "Job Information";
             // 
-            // comShopId
-            // 
-            this.comShopId.FormattingEnabled = true;
-            this.comShopId.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15"});
-            this.comShopId.Location = new System.Drawing.Point(404, 374);
-            this.comShopId.Name = "comShopId";
-            this.comShopId.Size = new System.Drawing.Size(127, 21);
-            this.comShopId.TabIndex = 55;
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(281, 377);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(95, 13);
-            this.label14.TabIndex = 54;
-            this.label14.Text = "Shop ID (optional):";
-            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -124,7 +87,7 @@
             // 
             // txtSortCode
             // 
-            this.txtSortCode.Location = new System.Drawing.Point(532, 332);
+            this.txtSortCode.Location = new System.Drawing.Point(532, 295);
             this.txtSortCode.Name = "txtSortCode";
             this.txtSortCode.Size = new System.Drawing.Size(100, 20);
             this.txtSortCode.TabIndex = 52;
@@ -132,7 +95,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(452, 335);
+            this.label12.Location = new System.Drawing.Point(454, 298);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(57, 13);
             this.label12.TabIndex = 51;
@@ -140,7 +103,7 @@
             // 
             // txtAccountNo
             // 
-            this.txtAccountNo.Location = new System.Drawing.Point(266, 332);
+            this.txtAccountNo.Location = new System.Drawing.Point(266, 295);
             this.txtAccountNo.Name = "txtAccountNo";
             this.txtAccountNo.Size = new System.Drawing.Size(138, 20);
             this.txtAccountNo.TabIndex = 50;
@@ -148,32 +111,11 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(159, 335);
+            this.label11.Location = new System.Drawing.Point(159, 298);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(90, 13);
             this.label11.TabIndex = 49;
             this.label11.Text = "Account Number:";
-            // 
-            // comJobRole
-            // 
-            this.comJobRole.FormattingEnabled = true;
-            this.comJobRole.Items.AddRange(new object[] {
-            "Admin",
-            "Manager",
-            "Sales"});
-            this.comJobRole.Location = new System.Drawing.Point(266, 296);
-            this.comJobRole.Name = "comJobRole";
-            this.comJobRole.Size = new System.Drawing.Size(118, 21);
-            this.comJobRole.TabIndex = 48;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(159, 299);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(52, 13);
-            this.label10.TabIndex = 47;
-            this.label10.Text = "Job Role:";
             // 
             // txtPostcode
             // 
@@ -324,18 +266,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(793, 408);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.comShopId);
-            this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.txtSortCode);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.txtAccountNo);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.comJobRole);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.txtPostcode);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtAddressLineTwo);
@@ -365,15 +303,11 @@
 
         private System.Windows.Forms.Button btnRegister;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.ComboBox comShopId;
-        private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox txtSortCode;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.TextBox txtAccountNo;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.ComboBox comJobRole;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtPostcode;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtAddressLineTwo;
