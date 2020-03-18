@@ -31,5 +31,11 @@ namespace CornerShopSecialistDesktop
             stockPage.Show();
 
         }
+
+        private void btnNewStaff_Click(object sender, EventArgs e)
+        {
+            CreateStaff createStaff = new CreateStaff();
+            createStaff.Show();
+        }
     }
 }
