@@ -29,3 +29,9 @@ var newShop = new schemas.Shop({"storeName" : "Alma Road Spar", "addressLineOne"
 newShop.save();
 
 console.log("new shop saved");
+
+var newStock = new schemas.Stock({"productName": "Milk", "storeName" : "Alma Road Spar", "quantity" : 5});
+
+newStock.save();
+
+console.log("new stock saved");

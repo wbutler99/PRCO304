@@ -280,21 +280,7 @@
             // 
             this.comShop.FormattingEnabled = true;
             this.comShop.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15"});
+            "N/A"});
             this.comShop.Location = new System.Drawing.Point(345, 376);
             this.comShop.Name = "comShop";
             this.comShop.Size = new System.Drawing.Size(127, 21);

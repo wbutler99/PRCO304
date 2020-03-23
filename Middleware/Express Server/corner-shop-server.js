@@ -167,10 +167,10 @@ app.get("/Staff", function(request, response){
         response.setHeader("Content-Type", "application/json");
         response.status(200);
         response.send(staff);
-    })
+    });
 });
 
-app.post("Admin/Staff/Signup", function(request, response){
+app.post("/Admin/Signup", function(request, response){
     var newUsername = request.body.username;
     var newPassword = request.body.password;
     var newEmail = request.body.emailAddress;
@@ -183,7 +183,7 @@ app.post("Admin/Staff/Signup", function(request, response){
     var newJobRole = request.body.jobRole;
     var newAccountNo = request.body.accountNo;
     var newSortCode = request.body.sortCode;
-    var newShopId = request.body.shopId;
+    var newShopName = request.body.shopName;
 
     var salt = bcrypt.genSaltSync(saltRounds);
     var hash = bcrypt.hashSync(newPassword, salt);
@@ -210,7 +210,7 @@ app.post("Admin/Staff/Signup", function(request, response){
     response.send("Sign up complete. Please log in to continue");
 });
 
-app.post("Manager/Staff/Signup", function(request, response){
+app.post("/Manager/Staff/Signup", function(request, response){
     var newUsername = request.body.username;
     var newPassword = request.body.password;
     var newEmail = request.body.emailAddress;
@@ -266,7 +266,7 @@ app.post("/Staff/Login", function(request, response){
                 console.log("Successful Staff login by: " + inputUsername);
                 staffSession = inputUsername;
                 response.status(200);
-                response.send("Welcome " + inputUsername);
+                response.send(authuser);
             }
             else
             {
@@ -354,29 +354,31 @@ app.get("/Staff/Shop", function(request, response){
 //Endpoints for stock
 
 app.get("/Staff/Stock", function(request, response){
-    var allStock = [];
+    var allStock = new Array();
     db.GetStaff(staffSession).then(function(staff){
         var shop = staff.shopName;
-        console.log("Stock for shop: " + shop + "Requested.");
+        console.log("Stock for shop: " + shop + " Requested.");
         db.GetStock(shop).then(function(stock){
-            for(var i = 0; i < Object.keys(stock).length; i++)
-            {
-                var productName = stock[i].productName;
-                db.GetProduct(productName).then(function(product){
-                    allStock.push({
-                        "productName": product.name,
-                        "stockType": product.stockType,
-                        "description": product.description,
-                        "quantity": stock.quantity
-                    });
-                });
-            }
+            response.status(200);
+            response.send(stock);
         });
     });
-    response.status(200);
-    response.send(allStock);
-});
 
+});
+            // for(var i = 0; i < stock.length; i++)
+            // {
+            //     var productName = stock[i].productName;
+            //     db.GetProduct(productName).then(function(product){
+            //         var stockItem = {
+            //             "productName": product.name,
+            //             "stockType": product.stockType,
+            //             "description": product.description,
+            //             "quantity": stock.quantity
+            //         }
+
+            //         allStock.push(stockItem);
+            //     });
+            // }
 //Endpoints for products
 
 app.get("/Products", function(request, response){

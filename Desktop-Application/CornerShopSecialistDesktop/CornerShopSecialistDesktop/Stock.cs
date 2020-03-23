@@ -37,10 +37,19 @@ namespace CornerShopSecialistDesktop
             {
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 stocks = JsonConvert.DeserializeObject<List<StockViewModel>>(jsonString);
+
+                //grdStock.Rows.Add(stocks);
                 foreach(StockViewModel stock in stocks)
                 {
-                    grdStock.Rows.Add(stock.productName, stock.stockType, stock.productDescription, stock.quantity);
-                }
+                    grdStock.Rows.Add(stock.productName, stock.quantity);
+                }                
+                
+            //    DataGridViewRow newRow = new DataGridViewRow();
+                //    newRow.CreateCells(grdStock);
+                //    newRow.Cells[0].Value = stock.productName;
+                //    newRow.Cells[1].Value = stock.quantity;
+
+                //    grdStock.Rows.Add(newRow);
             }
             else
             {

@@ -41,9 +41,11 @@ namespace CornerShopSecialistDesktop
             AccountCreation employee = new AccountCreation(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
                 accountNo, shopName);
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:9000/");
-            var response = client.PostAsJsonAsync("Admin/Staff/Signup", employee).Result;
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:9000/")
+            };
+            var response = client.PostAsJsonAsync("Admin/Signup", employee).Result;
 
             if (response.IsSuccessStatusCode)
             {
