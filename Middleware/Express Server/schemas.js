@@ -37,7 +37,7 @@ var Staff = mongoose.model("Staff", {
     jobRole: String,
     sortCode: String,
     accountNo: String,
-    shopId: String
+    shopName: String
 });
 
 var Shop = mongoose.model("Shop", {
@@ -51,14 +51,15 @@ var Shop = mongoose.model("Shop", {
 });
 
 var Delivery = mongoose.model("Delivery", {
-    shopId: String,
+    deliveryName: String,
+    shopName: String,
     deliveryDate: Date,
     deliveryType: String,
 });
 
 var DeliveryItem = mongoose.model("DeliveryItem", {
-    deliveryId: String,
-    productId: String
+    deliveryName: String,
+    productName: String
 });
 
 var Product = mongoose.model("Product", {
@@ -71,8 +72,8 @@ var Product = mongoose.model("Product", {
 });
 
 var Stock = mongoose.model("Stock", {
-    productId: String,
-    storeId: String,
+    productName: String,
+    storeName: String,
     quantity: Number
 });
 

@@ -36,22 +36,30 @@ async function GetShops()
     return await schemas.Shop.find();
 }
 
-async function GetShop(id)
+async function GetShop(name)
 {
-    return await schemas.Shop.findOne({"_id" : id});
+    return await schemas.Shop.findOne({"storeName" : name});
 }
 
 //DB functions for products
 
-async function GetProduct(id)
+async function GetProduct(name)
 {
-    return await schemas.Product.findOne({"_id" : id});
+    return await schemas.Product.findOne({"name" : name});
 }
 
 async function SearchProducts(search)
 {
     return await schemas.Product.find({$text: {$search: search}});
 }
+
+//DB functions for stock
+
+async function GetStock(shop)
+{
+    return await schemas.Stock.find({"storeName" : shop});
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
@@ -61,3 +69,4 @@ module.exports.GetShops = GetShops;
 module.exports.GetShop = GetShop;
 module.exports.GetProduct = GetProduct;
 module.exports.SearchProducts = SearchProducts;
+module.exports.GetStock = GetStock;

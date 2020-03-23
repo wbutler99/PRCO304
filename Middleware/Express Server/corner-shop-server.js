@@ -202,7 +202,7 @@ app.post("Admin/Staff/Signup", function(request, response){
         jobRole: newJobRole,
         sortCode: newSortCode,
         accountNo: newAccountNo,
-        shopId: newShopId
+        shopName: newShopName
     });
 
     newStaff.save(); //TODO: Add fail response for unique elements
@@ -224,10 +224,10 @@ app.post("Manager/Staff/Signup", function(request, response){
     var newJobRole = request.body.jobRole;
     var newAccountNo = request.body.accountNo;
     var newSortCode = request.body.sortCode;
-    var newShopId;
+    var newShopName;
 
     db.GetStaff(staffSession).then(function(manager){
-        newShopId = manager.shopId;
+        newShopName = manager.shopName;
     });
 
     var salt = bcrypt.genSaltSync(saltRounds);
@@ -246,7 +246,7 @@ app.post("Manager/Staff/Signup", function(request, response){
         jobRole: newJobRole,
         sortCode: newSortCode,
         accountNo: newAccountNo,
-        shopId: newShopId
+        shopName: newShopName
     });
 
     newStaff.save(); //TODO: Add fail response for unique elements
@@ -357,13 +357,13 @@ app.get("/Staff/Shop", function(request, response){
 app.get("/Staff/Stock", function(request, response){
     var allStock = [];
     db.GetStaff(staffSession).then(function(staff){
-        var shop = staff.shopId;
+        var shop = staff.shopName;
         console.log("Stock for shop: " + shop + "Requested.");
         db.GetStock(shop).then(function(stock){
             for(var i = 0; i < Object.keys(stock).length; i++)
             {
-                var productId = stock[i].productId;
-                db.GetProduct(productId).then(function(product){
+                var productName = stock[i].productName;
+                db.GetProduct(productName).then(function(product){
                     allStock.push({
                         "productName": product.name,
                         "stockType": product.stockType,
