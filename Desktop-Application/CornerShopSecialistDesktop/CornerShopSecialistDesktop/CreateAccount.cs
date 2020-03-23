@@ -38,9 +38,8 @@ namespace CornerShopSecialistDesktop
             string sortCode = txtSortCode.Text;
             string shopName = comShop.SelectedItem.ToString();
 
-            ShopViewModel shop = shops.Find(id => id.storeName.Equals(shopName));
             AccountCreation employee = new AccountCreation(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
-                accountNo, shop.shopId);
+                accountNo, shopName);
 
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:9000/");
