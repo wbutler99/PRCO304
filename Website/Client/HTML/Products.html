@@ -39,7 +39,7 @@
     <body>
         <div class="jumbotron text-center bg-primary text-white">
             <h1>Corner Shop Specialist</h1>
-            <h2>Customer Portal</h2> 
+            <h2>Products</h2> 
         </div>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
             <ul class="navbar-nav">
@@ -65,10 +65,11 @@
                 </div>
             </ul>
         </nav>
-        <!--TODO: Add search bar and have it call the search endpoint-->
-        <label for="search">Search:</label>
-        <input type="text" class="form-control mr-sm-2" id="search" placeholder="Search for products...">
-        <button class="btn btn-success" type="submit" id="searchbtn">Search</button>
+        <div class="input-group">
+            <input type="text" class="form-control col-sm-4" id="search" placeholder="Search for products...">
+            <button class="btn btn-success col-sm-1" type="submit" id="searchbtn">Search</button>
+        </div>
+
         <table id="productTable" class="table table-striped">
             <thead>
                 <tr>

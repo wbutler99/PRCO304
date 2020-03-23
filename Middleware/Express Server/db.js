@@ -43,6 +43,11 @@ async function GetShop(name)
 
 //DB functions for products
 
+async function GetProducts()
+{
+    return await schemas.Product.find();
+}
+
 async function GetProduct(name)
 {
     return await schemas.Product.findOne({"name" : name});
@@ -70,3 +75,4 @@ module.exports.GetShop = GetShop;
 module.exports.GetProduct = GetProduct;
 module.exports.SearchProducts = SearchProducts;
 module.exports.GetStock = GetStock;
+module.exports.GetProducts = GetProducts;
