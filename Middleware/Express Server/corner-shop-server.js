@@ -8,7 +8,6 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var http = require("http");
 var bcrypt = require("bcrypt");
-var router = express.Router();
 
 //Initial setup
 
@@ -396,9 +395,13 @@ app.get("/Products/Search", function(request, response){
     });
 });
 
+//Listener for requests
+
 app.listen(9000, async function() {
     await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
     console.log("Connected to DB");
 
     console.log("Listening on 9000");
 });
+
+module.exports.app = app;
