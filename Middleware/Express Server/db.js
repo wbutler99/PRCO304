@@ -55,7 +55,7 @@ async function GetProduct(name)
 
 async function SearchProducts(search)
 {
-    return await schemas.Product.find({$text: {$search: search}});
+    return await schemas.Product.find({"name" : search});
 }
 
 //DB functions for stock
