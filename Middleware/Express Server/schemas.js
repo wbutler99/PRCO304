@@ -59,7 +59,8 @@ var Delivery = mongoose.model("Delivery", {
 
 var DeliveryItem = mongoose.model("DeliveryItem", {
     deliveryName: String,
-    productName: String
+    productName: String,
+    quantity: Number
 });
 
 var Product = mongoose.model("Product", {
