@@ -13,43 +13,35 @@ using System.Windows.Forms;
 
 namespace CornerShopSecialistDesktop
 {
-    public partial class Stock : Form
+    public partial class ManagerDelivery : Form
     {
-        public Stock()
+        public ManagerDelivery()
         {
             InitializeComponent();
-            PopulateStock();
-
+            PopulateDelivery();
         }
 
-        public void PopulateStock()
+        private void PopulateDelivery()
         {
-            //Get the stock data and populate the table with it
+            //Get the delivery data and populate the table with it
 
-            List<StockViewModel> stocks = new List<StockViewModel>();
+            List<DeliveryViewModel> deliveries = new List<DeliveryViewModel>();
 
             HttpClient client = new HttpClient
             {
                 BaseAddress = new Uri("http://localhost:9000/")
             };
-            var response = client.GetAsync("Staff/Stock").Result;
-            if(response.IsSuccessStatusCode)
+            var response = client.GetAsync("Delivery/Shop").Result;
+            if (response.IsSuccessStatusCode)
             {
                 var jsonString = response.Content.ReadAsStringAsync().Result;
-                stocks = JsonConvert.DeserializeObject<List<StockViewModel>>(jsonString);
+                deliveries = JsonConvert.DeserializeObject<List<DeliveryViewModel>>(jsonString);
 
                 //grdStock.Rows.Add(stocks);
-                foreach(StockViewModel stock in stocks)
+                foreach (DeliveryViewModel delivery in deliveries)
                 {
-                    grdStock.Rows.Add(stock.productName, stock.quantity);
-                }                
-                
-                //    DataGridViewRow newRow = new DataGridViewRow();
-                //    newRow.CreateCells(grdStock);
-                //    newRow.Cells[0].Value = stock.productName;
-                //    newRow.Cells[1].Value = stock.quantity;
-
-                //    grdStock.Rows.Add(newRow);
+                    grdDelivery.Rows.Add(delivery.productName, delivery.quantity);
+                }
             }
             else
             {

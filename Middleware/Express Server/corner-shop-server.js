@@ -344,10 +344,12 @@ app.get("/Shop", function(request, response){
 });
 
 app.get("/Staff/Shop", function(request, response){
-    //TODO: get staff info to find the shop associated
-    db.GetShop(staffId).then(function(shop){
-        response.status(200);
-        response.send(shop);
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.shopName
+        db.GetShop(staffShop).then(function(shop){
+            response.status(200);
+            response.send(shop);
+        });
     });
 });
 
@@ -379,6 +381,7 @@ app.get("/Staff/Stock", function(request, response){
             //         allStock.push(stockItem);
             //     });
             // }
+
 //Endpoints for products
 
 app.get("/Products", function(request, response){
@@ -393,6 +396,18 @@ app.get("/Products/Search", function(request, response){
     db.SearchProducts(searchInput).then(function(products){
         response.status(200);
         response.send(products);
+    });
+});
+
+//Endpoints for Deliveries
+
+app.get("/Delivery/Shop", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.shopName
+        db.GetDelivery(staffShop).then(function(delivery){
+            response.status(200);
+            response.send(delivery);
+        });
     });
 });
 

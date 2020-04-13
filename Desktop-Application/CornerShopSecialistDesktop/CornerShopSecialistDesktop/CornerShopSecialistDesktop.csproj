@@ -77,6 +77,12 @@
     <Compile Include="Home.Designer.cs">
       <DependentUpon>Home.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManagerDelivery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ManagerDelivery.Designer.cs">
+      <DependentUpon>ManagerDelivery.cs</DependentUpon>
+    </Compile>
     <Compile Include="ManagerHome.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,6 +90,7 @@
       <DependentUpon>ManagerHome.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountCreation.cs" />
+    <Compile Include="Models\DeliveryViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\LogIn.cs" />
     <Compile Include="Models\ShopViewModel.cs" />
@@ -113,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ManagerDelivery.resx">
+      <DependentUpon>ManagerDelivery.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ManagerHome.resx">
       <DependentUpon>ManagerHome.cs</DependentUpon>
