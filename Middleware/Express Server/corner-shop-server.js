@@ -367,20 +367,10 @@ app.get("/Staff/Stock", function(request, response){
     });
 
 });
-            // for(var i = 0; i < stock.length; i++)
-            // {
-            //     var productName = stock[i].productName;
-            //     db.GetProduct(productName).then(function(product){
-            //         var stockItem = {
-            //             "productName": product.name,
-            //             "stockType": product.stockType,
-            //             "description": product.description,
-            //             "quantity": stock.quantity
-            //         }
 
-            //         allStock.push(stockItem);
-            //     });
-            // }
+app.get("/Customer/Stock", function(request, response){
+
+});
 
 //Endpoints for products
 
@@ -417,6 +407,26 @@ app.post("/Delivery/Shop/Items", function(request, response){
         response.status(200);
         response.send(items);
     });
+});
+
+//Endpoints for Reservations
+
+app.get("/Shop/Reservation", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.shopName
+        db.GetReservations(staffShop).then(function(reservations){
+            response.status(200);
+            response.send(reservations);
+        });
+    });
+});
+
+app.post("/Create/Reservation", function(request, response){
+
+});
+
+app.get("/Customer/Reservation", function(request, response){
+
 });
 
 //Listener for requests

@@ -52,7 +52,7 @@ var Shop = mongoose.model("Shop", {
 
 var Delivery = mongoose.model("Delivery", {
     deliveryName: String,
-    shopName: String,
+    storeName: String,
     deliveryDate: Date,
     deliveryType: String,
 });
@@ -70,6 +70,7 @@ var Product = mongoose.model("Product", {
     },
     stockType: String,
     description: String,
+    price: String
 });
 
 var Stock = mongoose.model("Stock", {
@@ -78,6 +79,12 @@ var Stock = mongoose.model("Stock", {
     quantity: Number
 });
 
+var Reservation = mongoose.model("Reservation", {
+    name: String,
+    productName: String,
+    storeName: String
+})
+
 module.exports.Customer = Customer;
 module.exports.Staff = Staff;
 module.exports.Shop = Shop;
@@ -85,3 +92,4 @@ module.exports.Stock = Stock;
 module.exports.Delivery = Delivery;
 module.exports.DeliveryItem = DeliveryItem;
 module.exports.Product = Product;
+module.exports.Reservation = Reservation;

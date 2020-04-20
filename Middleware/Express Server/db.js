@@ -69,12 +69,19 @@ async function GetStock(shop)
 
 async function GetDelivery(shop)
 {
-    return await schemas.Delivery.findOne({"shopName" : shop});
+    return await schemas.Delivery.findOne({"storeName" : shop});
 }
 
 async function GetDeliveryItems(delivery)
 {
     return await schemas.DeliveryItem.find({"deliveryName" : delivery});
+}
+
+//DB functions for reservations
+
+async function GetReservations(shop)
+{
+    return await schemas.Reservation.find({"storeName" : shop});
 }
 
 module.exports.GetCustomer = GetCustomer;
@@ -90,3 +97,4 @@ module.exports.GetStock = GetStock;
 module.exports.GetProducts = GetProducts;
 module.exports.GetDelivery = GetDelivery;
 module.exports.GetDeliveryItems = GetDeliveryItems;
+module.exports.GetReservations = GetReservations;

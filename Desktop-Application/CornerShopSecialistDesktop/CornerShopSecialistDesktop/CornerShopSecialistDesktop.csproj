@@ -90,6 +90,7 @@
       <DependentUpon>ManagerHome.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountCreation.cs" />
+    <Compile Include="Models\DeliveryItemViewModel.cs" />
     <Compile Include="Models\DeliveryViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
     <Compile Include="Models\LogIn.cs" />

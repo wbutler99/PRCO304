@@ -6,13 +6,13 @@ var uri = "mongodb://localhost:27017/CSSDB";
 
 mongoose.connect(uri, {useNewUrlParser: true});
 
-var newProduct = new schemas.Product({"name" : "Walker's Crisps", "stockType" : "Crisps", "description" : "Individual packs of crisps"});
+var newProduct = new schemas.Product({"name" : "Walker's Crisps", "stockType" : "Crisps", "description" : "Individual packs of crisps", "price" : "£0.60"});
 
 newProduct.save();
 
 console.log("new product saved");
 
-var newProduct = new schemas.Product({"name" : "Milk", "stockType" : "Milk", "description" : "2 pints of milk"});
+var newProduct = new schemas.Product({"name" : "Milk", "stockType" : "Milk", "description" : "2 pints of milk", "price" : "£1.00"});
 
 newProduct.save();
 
