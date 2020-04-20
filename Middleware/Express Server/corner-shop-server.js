@@ -356,7 +356,6 @@ app.get("/Staff/Shop", function(request, response){
 //Endpoints for stock
 
 app.get("/Staff/Stock", function(request, response){
-    var allStock = new Array();
     db.GetStaff(staffSession).then(function(staff){
         var shop = staff.shopName;
         console.log("Stock for shop: " + shop + " Requested.");
@@ -369,7 +368,13 @@ app.get("/Staff/Stock", function(request, response){
 });
 
 app.get("/Customer/Stock", function(request, response){
-
+    var shop = request.body.storeName;
+    var product = request.body.productName;
+    db.GetSpecificStock(shop, product).then(function(stock){
+        var quantity = stock.quantity;
+        response.status(200);
+        response.send(quantity);
+    });
 });
 
 //Endpoints for products
@@ -422,11 +427,33 @@ app.get("/Shop/Reservation", function(request, response){
 });
 
 app.post("/Create/Reservation", function(request, response){
+    var product = request.body.productName;
+    var shop = request.body.storeName;
+    var customerName;
+    db.GetCustomer(customerSession).then(function(customer){
+        customerName = customer.firstName + " " + customer.lastName;
+    })
 
+    var newReservation = new schemas.Reservation({
+        name : customerName,
+        productName : product,
+        storeName : shop
+    });
+
+    newReservation.save();
+    console.log("New reservation for: " + customerName + "of: " + product);
+    response.status(200);
+    response.send("Reservation made. Your reservsation will be ready in 2 hours.");
 });
 
 app.get("/Customer/Reservation", function(request, response){
-
+    db.GetCustomer(customerSession).then(function(customer){
+        var customerName = customer.firstName + " " + customer.lastName;
+        db.CustomerGetReservations(customerName).then(function(reservations){
+            response.status(200);
+            response.send(reservations);
+        });
+    });
 });
 
 //Listener for requests
