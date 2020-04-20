@@ -65,6 +65,18 @@ async function GetStock(shop)
     return await schemas.Stock.find({"storeName" : shop});
 }
 
+//DB functions for deliveries
+
+async function GetDelivery(shop)
+{
+    return await schemas.Delivery.findOne({"shopName" : shop});
+}
+
+async function GetDeliveryItems(delivery)
+{
+    return await schemas.DeliveryItem.find({"deliveryName" : delivery});
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
@@ -76,3 +88,5 @@ module.exports.GetProduct = GetProduct;
 module.exports.SearchProducts = SearchProducts;
 module.exports.GetStock = GetStock;
 module.exports.GetProducts = GetProducts;
+module.exports.GetDelivery = GetDelivery;
+module.exports.GetDeliveryItems = GetDeliveryItems;

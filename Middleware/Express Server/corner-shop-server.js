@@ -411,6 +411,14 @@ app.get("/Delivery/Shop", function(request, response){
     });
 });
 
+app.post("/Delivery/Shop/Items", function(request, response){
+    var deliveryName = request.body.deliveryName;
+    db.GetDeliveryItems(deliveryName).then(function(items){
+        response.status(200);
+        response.send(items);
+    });
+});
+
 //Listener for requests
 
 app.listen(9000, async function() {

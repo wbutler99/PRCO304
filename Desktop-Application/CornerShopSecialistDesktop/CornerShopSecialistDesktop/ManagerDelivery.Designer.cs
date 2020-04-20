@@ -28,48 +28,89 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.grdDelivery = new System.Windows.Forms.DataGridView();
             this.lblDeliveryDate = new System.Windows.Forms.Label();
             this.lblDeliveryType = new System.Windows.Forms.Label();
-            this.grdDelivery = new System.Windows.Forms.DataGridView();
+            this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.grdDelivery)).BeginInit();
             this.SuspendLayout();
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(26, 13);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(153, 25);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Delivery Date: ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(340, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(156, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Delivery Type: ";
+            // 
+            // grdDelivery
+            // 
+            this.grdDelivery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdDelivery.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.productName,
+            this.quantity});
+            this.grdDelivery.Location = new System.Drawing.Point(196, 85);
+            this.grdDelivery.Name = "grdDelivery";
+            this.grdDelivery.Size = new System.Drawing.Size(246, 292);
+            this.grdDelivery.TabIndex = 2;
             // 
             // lblDeliveryDate
             // 
             this.lblDeliveryDate.AutoSize = true;
             this.lblDeliveryDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeliveryDate.Location = new System.Drawing.Point(26, 13);
+            this.lblDeliveryDate.Location = new System.Drawing.Point(171, 13);
             this.lblDeliveryDate.Name = "lblDeliveryDate";
-            this.lblDeliveryDate.Size = new System.Drawing.Size(153, 25);
-            this.lblDeliveryDate.TabIndex = 0;
-            this.lblDeliveryDate.Text = "Delivery Date: ";
+            this.lblDeliveryDate.Size = new System.Drawing.Size(57, 25);
+            this.lblDeliveryDate.TabIndex = 3;
+            this.lblDeliveryDate.Text = "Date";
             // 
             // lblDeliveryType
             // 
             this.lblDeliveryType.AutoSize = true;
             this.lblDeliveryType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeliveryType.Location = new System.Drawing.Point(340, 13);
+            this.lblDeliveryType.Location = new System.Drawing.Point(484, 13);
             this.lblDeliveryType.Name = "lblDeliveryType";
-            this.lblDeliveryType.Size = new System.Drawing.Size(156, 25);
-            this.lblDeliveryType.TabIndex = 1;
-            this.lblDeliveryType.Text = "Delivery Type: ";
+            this.lblDeliveryType.Size = new System.Drawing.Size(60, 25);
+            this.lblDeliveryType.TabIndex = 4;
+            this.lblDeliveryType.Text = "Type";
             // 
-            // grdDelivery
+            // productName
             // 
-            this.grdDelivery.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdDelivery.Location = new System.Drawing.Point(31, 89);
-            this.grdDelivery.Name = "grdDelivery";
-            this.grdDelivery.Size = new System.Drawing.Size(491, 292);
-            this.grdDelivery.TabIndex = 2;
+            this.productName.HeaderText = "Product Name";
+            this.productName.Name = "productName";
+            this.productName.ReadOnly = true;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
             // 
             // ManagerDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 450);
-            this.Controls.Add(this.grdDelivery);
             this.Controls.Add(this.lblDeliveryType);
             this.Controls.Add(this.lblDeliveryDate);
+            this.Controls.Add(this.grdDelivery);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.label2);
             this.Name = "ManagerDelivery";
             this.Text = "Next Delivery Due In";
             ((System.ComponentModel.ISupportInitialize)(this.grdDelivery)).EndInit();
@@ -80,8 +121,12 @@
 
         #endregion
 
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView grdDelivery;
         private System.Windows.Forms.Label lblDeliveryDate;
         private System.Windows.Forms.Label lblDeliveryType;
-        private System.Windows.Forms.DataGridView grdDelivery;
+        private System.Windows.Forms.DataGridViewTextBoxColumn productName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
     }
 }

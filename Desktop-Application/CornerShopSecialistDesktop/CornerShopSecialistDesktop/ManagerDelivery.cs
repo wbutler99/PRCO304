@@ -18,6 +18,8 @@ namespace CornerShopSecialistDesktop
         public ManagerDelivery()
         {
             InitializeComponent();
+            lblDeliveryType.Visible = false;
+            lblDeliveryDate.Visible = false;
             PopulateDelivery();
         }
 
@@ -25,7 +27,9 @@ namespace CornerShopSecialistDesktop
         {
             //Get the delivery data and populate the table with it
 
-            List<DeliveryViewModel> deliveries = new List<DeliveryViewModel>();
+            DeliveryViewModel delivery = new DeliveryViewModel();
+
+            List<DeliveryItemViewModel> items = new List<DeliveryItemViewModel>();
 
             HttpClient client = new HttpClient
             {
@@ -35,12 +39,22 @@ namespace CornerShopSecialistDesktop
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = response.Content.ReadAsStringAsync().Result;
-                deliveries = JsonConvert.DeserializeObject<List<DeliveryViewModel>>(jsonString);
+                delivery = JsonConvert.DeserializeObject<DeliveryViewModel>(jsonString);
+                lblDeliveryDate.Text = delivery.deliveryDate.ToString();
+                lblDeliveryType.Text = delivery.deliveryType.ToString();
+                lblDeliveryDate.Visible = true;
+                lblDeliveryType.Visible = true;
 
-                //grdStock.Rows.Add(stocks);
-                foreach (DeliveryViewModel delivery in deliveries)
+                var deliveryName = delivery.deliveryName;
+                var secondResponse = client.PostAsJsonAsync("Delivery/Shop/Items", deliveryName).Result;
+                if(secondResponse.IsSuccessStatusCode)
                 {
-                    grdDelivery.Rows.Add(delivery.productName, delivery.quantity);
+                    var secondJsonString = secondResponse.Content.ReadAsStringAsync().Result;
+                    items = JsonConvert.DeserializeObject<List<DeliveryItemViewModel>>(secondJsonString);
+                     foreach (DeliveryItemViewModel item in items)
+                    {
+                        grdDelivery.Rows.Add(item.productName, item.quantity);
+                    }
                 }
             }
             else
