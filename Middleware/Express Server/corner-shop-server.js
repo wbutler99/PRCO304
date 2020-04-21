@@ -394,6 +394,15 @@ app.get("/Products/Search", function(request, response){
     });
 });
 
+app.get("/Product", function(request, response){
+    var productName = request.body.productName;
+
+    db.GetProduct(productName).then(function(product){
+        response.status(200);
+        response.send(product);
+    });
+});
+
 //Endpoints for Deliveries
 
 app.get("/Delivery/Shop", function(request, response){

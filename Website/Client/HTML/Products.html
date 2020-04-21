@@ -16,7 +16,7 @@
                         //insert data to the table
                         //TODO: Ask Dan about redirect button.
                         $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
-                             "<a class='btn btn-primary mt-3'>" + "View" + "</a>" + "</td></tr>"); 
+                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/'" + product.name + ">" + "View" + "</a>" + "</td></tr>");
                     }
                 });
                 $("#searchbtn").click(function(){
@@ -28,8 +28,9 @@
                             var product = products[i];
                             //insert data to the table
                             //TODO: Ask Dan about redirect button.
-                            $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
-                                "<a class='btn btn-primary mt-3'>" + "View" + "</a>" + "</td></tr>"); 
+                            $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" + 
+                                product.price + "</td><td>" +
+                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/" + product.name + "'>" + "View" + "</a>" + "</td></tr>"); 
                         }
                     });
                 });
@@ -55,9 +56,6 @@
                 <li class="nav-item">
                   <a class="nav-link" id="news">News Deliveries</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="account" onclick="window.location.href = 'CustomerAccount.html'">Account</a>
-                  </li>
                 <div class="nav navbar-right">
                     <li class="nav-item">
                         <button class="btn btn-primary mt-3" id="login">Log In</button>
@@ -66,7 +64,7 @@
                         <button class="btn btn-primary mt-3" id="signup" onclick="window.location.href='CustomerSignup.html'">Sign Up</button>
                     </li>
                     <li class="nav-item">
-                        <button class="btn btn-primary mt-3" id="stafflogin" onclick="window.location.href='StaffLogin.html'">Sign Up</button>
+                        <button class="btn btn-primary mt-3" id="stafflogin" onclick="window.location.href='StaffLogin.html'">Staff Portal</button>
                     </li>
                 </div>
             </ul>
@@ -82,6 +80,7 @@
                     <th>Name</th>
                     <th>Product Type</th>
                     <th>Description</th>
+                    <th>Price</th>
                     <th>View Product</th>
                 </tr>
             </thead>

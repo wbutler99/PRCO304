@@ -4,6 +4,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+        <script>
+            window.onload = function(){
+                $.get("http://localhost:9001/Product").then(function(productName){
+                    $.get("http://localhost:9000/Product", {"productName" : productName}).then(function(product){
+                        $("#name").append(product.name);
+                        $("#description").append(product.description);
+                        $("#type").append(product.stockType);
+                        $("#price").append(product.price);
+                    });
+                });
+            }
+        </script>
     </head>
     <body>
         <div class="jumbotron text-center bg-primary text-white">
@@ -19,20 +32,22 @@
                   <a class="nav-link" id="shops">Shops</a>
                 </li>                        
                 <li class="nav-item">
-                    <a class="nav-link" id="products" onclick="window.location.href='Products.html'">Products</a>
+                    <a class="nav-link" id="products" onclick="window.location.href = 'CustomerProducts.html'">Products</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="account" onclick="window.location.href = 'CustomerAccount.html'">Account</a>
+                  </li>
                 <div class="nav navbar-right">
                     <li class="nav-item">
-                        <button class="btn btn-primary mt-3" id="login" onclick="window.location.href='CustomerLogin.html'">Log In</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary mt-3" id="signup" onclick="window.location.href='CustomerSignup.html'">Sign Up</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary mt-3" id="stafflogin" onclick="window.location.href='StaffLogin.html'">Staff Portal</button>
+                        <button class="btn btn-primary mt-3" id="logout">Log Out</button>
                     </li>
                 </div>
             </ul>
         </nav>
+        <h1 id="name"></h1>
+        <h2 id="description"></h2>
+        <h3 id="type"></h3>
+        <h2 id="price"></h2>
+        <button class="btn btn-primary mt-3" onclick="window.location.href='CheckStock.html'" id="stock">Check Stock</button>
     </body>
 </html>
