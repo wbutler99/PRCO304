@@ -83,7 +83,15 @@ var Reservation = mongoose.model("Reservation", {
     name: String,
     productName: String,
     storeName: String
-})
+});
+
+var Shift = mongoose.model("Shift", {
+    storeName: String,
+    date: Date,
+    username: String,
+    startTime: Date,
+    endTime: Date
+});
 
 module.exports.Customer = Customer;
 module.exports.Staff = Staff;
