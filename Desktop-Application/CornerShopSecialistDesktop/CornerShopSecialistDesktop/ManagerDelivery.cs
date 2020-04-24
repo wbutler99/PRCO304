@@ -59,8 +59,8 @@ namespace CornerShopSecialistDesktop
             }
             else
             {
-                MessageBox.Show("Stock Request failed. Please try again. Error Code: " + response.StatusCode.ToString(),
-                    "Stock Request Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Delivery Request failed. Please try again. Error Code: " + response.StatusCode.ToString(),
+                    "Delivery Request Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
     }
