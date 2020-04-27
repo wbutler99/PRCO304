@@ -94,6 +94,13 @@ async function CustomerGetReservations(name)
     return await schemas.Reservation.find({"name" : name});
 }
 
+//DB functions for shifts
+
+async function GetShifts(username)
+{
+    return await schemas.Shift.find({"username" : username});
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
@@ -110,3 +117,4 @@ module.exports.GetDeliveryItems = GetDeliveryItems;
 module.exports.GetReservations = GetReservations;
 module.exports.GetSpecificStock = GetSpecificStock;
 module.exports.CustomerGetReservations = CustomerGetReservations;
+module.exports.GetShifts = GetShifts;

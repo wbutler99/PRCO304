@@ -37,7 +37,7 @@ var Staff = mongoose.model("Staff", {
     jobRole: String,
     sortCode: String,
     accountNo: String,
-    shopName: String
+    storeName: String
 });
 
 var Shop = mongoose.model("Shop", {
@@ -89,8 +89,6 @@ var Shift = mongoose.model("Shift", {
     storeName: String,
     date: Date,
     username: String,
-    startTime: Date,
-    endTime: Date
 });
 
 module.exports.Customer = Customer;
@@ -101,3 +99,4 @@ module.exports.Delivery = Delivery;
 module.exports.DeliveryItem = DeliveryItem;
 module.exports.Product = Product;
 module.exports.Reservation = Reservation;
+module.exports.Shift = Shift;

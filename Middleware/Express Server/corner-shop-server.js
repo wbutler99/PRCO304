@@ -201,7 +201,7 @@ app.post("/Admin/Signup", function(request, response){
         jobRole: newJobRole,
         sortCode: newSortCode,
         accountNo: newAccountNo,
-        shopName: newShopName
+        storeName: newShopName
     });
 
     newStaff.save(); //TODO: Add fail response for unique elements
@@ -226,7 +226,7 @@ app.post("/Manager/Staff/Signup", function(request, response){
     var newShopName;
 
     db.GetStaff(staffSession).then(function(manager){
-        newShopName = manager.shopName;
+        newShopName = manager.storeName;
     });
 
     var salt = bcrypt.genSaltSync(saltRounds);
@@ -345,7 +345,7 @@ app.get("/Shop", function(request, response){
 
 app.get("/Staff/Shop", function(request, response){
     db.GetStaff(staffSession).then(function(staff){
-        staffShop = staff.shopName
+        staffShop = staff.storeName
         db.GetShop(staffShop).then(function(shop){
             response.status(200);
             response.send(shop);
@@ -357,7 +357,7 @@ app.get("/Staff/Shop", function(request, response){
 
 app.get("/Staff/Stock", function(request, response){
     db.GetStaff(staffSession).then(function(staff){
-        var shop = staff.shopName;
+        var shop = staff.storeName;
         console.log("Stock for shop: " + shop + " Requested.");
         db.GetStock(shop).then(function(stock){
             response.status(200);
@@ -407,7 +407,7 @@ app.get("/Product", function(request, response){
 
 app.get("/Delivery/Shop", function(request, response){
     db.GetStaff(staffSession).then(function(staff){
-        staffShop = staff.shopName
+        staffShop = staff.storeName
         db.GetDelivery(staffShop).then(function(delivery){
             response.status(200);
             response.send(delivery);
@@ -427,7 +427,7 @@ app.post("/Delivery/Shop/Items", function(request, response){
 
 app.get("/Shop/Reservation", function(request, response){
     db.GetStaff(staffSession).then(function(staff){
-        staffShop = staff.shopName
+        staffShop = staff.storeName
         db.GetReservations(staffShop).then(function(reservations){
             response.status(200);
             response.send(reservations);
@@ -462,6 +462,35 @@ app.get("/Customer/Reservation", function(request, response){
             response.status(200);
             response.send(reservations);
         });
+    });
+});
+
+//Endpoints for shifts
+
+app.post("/Create/Shift", function(request, response){
+    var staffMember = request.body.username;
+    var date = request.body.shiftDate;
+    var shop;
+    db.GetStaff(staffSession).then(function(manager){
+        shop = manager.storeName;
+    });
+
+    var newShift = new schemas.Shift({
+        storeName: shop,
+        date: date,
+        username: staffMember
+    });
+
+    newShift.save();
+    console.log("New shift for shop: " + shop + "for staff member: " + staffMember);
+    response.status(200);
+    response.send("Shift successfully added");
+});
+
+app.get("/Staff/Shift", function(request, response){
+    db.GetShifts(staffSession).then(function(shifts){
+        response.status(200);
+        response.send(shifts);
     });
 });
 

@@ -4,11 +4,26 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script>
+            window.onload = function(){
+                //get Product data
+                //populate table with said data
+                $.get("http://localhost:9000/Staff/Shifts").then(function(shifts){
+                    for (var i = 0; i <= shifts.length; i++)
+                    {
+                        var shift = shifts[i];
+                        //insert data to the table
+                        //TODO: Ask Dan about redirect button.
+                        $("#productTable").append("<tr><td>" +  shift.StoreName + "</td><td>" + shift.date.split('T')[0] +  "</td></tr>");
+                    }
+                });
+            }
+        </script>
     </head>
     <body>
         <div class="jumbotron text-center bg-primary text-white">
             <h1>Corner Shop Specialist</h1>
-            <h2>Staff Portal</h2> 
+            <h2>Your Shifts</h2> 
         </div>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
             <ul class="navbar-nav">
@@ -34,5 +49,17 @@
                 </div>
             </ul>
         </nav>
+
+        <table id="shifts" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Shop Name</th>
+                    <th>Shift Date</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </body>
 </html>
