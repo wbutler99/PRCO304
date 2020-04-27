@@ -101,6 +101,11 @@ async function GetShifts(username)
     return await schemas.Shift.find({"username" : username});
 }
 
+async function GetShopShifts(shopName)
+{
+    return await schemas.Shift.find({"storeName" : shopName});
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
@@ -118,3 +123,4 @@ module.exports.GetReservations = GetReservations;
 module.exports.GetSpecificStock = GetSpecificStock;
 module.exports.CustomerGetReservations = CustomerGetReservations;
 module.exports.GetShifts = GetShifts;
+module.exports.GetShopShifts = GetShopShifts;

@@ -494,6 +494,16 @@ app.get("/Staff/Shift", function(request, response){
     });
 });
 
+app.get("/Shop/Shift", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.storeName
+        db.GetShopShifts(staffShop).then(function(shifts){
+            response.status(200);
+            response.send(shifts);
+        });
+    });   
+})
+
 //Listener for requests
 
 app.listen(9000, async function() {
