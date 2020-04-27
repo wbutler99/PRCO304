@@ -7,12 +7,31 @@
 
         <script>
             window.onload = function(){
-                $.get("http://localhost:9001/Product").then(function(productName){
-                    $.get("http://localhost:9000/Product", {"productName" : productName}).then(function(product){
-                        $("#name").append(product.name);
-                        $("#description").append(product.description);
-                        $("#type").append(product.stockType);
-                        $("#price").append(product.price);
+                //get Product data
+                //populate table with said data
+                $.get("http://localhost:9000/Products").then(function(products){
+                    for (var i = 0; i <= products.length; i++)
+                    {
+                        var product = products[i];
+                        //insert data to the table
+                        //TODO: Ask Dan about redirect button.
+                        $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
+                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/'" + product.name + ">" + "View" + "</a>" + "</td></tr>");
+                    }
+                });
+                $("#searchbtn").click(function(){
+                    var searchInput = $("#search").val();
+                    $.get("http://localhost:9000/Products/Search", {"searchInput": searchInput}).then(function(products){
+                        $("#productTable tbody").remove();
+                        for (var i = 0; i <= products.length; i++)
+                        {
+                            var product = products[i];
+                            //insert data to the table
+                            //TODO: Ask Dan about redirect button.
+                            $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" + 
+                                product.price + "</td><td>" +
+                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/" + product.name + "'>" + "View" + "</a>" + "</td></tr>"); 
+                        }
                     });
                 });
             }
@@ -44,10 +63,24 @@
                 </div>
             </ul>
         </nav>
-        <h1 id="name"></h1>
-        <h2 id="description"></h2>
-        <h3 id="type"></h3>
-        <h2 id="price"></h2>
-        <button class="btn btn-primary mt-3" onclick="window.location.href='CheckStock.html'" id="stock">Check Stock</button>
+        <div class="input-group">
+            <input type="text" class="form-control col-sm-4" id="search" placeholder="Search for products...">
+            <button class="btn btn-success col-sm-1" type="submit" id="searchbtn">Search</button>
+        </div>
+
+        <table id="productTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Product Type</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>View Product</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
     </body>
 </html>
