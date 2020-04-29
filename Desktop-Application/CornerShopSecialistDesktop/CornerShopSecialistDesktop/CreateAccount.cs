@@ -15,9 +15,11 @@ namespace CornerShopSecialistDesktop
 {
     public partial class CreateAccount : Form
     {
+        List<ShopViewModel> shops = new List<ShopViewModel>();
         public CreateAccount()
         {
             InitializeComponent();
+            PopulateShops();
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
@@ -34,14 +36,16 @@ namespace CornerShopSecialistDesktop
             string jobRole = comJobRole.SelectedItem.ToString();
             string accountNo = txtAccountNo.Text;
             string sortCode = txtSortCode.Text;
-            //int shopId = System.Convert.ToInt32(comShopId.SelectedItem.ToString());
+            string shopName = comShop.SelectedItem.ToString();
 
             AccountCreation employee = new AccountCreation(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
-                accountNo);
+                accountNo, shopName);
 
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:9000/");
-            var response = client.PostAsJsonAsync("Staff/Signup", employee).Result;
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:9000/")
+            };
+            var response = client.PostAsJsonAsync("Admin/Signup", employee).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -63,6 +67,24 @@ namespace CornerShopSecialistDesktop
             {
                 MessageBox.Show("Sign Up failed. Please check you credentials and try again. Error Code: " + response.StatusCode.ToString(),
                     "Sign Up Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        public void PopulateShops()
+        {
+
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri("http://localhost:9000/");
+            var response = client.GetAsync("Shop").Result;
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = response.Content.ReadAsStringAsync().Result;
+                shops = JsonConvert.DeserializeObject<List<ShopViewModel>>(jsonString);
+                foreach (ShopViewModel shop in shops)
+                {
+                    comShop.Items.Add(shop.storeName);
+                }
             }
         }
     }

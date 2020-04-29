@@ -1,0 +1,65 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="../Javascript/StaffUpdatePassword.js"></script>
+    </head>
+    <body>
+        <div class="jumbotron text-center bg-primary text-white">
+            <h1>Corner Shop Specialist</h1>
+            <h2>Staff Portal</h2> 
+        </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" onclick="window.location.href = 'CustomerHome.html'">Corner Shop Specialist</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="shops">Shops</a>
+                </li>                        
+                <li class="nav-item">
+                    <a class="nav-link" id="products">Products</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="news">News Deliveries</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="account" onclick="window.location.href = 'CustomerAccount.html'">Account</a>
+                  </li>
+                <div class="nav navbar-right">
+                    <li class="nav-item">
+                        <button class="btn btn-primary mt-3" id="logout">Log Out</button>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+
+        <h1>Update Account Details</h1>
+
+        <div class="container">
+            <h2>Please update your password here</h2>                
+            <form id="updatePasswordForm" class="was-validated">
+                <div class="form-group">
+                    <label for="oldpassword">Old Password:</label>
+                    <input type="password" class="form-control" id="oldpassword" required>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+                <div class="input-group">
+                    <div class="form-group col-sm-6">
+                        <label for="password">New Password:</label>
+                        <input type="text" class="form-control" id="password" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group col-sm-6">
+                        <label for="confirmpassword">Confirm New Password:</label>
+                        <input type="text" class="form-control" id="confirmpassword" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Update Your Password</button>
+            </form>
+        </div>
+    </body>
+</html>

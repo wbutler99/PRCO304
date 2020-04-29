@@ -54,7 +54,7 @@
             this.txtSortCode = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.comShopId = new System.Windows.Forms.ComboBox();
+            this.comShop = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.btnRegister = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -276,29 +276,15 @@
             this.label14.TabIndex = 25;
             this.label14.Text = "Shop ID (optional):";
             // 
-            // comShopId
+            // comShop
             // 
-            this.comShopId.FormattingEnabled = true;
-            this.comShopId.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "14",
-            "15"});
-            this.comShopId.Location = new System.Drawing.Point(345, 376);
-            this.comShopId.Name = "comShopId";
-            this.comShopId.Size = new System.Drawing.Size(127, 21);
-            this.comShopId.TabIndex = 26;
+            this.comShop.FormattingEnabled = true;
+            this.comShop.Items.AddRange(new object[] {
+            "N/A"});
+            this.comShop.Location = new System.Drawing.Point(345, 376);
+            this.comShop.Name = "comShop";
+            this.comShop.Size = new System.Drawing.Size(127, 21);
+            this.comShop.TabIndex = 26;
             // 
             // label15
             // 
@@ -327,7 +313,7 @@
             this.ClientSize = new System.Drawing.Size(800, 485);
             this.Controls.Add(this.btnRegister);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.comShopId);
+            this.Controls.Add(this.comShop);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.txtSortCode);
@@ -389,7 +375,7 @@
         private System.Windows.Forms.TextBox txtSortCode;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.ComboBox comShopId;
+        private System.Windows.Forms.ComboBox comShop;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Button btnRegister;
     }

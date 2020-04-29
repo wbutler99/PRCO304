@@ -8,6 +8,9 @@ var router = express.Router();
 
 var app = express();
 
+var productData;
+var customerProductData;
+
 app.use(function(req, res, next){
     res.header("Access-Control-Allow-Origin", "*");
     next();
@@ -22,15 +25,25 @@ router.get('/', function(request, response){
     response.sendFile(path.join(__dirname + "/Client/HTML/Index.html"));
 });
 
-router.get("/CustomerLogin", function(request, response){
-    response.sendFile(path.join(__dirname + "/Client/HTML/CustomerLogin.html"));
-    response.sendFile(path.join(__dirname + "/Client/Javascript/CustomerLogin.js"));
+router.get("/Products/View/:productName", function(request, response){
+    productData = request.params.productName;
+    response.sendFile(path.join(__dirname + "/Client/HTML/Product.html"));
 });
 
-router.get("/Signup", function(request, response){
-    response.sendFile(path.join(__dirname + "/Client/HTML/CustomerSignup.html"));
-    response.sendFile(path.join(__dirname + "/Client/Javascript/signup.js"));
+router.get("/Customer/Products/View/:productName", function(request, response){
+    customerProductData = request.params.productName;
+    response.sendFile(path.join(__dirname + "/Client/HTML/CustomerProduct.html"));
 });
+
+app.get("/Product", function(request, response){
+    response.status(200);
+    response.send(productData);
+})
+
+app.get("/Customer/Product", function(request, response){
+    response.status(200);
+    response.send(customerProductData);
+})
 
 app.listen(9001, function() {
     console.log("Listening on 9001");

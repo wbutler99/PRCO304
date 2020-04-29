@@ -31,6 +31,7 @@
             this.btnStock = new System.Windows.Forms.Button();
             this.btnDeliveries = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
+            this.btnNewStaff = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStock
@@ -41,6 +42,7 @@
             this.btnStock.TabIndex = 0;
             this.btnStock.Text = "Stock";
             this.btnStock.UseVisualStyleBackColor = true;
+            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
             // 
             // btnDeliveries
             // 
@@ -62,11 +64,22 @@
             this.btnLogOut.UseVisualStyleBackColor = true;
             this.btnLogOut.Click += new System.EventHandler(this.btnLogOut_Click);
             // 
+            // btnNewStaff
+            // 
+            this.btnNewStaff.Location = new System.Drawing.Point(379, 59);
+            this.btnNewStaff.Name = "btnNewStaff";
+            this.btnNewStaff.Size = new System.Drawing.Size(124, 23);
+            this.btnNewStaff.TabIndex = 3;
+            this.btnNewStaff.Text = "New Staff Member";
+            this.btnNewStaff.UseVisualStyleBackColor = true;
+            this.btnNewStaff.Click += new System.EventHandler(this.btnNewStaff_Click);
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 474);
+            this.Controls.Add(this.btnNewStaff);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnDeliveries);
             this.Controls.Add(this.btnStock);
@@ -81,5 +94,6 @@
         private System.Windows.Forms.Button btnStock;
         private System.Windows.Forms.Button btnDeliveries;
         private System.Windows.Forms.Button btnLogOut;
+        private System.Windows.Forms.Button btnNewStaff;
     }
 }

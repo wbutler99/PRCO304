@@ -7,7 +7,8 @@ var cookieParser = require("cookie-parser");
 var session = require("express-session");
 var http = require("http");
 var bcrypt = require("bcrypt");
-var router = express.Router();
+
+//Initial setup
 
 var app = express();
 
@@ -25,15 +26,17 @@ app.use(function(req, res, next){
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
 
+//Endpoints for Customer
+
 app.get("/Customer", function(request, response){
     var username = customerSession;
 
     db.GetCustomer(username).then(function(customer){
-        //TODO: limit data being sent back to end user. I dont need password here!
+        customer.customerHashedPassword = undefined;
         response.setHeader("Content-Type", "application/json");
         response.status(200);
         response.send(customer);
-    })
+    });
 })
 
 app.post("/Customer/Signup", function(request, response){
@@ -50,68 +53,28 @@ app.post("/Customer/Signup", function(request, response){
     var repeatCheckUsername = 0;
     var repeatCheckEmail = 0;
 
-    // //Check to see if username chosen is already in use
-    // repeatCheckUsername = db.GetCustomer(newUsername).then(function(result){
-    //     if(result == null)
-    //     {
-    //         return 0;
-    //     }
-    //     else if(result.username == newUsername){
-    //         return 1;
-    //     }
-    //     else 
-    //     {
-    //         return 0;
-    //     }
-    // });
-    // //Check to see if email chosen is already used for an account
-    // repeatCheckEmail = db.GetCustomerEmail(newEmail).then(function(result){
-    //     if(result == null)
-    //     {
-    //         return 0;
-    //     }
-    //     else if(result.email == newEmail){
-    //         return 1;
-    //     }
-    //     else
-    //     {
-    //         return 0;
-    //     }
-    // });
-    if(repeatCheckEmail)
-    {
-        response.status(403);
-        response.send("A user with that email address already exists");
-    }
-    else if(repeatCheckUsername)
-    {
-        response.status(403);
-        response.send("A user with that username already exists");
-    }
-    else
-    {
-        var salt = bcrypt.genSaltSync(saltRounds);
-        var hash = bcrypt.hashSync(newPassword, salt);
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(newPassword, salt);
 
-        var newCustomer = new schemas.Customer({
-            username: newUsername,
-            customerHashedPassword: hash,
-            email: newEmail,
-            firstName: newFirstName,
-            lastName: newLastName,
-            DOB: newDateOfBirth,
-            addressLineOne: newAddressLineOne,
-            addressLineTwo: newAddressLineTwo,
-            postcode: newPostcode
-        });
+    var newCustomer = new schemas.Customer({
+        username: newUsername,
+        customerHashedPassword: hash,
+        email: newEmail,
+        firstName: newFirstName,
+        lastName: newLastName,
+        DOB: newDateOfBirth,
+        addressLineOne: newAddressLineOne,
+        addressLineTwo: newAddressLineTwo,
+        postcode: newPostcode
+    });
 
-        newCustomer.save();
-        //app.session = newCustomer.username;
-        //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
-        console.log("New User: " + newUsername + " created!");
-        response.status(200);
-        response.send("Sign up complete. Please log in to continue.");
-    }
+    newCustomer.save();
+    //app.session = newCustomer.username;
+    //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
+    console.log("New User: " + newUsername + " created!");
+    response.status(200);
+    response.send("Sign up complete. Please log in to continue.");
+    
 });
 
 app.post("/Customer/Login", function(request, response){
@@ -158,16 +121,56 @@ app.post("/Customer/Update", function(request, response){
         }
     }
 
-    db.UpdateCustomer(session, updatedCustomer).then(function(res){
+    db.UpdateCustomer(customerSession, updatedCustomer).then(function(res){
         response.sendStatus(200);
     });
 });
 
-app.get("/Staff", function(request, response){
+app.post("/Customer/UpdatePassword", function(request, response){
+    var oldPassword = request.body.oldPassword;
+    var newPassword = request.body.newPassword;
 
+    db.GetCustomer(customerSession).then(function(customer){
+        var password = customer.customerHashedPassword;
+        bcrypt.compare(oldPassword, password, function(err, result){
+            if(result == true)
+            {
+                var salt = bcrypt.genSaltSync(saltRounds);
+                var hash = bcrypt.hashSync(newPassword, salt);
+                var updatedCustomer = {
+                    $set:
+                    {
+                        customerHashedPassword : hash
+                    }
+                }
+
+                db.UpdateCustomer(customerSession, updatedCustomer).then(function(res){
+                    response.sendStatus(200);
+                })
+            }
+            else
+            {
+                response.status(401);
+                response.send("Authentication failed. Please check your credentials and try again.");
+            }
+        });
+    });
 });
 
-app.post("/Staff/Signup", function(request, response){
+//Endpoints for staff
+
+app.get("/Staff", function(request, response){
+    var username = staffSession;
+
+    db.GetStaff(username).then(function(staff){
+        staff.staffHashedPassword = undefined;
+        response.setHeader("Content-Type", "application/json");
+        response.status(200);
+        response.send(staff);
+    });
+});
+
+app.post("/Admin/Signup", function(request, response){
     var newUsername = request.body.username;
     var newPassword = request.body.password;
     var newEmail = request.body.emailAddress;
@@ -180,7 +183,7 @@ app.post("/Staff/Signup", function(request, response){
     var newJobRole = request.body.jobRole;
     var newAccountNo = request.body.accountNo;
     var newSortCode = request.body.sortCode;
-    var newShopId = request.body.shopId;
+    var newShopName = request.body.shopName;
 
     var salt = bcrypt.genSaltSync(saltRounds);
     var hash = bcrypt.hashSync(newPassword, salt);
@@ -198,10 +201,54 @@ app.post("/Staff/Signup", function(request, response){
         jobRole: newJobRole,
         sortCode: newSortCode,
         accountNo: newAccountNo,
-        shopId: newShopId
+        storeName: newShopName
     });
 
-    newStaff.save();
+    newStaff.save(); //TODO: Add fail response for unique elements
+    console.log("New Staff Member: " + newUsername + " created!");
+    response.status(200);
+    response.send("Sign up complete. Please log in to continue");
+});
+
+app.post("/Manager/Staff/Signup", function(request, response){
+    var newUsername = request.body.username;
+    var newPassword = request.body.password;
+    var newEmail = request.body.emailAddress;
+    var newFirstName = request.body.firstName;
+    var newLastName = request.body.lastName;
+    var newDateOfBirth = request.body.DOB;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
+    var newJobRole = request.body.jobRole;
+    var newAccountNo = request.body.accountNo;
+    var newSortCode = request.body.sortCode;
+    var newShopName;
+
+    db.GetStaff(staffSession).then(function(manager){
+        newShopName = manager.storeName;
+    });
+
+    var salt = bcrypt.genSaltSync(saltRounds);
+    var hash = bcrypt.hashSync(newPassword, salt);
+
+    var newStaff = new schemas.Staff({
+        username: newUsername,
+        staffHashedPassword: hash,
+        email: newEmail,
+        firstName: newFirstName,
+        lastName: newLastName,
+        DOB: newDateOfBirth,
+        addressLineOne: newAddressLineOne,
+        addressLineTwo: newAddressLineTwo,
+        postcode: newPostcode,
+        jobRole: newJobRole,
+        sortCode: newSortCode,
+        accountNo: newAccountNo,
+        shopName: newShopName
+    });
+
+    newStaff.save(); //TODO: Add fail response for unique elements
     console.log("New Staff Member: " + newUsername + " created!");
     response.status(200);
     response.send("Sign up complete. Please log in to continue");
@@ -217,8 +264,9 @@ app.post("/Staff/Login", function(request, response){
             if (result == true)
             {
                 console.log("Successful Staff login by: " + inputUsername);
+                staffSession = inputUsername;
                 response.status(200);
-                response.send("Welcome " + inputUsername);
+                response.send(authuser);
             }
             else
             {
@@ -230,9 +278,240 @@ app.post("/Staff/Login", function(request, response){
     });
 });
 
+app.post("/Staff/Web/Update", function(request, response){
+    var newEmail = request.body.email;
+    var newAddressLineOne = request.body.addressLineOne;
+    var newAddressLineTwo = request.body.addressLineTwo;
+    var newPostcode = request.body.postcode;
+
+    var updatedStaff = {
+        $set:
+        {
+            email : newEmail,
+            addressLineOne : newAddressLineOne,
+            addressLineTwo : newAddressLineTwo,
+            postcode : newPostcode
+        }
+    }
+
+    db.UpdateCustomer(staffSession, updatedStaff).then(function(res){
+        response.sendStatus(200);
+    });
+});
+
+app.post("/Staff/UpdatePassword", function(request, response){
+    var oldPassword = request.body.oldPassword;
+    var newPassword = request.body.newPassword;
+
+    db.GetStaff(staffSession).then(function(staff){
+        var password = staff.staffHashedPassword;
+        bcrypt.compare(oldPassword, password, function(err, result){
+            if(result == true)
+            {
+                var salt = bcrypt.genSaltSync(saltRounds);
+                var hash = bcrypt.hashSync(newPassword, salt);
+                var updatedStaff = {
+                    $set:
+                    {
+                        staffHashedPassword : hash
+                    }
+                }
+
+                db.UpdateCustomer(staffSession, updatedStaff).then(function(res){
+                    response.sendStatus(200);
+                })
+            }
+            else
+            {
+                response.status(401);
+                response.send("Authentication failed. Please check your credentials and try again.");
+            }
+        });
+    });
+});
+
+app.post("/Staff/Desktop/Update", function(request, response){
+    
+});
+
+//Endpoints for shops
+
+app.get("/Shop", function(request, response){
+    db.GetShops().then(function(shops){
+        response.status(200);
+        response.send(shops);
+    });
+});
+
+app.get("/Staff/Shop", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.storeName
+        db.GetShop(staffShop).then(function(shop){
+            response.status(200);
+            response.send(shop);
+        });
+    });
+});
+
+//Endpoints for stock
+
+app.get("/Staff/Stock", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        var shop = staff.storeName;
+        console.log("Stock for shop: " + shop + " Requested.");
+        db.GetStock(shop).then(function(stock){
+            response.status(200);
+            response.send(stock);
+        });
+    });
+
+});
+
+app.get("/Customer/Stock", function(request, response){
+    var shop = request.body.storeName;
+    var product = request.body.productName;
+    db.GetSpecificStock(shop, product).then(function(stock){
+        var quantity = stock.quantity;
+        response.status(200);
+        response.send(quantity);
+    });
+});
+
+//Endpoints for products
+
+app.get("/Products", function(request, response){
+    db.GetProducts().then(function(products){
+        response.status(200);
+        response.send(products);
+    });
+});
+
+app.post("/Products/Search", function(request, response){
+    var searchInput = request.body.searchInput;
+    console.log("Search request of input: " + searchInput);
+    db.SearchProducts(searchInput).then(function(products){
+        response.status(200);
+        response.send(products);
+    });
+});
+
+app.get("/Product", function(request, response){
+    var productName = request.body.productName;
+
+    db.GetProduct(productName).then(function(product){
+        response.status(200);
+        response.send(product);
+    });
+});
+
+//Endpoints for Deliveries
+
+app.get("/Delivery/Shop", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.storeName
+        db.GetDelivery(staffShop).then(function(delivery){
+            response.status(200);
+            response.send(delivery);
+        });
+    });
+});
+
+app.post("/Delivery/Shop/Items", function(request, response){
+    var deliveryName = request.body.deliveryName;
+    db.GetDeliveryItems(deliveryName).then(function(items){
+        response.status(200);
+        response.send(items);
+    });
+});
+
+//Endpoints for Reservations
+
+app.get("/Shop/Reservation", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.storeName
+        db.GetReservations(staffShop).then(function(reservations){
+            response.status(200);
+            response.send(reservations);
+        });
+    });
+});
+
+app.post("/Create/Reservation", function(request, response){
+    var product = request.body.productName;
+    var shop = request.body.storeName;
+    var customerName;
+    db.GetCustomer(customerSession).then(function(customer){
+        customerName = customer.firstName + " " + customer.lastName;
+    })
+
+    var newReservation = new schemas.Reservation({
+        name : customerName,
+        productName : product,
+        storeName : shop
+    });
+
+    newReservation.save();
+    console.log("New reservation for: " + customerName + "of: " + product);
+    response.status(200);
+    response.send("Reservation made. Your reservsation will be ready in 2 hours.");
+});
+
+app.get("/Customer/Reservation", function(request, response){
+    db.GetCustomer(customerSession).then(function(customer){
+        var customerName = customer.firstName + " " + customer.lastName;
+        db.CustomerGetReservations(customerName).then(function(reservations){
+            response.status(200);
+            response.send(reservations);
+        });
+    });
+});
+
+//Endpoints for shifts
+
+app.post("/Create/Shift", function(request, response){
+    var staffMember = request.body.username;
+    var date = request.body.shiftDate;
+    var shop;
+    db.GetStaff(staffSession).then(function(manager){
+        shop = manager.storeName;
+    });
+
+    var newShift = new schemas.Shift({
+        storeName: shop,
+        date: date,
+        username: staffMember
+    });
+
+    newShift.save();
+    console.log("New shift for shop: " + shop + "for staff member: " + staffMember);
+    response.status(200);
+    response.send("Shift successfully added");
+});
+
+app.get("/Staff/Shift", function(request, response){
+    db.GetShifts(staffSession).then(function(shifts){
+        response.status(200);
+        response.send(shifts);
+    });
+});
+
+app.get("/Shop/Shift", function(request, response){
+    db.GetStaff(staffSession).then(function(staff){
+        staffShop = staff.storeName
+        db.GetShopShifts(staffShop).then(function(shifts){
+            response.status(200);
+            response.send(shifts);
+        });
+    });   
+})
+
+//Listener for requests
+
 app.listen(9000, async function() {
     await mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
     console.log("Connected to DB");
 
     console.log("Listening on 9000");
 });
+
+module.exports.app = app;

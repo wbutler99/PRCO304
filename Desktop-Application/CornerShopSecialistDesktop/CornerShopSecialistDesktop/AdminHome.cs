@@ -24,5 +24,11 @@ namespace CornerShopSecialistDesktop
             home.Show();
             this.Hide();
         }
+
+        private void btnNewManager_Click(object sender, EventArgs e)
+        {
+            CreateAccount create = new CreateAccount();
+            create.Show();
+        }
     }
 }
