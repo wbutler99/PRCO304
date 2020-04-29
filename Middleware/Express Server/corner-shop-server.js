@@ -386,8 +386,9 @@ app.get("/Products", function(request, response){
     });
 });
 
-app.get("/Products/Search", function(request, response){
+app.post("/Products/Search", function(request, response){
     var searchInput = request.body.searchInput;
+    console.log("Search request of input: " + searchInput);
     db.SearchProducts(searchInput).then(function(products){
         response.status(200);
         response.send(products);

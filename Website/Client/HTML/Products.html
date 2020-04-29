@@ -16,12 +16,13 @@
                         //insert data to the table
                         //TODO: Ask Dan about redirect button.
                         $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
-                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/'" + product.name + ">" + "View" + "</a>" + "</td></tr>");
+                            product.price + "</td><td>" +
+                            "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/'" + product.name + ">" + "View" + "</a>" + "</td></tr>");
                     }
                 });
                 $("#searchbtn").click(function(){
                     var searchInput = $("#search").val();
-                    $.get("http://localhost:9000/Products/Search", {"searchInput": searchInput}).then(function(products){
+                    $.post("http://localhost:9000/Products/Search", {"searchInput": searchInput}).then(function(products){
                         $("#productTable tbody").remove();
                         for (var i = 0; i <= products.length; i++)
                         {
@@ -60,9 +61,7 @@
                     <li class="nav-item">
                         <button class="btn btn-primary mt-3" id="login">Log In</button>
                     </li>
-                    <li class="nav-item">
-                        <button class="btn btn-primary mt-3" id="signup" onclick="window.location.href='CustomerSignup.html'">Sign Up</button>
-                    </li>
+
                     <li class="nav-item">
                         <button class="btn btn-primary mt-3" id="stafflogin" onclick="window.location.href='StaffLogin.html'">Staff Portal</button>
                     </li>
