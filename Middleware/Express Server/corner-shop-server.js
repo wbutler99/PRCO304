@@ -330,6 +330,16 @@ app.post("/Staff/UpdatePassword", function(request, response){
     });
 });
 
+app.get("/Manager/Staff", function(request, response){
+    db.GetStaff(staffSession).then(function(manager){
+        var staffShop = manager.storeName;
+        db.getShopStaff(staffShop).then(function(staffs){
+            response.status(200);
+            response.send(staffs);
+        });
+    }); 
+});
+
 app.post("/Staff/Desktop/Update", function(request, response){
     
 });
