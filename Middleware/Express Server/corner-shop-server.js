@@ -341,7 +341,21 @@ app.get("/Manager/Staff", function(request, response){
 });
 
 app.post("/Staff/Desktop/Update", function(request, response){
-    
+    var updateUsername = request.body.username;
+    var updatedSortCode = request.body.sortCode;
+    var updatedAccountNo = request.body.accountNo;
+
+    var updatedStaff = {
+        $set:
+        {
+            sortCode : updatedSortCode,
+            accountNo : updatedAccountNo
+        }
+    }
+
+    db.UpdateCustomer(updateUsername, updatedStaff).then(function(res){
+        response.sendStatus(200);
+    });
 });
 
 //Endpoints for shops
