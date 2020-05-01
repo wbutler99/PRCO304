@@ -95,7 +95,7 @@
     <Compile Include="ManagerReservations.Designer.cs">
       <DependentUpon>ManagerReservations.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountCreation.cs" />
+    <Compile Include="Models\StaffViewModel.cs" />
     <Compile Include="Models\DeliveryItemViewModel.cs" />
     <Compile Include="Models\DeliveryViewModel.cs" />
     <Compile Include="Models\EmployeeViewModel.cs" />
@@ -151,6 +151,9 @@
     <EmbeddedResource Include="ManagerReservations.resx">
       <DependentUpon>ManagerReservations.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewShift.resx">
+      <DependentUpon>NewShift.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -160,6 +163,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Shifts.resx">
+      <DependentUpon>Shifts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Stock.resx">
       <DependentUpon>Stock.cs</DependentUpon>
     </EmbeddedResource>

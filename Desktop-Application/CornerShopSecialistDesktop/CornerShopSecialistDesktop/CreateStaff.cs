@@ -36,7 +36,7 @@ namespace CornerShopSecialistDesktop
             string accountNo = txtAccountNo.Text;
             string sortCode = txtSortCode.Text;
 
-            AccountCreation employee = new AccountCreation(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
+            StaffViewModel employee = new StaffViewModel(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
             accountNo);
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri("http://localhost:9000/");
