@@ -434,6 +434,26 @@ app.post("/Delivery/Shop/Items", function(request, response){
     });
 });
 
+app.post("/Create/Delivery", function(request, response){
+    var newDeliveryName = request.body.deliveryName;
+    var newDeliveryDate = request.body.deliveryType;
+    var newDeliveryStore = request.body.storeName;
+    var newDeliveryType = request.body.deliveryType;
+
+    var newDelivery = new schemas.Delivery({
+        deliveryName : newDeliveryName,
+        storeName : newDeliveryStore,
+        deliveryDate : newDeliveryDate,
+        deliveryType : newDeliveryType
+    });
+
+    newDelivery.save();
+
+    console.log("New Delivery for: " + newDeliveryStore + "of type: " + newDeliveryType);
+    response.sendStatus(200);
+
+})
+
 //Endpoints for Reservations
 
 app.get("/Shop/Reservation", function(request, response){
