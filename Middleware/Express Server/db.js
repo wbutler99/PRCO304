@@ -111,6 +111,23 @@ async function GetShopShifts(shopName)
     return await schemas.Shift.find({"storeName" : shopName});
 }
 
+//DB functions for holidays
+
+async function GetShopHoliday(shopName)
+{
+    return await schemas.Holiday.find({"storeName" : shopName});
+}
+
+async function GetStaffHoliday(username)
+{
+    return await schemas.Holiday.find({"username" : username});
+}
+
+async function UpdateHoliday(reference, newStatus)
+{
+    return await schemas.Holiday.updateOne({"holidayReference": reference}, newStatus);
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
@@ -130,3 +147,5 @@ module.exports.CustomerGetReservations = CustomerGetReservations;
 module.exports.GetShifts = GetShifts;
 module.exports.GetShopShifts = GetShopShifts;
 module.exports.GetShopStaff = GetShopStaff;
+module.exports.GetShopHoliday = GetShopHoliday;
+module.exports.GetStaffHoliday = GetStaffHoliday;

@@ -449,7 +449,7 @@ app.post("/Create/Delivery", function(request, response){
 
     newDelivery.save();
 
-    console.log("New Delivery for: " + newDeliveryStore + "of type: " + newDeliveryType);
+    console.log("New Delivery for: " + newDeliveryStore + " of type: " + newDeliveryType);
     response.sendStatus(200);
 
 })
@@ -472,7 +472,7 @@ app.post("/Create/Reservation", function(request, response){
     var customerName;
     db.GetCustomer(customerSession).then(function(customer){
         customerName = customer.firstName + " " + customer.lastName;
-    })
+    });
 
     var newReservation = new schemas.Reservation({
         name : customerName,
@@ -481,7 +481,7 @@ app.post("/Create/Reservation", function(request, response){
     });
 
     newReservation.save();
-    console.log("New reservation for: " + customerName + "of: " + product);
+    console.log("New reservation for: " + customerName + " of: " + product);
     response.status(200);
     response.send("Reservation made. Your reservsation will be ready in 2 hours.");
 });
@@ -513,7 +513,7 @@ app.post("/Create/Shift", function(request, response){
     });
 
     newShift.save();
-    console.log("New shift for shop: " + shop + "for staff member: " + staffMember);
+    console.log("New shift for shop: " + shop + " for staff member: " + staffMember);
     response.status(200);
     response.send("Shift successfully added");
 });
@@ -533,6 +533,69 @@ app.get("/Shop/Shift", function(request, response){
             response.send(shifts);
         });
     });   
+});
+
+//Endpoints for Holiday
+
+app.get("/Shop/Holiday", function(request, response){
+    db.GetStaff(staffSession).then(function(manager){
+        var shop = manager.storeName;
+        db.GetShopHoliday(shop).then(function(holidays){
+            response.status(200);
+            response.send(holidays);
+        });
+    });
+});
+
+app.get("/Staff/Holiday", function(request, response){
+    db.GetStaffHoliday(staffSession).then(function(holidays){
+        response.status(200);
+        response.send(holidays);
+    });
+});
+
+app.post("/Create/Holiday", function(request, response){
+    var newHolidayRef = request.body.holidayReference;
+    var newHolidayDate = request.body.holidayDate;
+    var newHolidayUsername = staffSession;
+    var newHolidayStatus = "Pending";
+    var newHolidayReason = request.body.reason
+    var newHolidayStoreName;
+    db.GetStaff(staffSession).then(function(staff){
+        newHolidayStoreName = staff.storeName;
+    });
+
+    var newHoliday = new schemas.Holiday({
+        holidayReference : newHolidayRef,
+        storeName : newHolidayStoreName,
+        username : newHolidayUsername,
+        date : newHolidayDate,
+        status : newHolidayStatus,
+        reason : newHolidayReason
+    });
+
+    newHoliday.save();
+    console.log("New holiday for shop: " + newHolidayStoreName + " Created by staff member: " + staffSession);
+    response.status(200);
+    response.send("Holiday successfully added");
+    
+});
+
+app.post("/Update/Holiday", function(request, response){
+    var updatedStatus = request.body.status;
+    var updatedReference = request.body.holidayReference;
+
+
+    var updatedHoliday = {
+        $set:
+        {
+            status : updatedStatus
+        }
+    }
+
+    db.UpdateHoliday(updatedReference, updatedHoliday).then(function(res){
+        response.sendStatus(200);
+    });
 })
 
 //Listener for requests
