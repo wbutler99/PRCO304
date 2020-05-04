@@ -29,6 +29,11 @@ async function UpdateStaff(username, staff)
     return await schemas.Staff.updateOne({"username": username}, staff);
 }
 
+async function GetShopStaff(shop)
+{
+    return await schemas.Staff.find({"storeName": shop});
+}
+
 //DB functions for shop
 
 async function GetShops()
@@ -106,6 +111,28 @@ async function GetShopShifts(shopName)
     return await schemas.Shift.find({"storeName" : shopName});
 }
 
+//DB functions for holidays
+
+async function GetShopHoliday(shopName)
+{
+    return await schemas.Holiday.find({"storeName" : shopName});
+}
+
+async function GetStaffHoliday(username)
+{
+    return await schemas.Holiday.find({"username" : username});
+}
+
+async function UpdateHoliday(reference, newStatus)
+{
+    return await schemas.Holiday.updateOne({"holidayReference": reference}, newStatus);
+}
+
+async function GetShopHolidayApproval(shopName)
+{
+    return await schemas.Holiday.find({"storeName" : shopName, "status" : "Pending"});
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
@@ -124,3 +151,8 @@ module.exports.GetSpecificStock = GetSpecificStock;
 module.exports.CustomerGetReservations = CustomerGetReservations;
 module.exports.GetShifts = GetShifts;
 module.exports.GetShopShifts = GetShopShifts;
+module.exports.GetShopStaff = GetShopStaff;
+module.exports.GetShopHoliday = GetShopHoliday;
+module.exports.GetStaffHoliday = GetStaffHoliday;
+module.exports.UpdateHoliday = UpdateHoliday;
+module.exports.GetShopHolidayApproval = GetShopHolidayApproval;

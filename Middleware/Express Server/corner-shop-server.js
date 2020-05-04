@@ -330,8 +330,32 @@ app.post("/Staff/UpdatePassword", function(request, response){
     });
 });
 
+app.get("/Manager/Staff", function(request, response){
+    db.GetStaff(staffSession).then(function(manager){
+        var staffShop = manager.storeName;
+        db.getShopStaff(staffShop).then(function(staffs){
+            response.status(200);
+            response.send(staffs);
+        });
+    }); 
+});
+
 app.post("/Staff/Desktop/Update", function(request, response){
-    
+    var updateUsername = request.body.username;
+    var updatedSortCode = request.body.sortCode;
+    var updatedAccountNo = request.body.accountNo;
+
+    var updatedStaff = {
+        $set:
+        {
+            sortCode : updatedSortCode,
+            accountNo : updatedAccountNo
+        }
+    }
+
+    db.UpdateStaff(updateUsername, updatedStaff).then(function(res){
+        response.sendStatus(200);
+    });
 });
 
 //Endpoints for shops
@@ -424,6 +448,26 @@ app.post("/Delivery/Shop/Items", function(request, response){
     });
 });
 
+app.post("/Create/Delivery", function(request, response){
+    var newDeliveryName = request.body.deliveryName;
+    var newDeliveryDate = request.body.deliveryType;
+    var newDeliveryStore = request.body.storeName;
+    var newDeliveryType = request.body.deliveryType;
+
+    var newDelivery = new schemas.Delivery({
+        deliveryName : newDeliveryName,
+        storeName : newDeliveryStore,
+        deliveryDate : newDeliveryDate,
+        deliveryType : newDeliveryType
+    });
+
+    newDelivery.save();
+
+    console.log("New Delivery for: " + newDeliveryStore + " of type: " + newDeliveryType);
+    response.sendStatus(200);
+
+})
+
 //Endpoints for Reservations
 
 app.get("/Shop/Reservation", function(request, response){
@@ -442,7 +486,7 @@ app.post("/Create/Reservation", function(request, response){
     var customerName;
     db.GetCustomer(customerSession).then(function(customer){
         customerName = customer.firstName + " " + customer.lastName;
-    })
+    });
 
     var newReservation = new schemas.Reservation({
         name : customerName,
@@ -451,7 +495,7 @@ app.post("/Create/Reservation", function(request, response){
     });
 
     newReservation.save();
-    console.log("New reservation for: " + customerName + "of: " + product);
+    console.log("New reservation for: " + customerName + " of: " + product);
     response.status(200);
     response.send("Reservation made. Your reservsation will be ready in 2 hours.");
 });
@@ -483,7 +527,7 @@ app.post("/Create/Shift", function(request, response){
     });
 
     newShift.save();
-    console.log("New shift for shop: " + shop + "for staff member: " + staffMember);
+    console.log("New shift for shop: " + shop + " for staff member: " + staffMember);
     response.status(200);
     response.send("Shift successfully added");
 });
@@ -503,6 +547,81 @@ app.get("/Shop/Shift", function(request, response){
             response.send(shifts);
         });
     });   
+});
+
+//Endpoints for Holiday
+
+app.get("/Shop/Holiday", function(request, response){
+    db.GetStaff(staffSession).then(function(manager){
+        var shop = manager.storeName;
+        db.GetShopHoliday(shop).then(function(holidays){
+            response.status(200);
+            response.send(holidays);
+        });
+    });
+});
+
+app.get("/Staff/Holiday", function(request, response){
+    db.GetStaffHoliday(staffSession).then(function(holidays){
+        response.status(200);
+        response.send(holidays);
+    });
+});
+
+app.get("/Shop/Holiday/Approve", function(request, response){
+    db.GetStaff(staffSession).then(function(manager){
+        var shop = manager.storeName;
+        db.GetShopHolidayApproval(shop).then(function(holidays){
+            response.status(200);
+            response.send(holidays);
+        });
+    });
+})
+
+app.post("/Create/Holiday", function(request, response){
+    var newHolidayRef = request.body.holidayReference;
+    var newHolidayStartDate = request.body.holidayStartDate;
+    var newHolidayEndDate = request.body.holidayEndDate;
+    var newHolidayUsername = staffSession;
+    var newHolidayStatus = "Pending";
+    var newHolidayReason = request.body.reason
+    var newHolidayStoreName;
+    db.GetStaff(staffSession).then(function(staff){
+        newHolidayStoreName = staff.storeName;
+    });
+
+    var newHoliday = new schemas.Holiday({
+        holidayReference : newHolidayRef,
+        storeName : newHolidayStoreName,
+        username : newHolidayUsername,
+        startDate : newHolidayStartDate,
+        endDate : newHolidayEndDate,
+        status : newHolidayStatus,
+        reason : newHolidayReason
+    });
+
+    newHoliday.save();
+    console.log("New holiday request for shop: " + newHolidayStoreName + " Created by staff member: " + staffSession);
+    response.status(200);
+    response.send("Holiday Request made. Check back to see if it has been approved.");
+    
+});
+
+app.post("/Update/Holiday", function(request, response){
+    var updatedStatus = request.body.status;
+    var updatedReference = request.body.holidayReference;
+
+
+    var updatedHoliday = {
+        $set:
+        {
+            status : updatedStatus
+        }
+    }
+
+    db.UpdateHoliday(updatedReference, updatedHoliday).then(function(res){
+        response.sendStatus(200);
+    });
 })
 
 //Listener for requests

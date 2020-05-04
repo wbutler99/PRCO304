@@ -11,7 +11,7 @@ namespace CornerShopSecialistDesktop.Models
     {
         [JsonProperty("deliveryName")]
         public string deliveryName { get; set; }
-        [JsonProperty("shopName")]
+        [JsonProperty("storeName")]
         public string shopName { get; set; }
         [JsonProperty("deliveryDate")]
         public DateTime deliveryDate { get; set; }

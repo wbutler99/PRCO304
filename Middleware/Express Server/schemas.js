@@ -91,6 +91,19 @@ var Shift = mongoose.model("Shift", {
     username: String,
 });
 
+var Holiday = mongoose.model("Holiday", {
+    holidayReference : {
+        type: String,
+        unique: true
+    },
+    storeName : String,
+    username : String,
+    startDate : Date,
+    endDate : Date,
+    status : String,
+    reason : String
+});
+
 module.exports.Customer = Customer;
 module.exports.Staff = Staff;
 module.exports.Shop = Shop;
@@ -100,3 +113,4 @@ module.exports.DeliveryItem = DeliveryItem;
 module.exports.Product = Product;
 module.exports.Reservation = Reservation;
 module.exports.Shift = Shift;
+module.exports.Holiday = Holiday;

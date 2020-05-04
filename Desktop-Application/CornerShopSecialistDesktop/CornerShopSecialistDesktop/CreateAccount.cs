@@ -29,7 +29,7 @@ namespace CornerShopSecialistDesktop
             string username = txtUsername.Text;
             string password = txtPassword.Text;
             string email = txtEmail.Text;
-            DateTime DOB = dtpDOB.Value.Date;
+            DateTime DOB = dtpDOB.Value.Date.AddHours(1);
             string addressLineOne = txtAddressLineOne.Text;
             string addressLineTwo = txtAddressLineTwo.Text;
             string postcode = txtPostcode.Text;
@@ -38,7 +38,7 @@ namespace CornerShopSecialistDesktop
             string sortCode = txtSortCode.Text;
             string shopName = comShop.SelectedItem.ToString();
 
-            AccountCreation employee = new AccountCreation(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
+            StaffViewModel employee = new StaffViewModel(username, firstName, lastName, password, email, DOB, addressLineOne, addressLineTwo, postcode, jobRole, sortCode,
                 accountNo, shopName);
 
             HttpClient client = new HttpClient
@@ -65,7 +65,7 @@ namespace CornerShopSecialistDesktop
             }
             else
             {
-                MessageBox.Show("Sign Up failed. Please check you credentials and try again. Error Code: " + response.StatusCode.ToString(),
+                MessageBox.Show("Sign Up failed. Please check your credentials and try again. Error Code: " + response.StatusCode.ToString(),
                     "Sign Up Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }

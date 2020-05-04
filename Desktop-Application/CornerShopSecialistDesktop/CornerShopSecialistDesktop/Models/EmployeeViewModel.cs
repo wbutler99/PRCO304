@@ -45,7 +45,7 @@ namespace CornerShopSecialistDesktop.Models
         [JsonProperty("accountNo")]
         public string accountNo { get; set; }
 
-        [JsonProperty("shopName")]
+        [JsonProperty("storeName")]
         public string shopName { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace CornerShopSecialistDesktop.Models
 {
-    public class AccountCreation
+    public class StaffViewModel
     {
 
         [JsonProperty("firstName")]
@@ -45,10 +45,10 @@ namespace CornerShopSecialistDesktop.Models
         [JsonProperty("accountNo")]
         public string accountNo { get; set; }
 
-        [JsonProperty("shopName")]
+        [JsonProperty("storeName")]
         public string shopName { get; set; }
 
-        public AccountCreation(string username, string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo, 
+        public StaffViewModel(string username, string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo, 
             string postcode, string jobRole, string sortCode, string accountNo)
         {
             this.username = username;
@@ -63,10 +63,9 @@ namespace CornerShopSecialistDesktop.Models
             this.jobRole = jobRole;
             this.sortCode = sortCode;
             this.accountNo = accountNo;
-            //this.shopId = shopId;
         }
 
-        public AccountCreation(string username, string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo,
+        public StaffViewModel(string username, string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo,
             string postcode, string jobRole, string sortCode, string accountNo, string shopName)
         {
             this.username = username;
@@ -82,6 +81,10 @@ namespace CornerShopSecialistDesktop.Models
             this.sortCode = sortCode;
             this.accountNo = accountNo;
             this.shopName = shopName;
+        }
+
+        public StaffViewModel()
+        {
         }
     }
 }
