@@ -20,7 +20,6 @@ namespace CornerShopSecialistDesktop
         public ApproveHolidays()
         {
             InitializeComponent();
-            
             PopulateHolidays();
         }
 

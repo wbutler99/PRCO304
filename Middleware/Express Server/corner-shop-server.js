@@ -353,7 +353,7 @@ app.post("/Staff/Desktop/Update", function(request, response){
         }
     }
 
-    db.UpdateCustomer(updateUsername, updatedStaff).then(function(res){
+    db.UpdateStaff(updateUsername, updatedStaff).then(function(res){
         response.sendStatus(200);
     });
 });

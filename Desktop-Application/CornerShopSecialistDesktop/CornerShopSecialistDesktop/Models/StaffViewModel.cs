@@ -82,5 +82,9 @@ namespace CornerShopSecialistDesktop.Models
             this.accountNo = accountNo;
             this.shopName = shopName;
         }
+
+        public StaffViewModel()
+        {
+        }
     }
 }

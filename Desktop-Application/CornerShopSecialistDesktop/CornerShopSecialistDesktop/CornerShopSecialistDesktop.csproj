@@ -59,6 +59,12 @@
     <Compile Include="AdminHome.Designer.cs">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </Compile>
+    <Compile Include="ApproveHolidays.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApproveHolidays.Designer.cs">
+      <DependentUpon>ApproveHolidays.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateAccount.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +82,12 @@
     </Compile>
     <Compile Include="CreateStaff.Designer.cs">
       <DependentUpon>CreateStaff.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Holiday.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Holiday.Designer.cs">
+      <DependentUpon>Holiday.cs</DependentUpon>
     </Compile>
     <Compile Include="Home.cs">
       <SubType>Form</SubType>
@@ -101,6 +113,7 @@
     <Compile Include="ManagerReservations.Designer.cs">
       <DependentUpon>ManagerReservations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\HolidayViewModel.cs" />
     <Compile Include="Models\StaffViewModel.cs" />
     <Compile Include="Models\DeliveryItemViewModel.cs" />
     <Compile Include="Models\DeliveryViewModel.cs" />
@@ -115,6 +128,12 @@
     </Compile>
     <Compile Include="NewShift.Designer.cs">
       <DependentUpon>NewShift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Payroll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Payroll.Designer.cs">
+      <DependentUpon>Payroll.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -139,6 +158,9 @@
     <EmbeddedResource Include="AdminHome.resx">
       <DependentUpon>AdminHome.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ApproveHolidays.resx">
+      <DependentUpon>ApproveHolidays.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateAccount.resx">
       <DependentUpon>CreateAccount.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +169,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CreateStaff.resx">
       <DependentUpon>CreateStaff.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Holiday.resx">
+      <DependentUpon>Holiday.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Home.resx">
       <DependentUpon>Home.cs</DependentUpon>
@@ -162,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewShift.resx">
       <DependentUpon>NewShift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Payroll.resx">
+      <DependentUpon>Payroll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
