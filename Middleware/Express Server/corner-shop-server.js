@@ -568,6 +568,16 @@ app.get("/Staff/Holiday", function(request, response){
     });
 });
 
+app.get("/Shop/Holiday/Approve", function(request, response){
+    db.GetStaff(staffSession).then(function(manager){
+        var shop = manager.storeName;
+        db.GetShopHolidayApproval(shop).then(function(holidays){
+            response.status(200);
+            response.send(holidays);
+        });
+    });
+})
+
 app.post("/Create/Holiday", function(request, response){
     var newHolidayRef = request.body.holidayReference;
     var newHolidayStartDate = request.body.holidayStartDate;

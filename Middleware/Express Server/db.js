@@ -128,6 +128,11 @@ async function UpdateHoliday(reference, newStatus)
     return await schemas.Holiday.updateOne({"holidayReference": reference}, newStatus);
 }
 
+async function GetShopHolidayApproval(shopName)
+{
+    return await schemas.Holiday.find({"storeName" : shopName, "status" : "Pending"});
+}
+
 module.exports.GetCustomer = GetCustomer;
 module.exports.GetCustomerEmail = GetCustomerEmail;
 module.exports.UpdateCustomer = UpdateCustomer;
@@ -150,3 +155,4 @@ module.exports.GetShopStaff = GetShopStaff;
 module.exports.GetShopHoliday = GetShopHoliday;
 module.exports.GetStaffHoliday = GetStaffHoliday;
 module.exports.UpdateHoliday = UpdateHoliday;
+module.exports.GetShopHolidayApproval = GetShopHolidayApproval;

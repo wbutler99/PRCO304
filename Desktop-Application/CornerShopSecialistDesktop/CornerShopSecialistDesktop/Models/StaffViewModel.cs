@@ -63,7 +63,6 @@ namespace CornerShopSecialistDesktop.Models
             this.jobRole = jobRole;
             this.sortCode = sortCode;
             this.accountNo = accountNo;
-            //this.shopId = shopId;
         }
 
         public StaffViewModel(string username, string firstName, string lastName, string password, string email, DateTime dOB, string addressLineOne, string addressLineTwo,
