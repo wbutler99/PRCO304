@@ -570,7 +570,8 @@ app.get("/Staff/Holiday", function(request, response){
 
 app.post("/Create/Holiday", function(request, response){
     var newHolidayRef = request.body.holidayReference;
-    var newHolidayDate = request.body.holidayDate;
+    var newHolidayStartDate = request.body.holidayStartDate;
+    var newHolidayEndDate = request.body.holidayEndDate;
     var newHolidayUsername = staffSession;
     var newHolidayStatus = "Pending";
     var newHolidayReason = request.body.reason
@@ -583,15 +584,16 @@ app.post("/Create/Holiday", function(request, response){
         holidayReference : newHolidayRef,
         storeName : newHolidayStoreName,
         username : newHolidayUsername,
-        date : newHolidayDate,
+        startDate : newHolidayStartDate,
+        endDate : newHolidayEndDate,
         status : newHolidayStatus,
         reason : newHolidayReason
     });
 
     newHoliday.save();
-    console.log("New holiday for shop: " + newHolidayStoreName + " Created by staff member: " + staffSession);
+    console.log("New holiday request for shop: " + newHolidayStoreName + " Created by staff member: " + staffSession);
     response.status(200);
-    response.send("Holiday successfully added");
+    response.send("Holiday Request made. Check back to see if it has been approved.");
     
 });
 

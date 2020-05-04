@@ -149,3 +149,4 @@ module.exports.GetShopShifts = GetShopShifts;
 module.exports.GetShopStaff = GetShopStaff;
 module.exports.GetShopHoliday = GetShopHoliday;
 module.exports.GetStaffHoliday = GetStaffHoliday;
+module.exports.UpdateHoliday = UpdateHoliday;

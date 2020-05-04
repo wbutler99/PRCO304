@@ -98,7 +98,8 @@ var Holiday = mongoose.model("Holiday", {
     },
     storeName : String,
     username : String,
-    date : Date,
+    startDate : Date,
+    endDate : Date,
     status : String,
     reason : String
 });
