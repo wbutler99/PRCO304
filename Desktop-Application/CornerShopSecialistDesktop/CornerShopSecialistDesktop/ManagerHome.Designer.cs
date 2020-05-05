@@ -36,6 +36,7 @@
             this.btnShifts = new System.Windows.Forms.Button();
             this.btnHolidays = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnPayroll = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStock
@@ -61,7 +62,7 @@
             // btnLogOut
             // 
             this.btnLogOut.ForeColor = System.Drawing.Color.Black;
-            this.btnLogOut.Location = new System.Drawing.Point(205, 286);
+            this.btnLogOut.Location = new System.Drawing.Point(204, 326);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(75, 23);
             this.btnLogOut.TabIndex = 2;
@@ -119,11 +120,22 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Select the service you require:";
             // 
+            // btnPayroll
+            // 
+            this.btnPayroll.Location = new System.Drawing.Point(195, 224);
+            this.btnPayroll.Name = "btnPayroll";
+            this.btnPayroll.Size = new System.Drawing.Size(94, 70);
+            this.btnPayroll.TabIndex = 8;
+            this.btnPayroll.Text = "Payroll";
+            this.btnPayroll.UseVisualStyleBackColor = true;
+            this.btnPayroll.Click += new System.EventHandler(this.btnPayroll_Click);
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 379);
+            this.Controls.Add(this.btnPayroll);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnHolidays);
             this.Controls.Add(this.btnShifts);
@@ -149,5 +161,6 @@
         private System.Windows.Forms.Button btnShifts;
         private System.Windows.Forms.Button btnHolidays;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnPayroll;
     }
 }

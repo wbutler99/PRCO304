@@ -75,5 +75,11 @@ namespace CornerShopSecialistDesktop
             Holiday holiday = new Holiday();
             holiday.Show();
         }
+
+        private void btnPayroll_Click(object sender, EventArgs e)
+        {
+            Payroll payroll = new Payroll();
+            payroll.Show();
+        }
     }
 }
