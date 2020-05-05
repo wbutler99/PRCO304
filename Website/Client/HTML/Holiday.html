@@ -8,7 +8,7 @@
             window.onload = function(){
                 //Get Holiday data for staff member and add it to the table
                 $.get("http://localhost:9000/Staff/Holiday").then(function(holidays){
-                    for (var i = 0; i <= products.length; i++)
+                    for (var i = 0; i <= holidays.length; i++)
                     {
                         var holiday = holidays[i];
                         //insert data to the table
