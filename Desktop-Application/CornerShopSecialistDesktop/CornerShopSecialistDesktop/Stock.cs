@@ -38,9 +38,10 @@ namespace CornerShopSecialistDesktop
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 stocks = JsonConvert.DeserializeObject<List<StockViewModel>>(jsonString);
 
-                lblShop.Text = stocks[0].storeName;
+                
                 foreach(StockViewModel stock in stocks)
                 {
+                    lblShop.Text = stock.storeName;
                     grdStock.Rows.Add(stock.productName, stock.quantity);
                 }                
             }
