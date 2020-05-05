@@ -69,8 +69,6 @@ app.post("/Customer/Signup", function(request, response){
     });
 
     newCustomer.save();
-    //app.session = newCustomer.username;
-    //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
     console.log("New User: " + newUsername + " created!");
     response.status(200);
     response.send("Sign up complete. Please log in to continue.");
