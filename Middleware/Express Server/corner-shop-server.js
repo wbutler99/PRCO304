@@ -157,7 +157,7 @@ app.post("/Customer/UpdatePassword", function(request, response){
     });
 });
 
-app.post("/Customer/Logout", function(request, response){
+app.get("/Customer/Logout", function(request, response){
     console.log("Successful log out by: " + customerSession);
     customerSession = undefined;
     response.status(200);
@@ -365,7 +365,7 @@ app.post("/Staff/Desktop/Update", function(request, response){
     });
 });
 
-app.post("/Staff/Logout", function(request, response){
+app.get("/Staff/Logout", function(request, response){
     console.log("Log out by: " + staffSession);
     staffSession = undefined;
     response.status(200);
