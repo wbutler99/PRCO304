@@ -143,11 +143,11 @@
     <Compile Include="Shifts.Designer.cs">
       <DependentUpon>Shifts.cs</DependentUpon>
     </Compile>
-    <Compile Include="StaffHome.cs">
+    <Compile Include="Shops.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StaffHome.Designer.cs">
-      <DependentUpon>StaffHome.cs</DependentUpon>
+    <Compile Include="Shops.Designer.cs">
+      <DependentUpon>Shops.cs</DependentUpon>
     </Compile>
     <Compile Include="Stock.cs">
       <SubType>Form</SubType>
@@ -202,6 +202,9 @@
     </Compile>
     <EmbeddedResource Include="Shifts.resx">
       <DependentUpon>Shifts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shops.resx">
+      <DependentUpon>Shops.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stock.resx">
       <DependentUpon>Stock.cs</DependentUpon>
