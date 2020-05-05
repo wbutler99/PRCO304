@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -19,10 +20,22 @@ namespace CornerShopSecialistDesktop
 
         private void btnLogOut_Click(object sender, EventArgs e)
         {
-            //TODO: Dispose of data when logging out & clear all other pages that may be open
-            Home home = new Home();
-            home.Show();
-            this.Hide();
+            HttpClient client = new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:9000/")
+            };
+            var response = client.GetAsync("Staff/Logout").Result;
+            if (response.IsSuccessStatusCode)
+            {
+                Home home = new Home();
+                home.Show();
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Log Out Request failed. Please try again. Error Code: " + response.StatusCode.ToString(),
+                    "Log Out Request Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnNewManager_Click(object sender, EventArgs e)
