@@ -31,10 +31,11 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.grdDelivery = new System.Windows.Forms.DataGridView();
-            this.lblDeliveryDate = new System.Windows.Forms.Label();
-            this.lblDeliveryType = new System.Windows.Forms.Label();
             this.productName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblDeliveryDate = new System.Windows.Forms.Label();
+            this.lblDeliveryType = new System.Windows.Forms.Label();
+            this.btnRefresh = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdDelivery)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +53,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(340, 13);
+            this.label1.Location = new System.Drawing.Point(419, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(156, 25);
             this.label1.TabIndex = 1;
@@ -69,6 +70,18 @@
             this.grdDelivery.Size = new System.Drawing.Size(246, 292);
             this.grdDelivery.TabIndex = 2;
             // 
+            // productName
+            // 
+            this.productName.HeaderText = "Product Name";
+            this.productName.Name = "productName";
+            this.productName.ReadOnly = true;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            // 
             // lblDeliveryDate
             // 
             this.lblDeliveryDate.AutoSize = true;
@@ -83,29 +96,28 @@
             // 
             this.lblDeliveryType.AutoSize = true;
             this.lblDeliveryType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeliveryType.Location = new System.Drawing.Point(484, 13);
+            this.lblDeliveryType.Location = new System.Drawing.Point(581, 13);
             this.lblDeliveryType.Name = "lblDeliveryType";
             this.lblDeliveryType.Size = new System.Drawing.Size(60, 25);
             this.lblDeliveryType.TabIndex = 4;
             this.lblDeliveryType.Text = "Type";
             // 
-            // productName
+            // btnRefresh
             // 
-            this.productName.HeaderText = "Product Name";
-            this.productName.Name = "productName";
-            this.productName.ReadOnly = true;
-            // 
-            // quantity
-            // 
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
+            this.btnRefresh.Location = new System.Drawing.Point(31, 62);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(93, 62);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // ManagerDelivery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 450);
+            this.ClientSize = new System.Drawing.Size(872, 450);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblDeliveryType);
             this.Controls.Add(this.lblDeliveryDate);
             this.Controls.Add(this.grdDelivery);
@@ -128,5 +140,6 @@
         private System.Windows.Forms.Label lblDeliveryType;
         private System.Windows.Forms.DataGridViewTextBoxColumn productName;
         private System.Windows.Forms.DataGridViewTextBoxColumn quantity;
+        private System.Windows.Forms.Button btnRefresh;
     }
 }

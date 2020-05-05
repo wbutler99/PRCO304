@@ -4,18 +4,19 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="../Javascript/StaffLogout.js"></script>
         <script>
             window.onload = function(){
-                $.get("http://localhost:9000/Customer").then(function(customer){
-                $("#username").append(customer.username);
-                $("#DOB").append(customer.DOB.split('T')[0]);
+                $.get("http://localhost:9000/Staff").then(function(staff){
+                $("#username").append(staff.username);
+                $("#DOB").append(staff.DOB.split('T')[0]);
                 $("#name").append(staff.firstName + " " + staff.lastName);
                 $("#jobrole").append(staff.jobRole);
 
-                $("#email").val(customer.email);
-                $("#addressLineOne").val(customer.addressLineOne);
-                $("#addressLineTwo").val(customer.addressLineTwo);
-                $("#postcode").val(customer.postcode);
+                $("#email").val(staff.email);
+                $("#addressLineOne").val(staff.addressLineOne);
+                $("#addressLineTwo").val(staff.addressLineTwo);
+                $("#postcode").val(staff.postcode);
                 });
 
                 $("#updateForm").submit(function(){
@@ -47,21 +48,21 @@
     <body>
         <div class="jumbotron text-center bg-primary text-white">
             <h1>Corner Shop Specialist</h1>
-            <h2>Staff Portal</h2> 
+            <h2>Update Staff Details</h2> 
         </div>
         <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" onclick="window.location.href = 'CustomerHome.html'">Corner Shop Specialist</a>
+                    <a class="nav-link" onclick="window.location.href = 'StaffHome.html'">Corner Shop Specialist</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="shops">Shops</a>
+                  <a class="nav-link" id="shops" onclick="window.location.href='StaffShops.html'">Shops</a>
                 </li>                        
                 <li class="nav-item">
-                    <a class="nav-link" id="products">Products</a>
+                    <a class="nav-link" id="shift" onclick="window.location.href = 'Shifts.html'">Shifts</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="news">News Deliveries</a>
+                  <a class="nav-link" id="holiday" onclick="window.location.href='Holiday.html'">Holiday</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="account" onclick="window.location.href = 'StaffAccount.html'">Account</a>
@@ -73,7 +74,7 @@
                 </div>
             </ul>
         </nav>
-
+        <h1>Update Your Details</h1>
         <div class="container">
             <h2>Please edit your details here</h2>                
             <label for="username">Username:</label>

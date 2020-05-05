@@ -40,13 +40,12 @@ namespace CornerShopSecialistDesktop
             {
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 delivery = JsonConvert.DeserializeObject<DeliveryViewModel>(jsonString);
-                lblDeliveryDate.Text = delivery.deliveryDate.ToString();
+                lblDeliveryDate.Text = delivery.deliveryDate.Date.ToString();
                 lblDeliveryType.Text = delivery.deliveryType.ToString();
                 lblDeliveryDate.Visible = true;
                 lblDeliveryType.Visible = true;
 
-                var deliveryName = delivery.deliveryName;
-                var secondResponse = client.PostAsJsonAsync("Delivery/Shop/Items", deliveryName).Result;
+                var secondResponse = client.PostAsJsonAsync("Delivery/Shop/Items", delivery).Result;
                 if(secondResponse.IsSuccessStatusCode)
                 {
                     var secondJsonString = secondResponse.Content.ReadAsStringAsync().Result;
@@ -62,6 +61,12 @@ namespace CornerShopSecialistDesktop
                 MessageBox.Show("Delivery Request failed. Please try again. Error Code: " + response.StatusCode.ToString(),
                     "Delivery Request Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            grdDelivery.Rows.Clear();
+            PopulateDelivery();
         }
     }
 }

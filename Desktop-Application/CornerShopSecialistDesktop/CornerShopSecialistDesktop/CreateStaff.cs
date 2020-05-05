@@ -28,7 +28,7 @@ namespace CornerShopSecialistDesktop
             string username = txtUsername.Text;
             string password = txtPassword.Text;
             string email = txtEmail.Text;
-            DateTime DOB = dtpDOB.Value.Date;
+            DateTime DOB = dtpDOB.Value.Date.AddHours(1);
             string addressLineOne = txtAddressLineOne.Text;
             string addressLineTwo = txtAddressLineTwo.Text;
             string postcode = txtPostcode.Text;

@@ -42,13 +42,20 @@ namespace CornerShopSecialistDesktop
                 
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 shifts = JsonConvert.DeserializeObject<List<ShiftViewModel>>(jsonString);
-                lblShop.Text = shifts[0].storeName.ToString();
+                
                 lblShop.Visible = true;
                 foreach (ShiftViewModel shift in shifts)
                 {
+                    lblShop.Text = shift.storeName.ToString();
                     grdShifts.Rows.Add(shift.username, shift.shiftDate);
                 }
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            grdShifts.Rows.Clear();
+            PopulateShifts();
         }
     }
 }

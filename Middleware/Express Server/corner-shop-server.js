@@ -69,8 +69,6 @@ app.post("/Customer/Signup", function(request, response){
     });
 
     newCustomer.save();
-    //app.session = newCustomer.username;
-    //sessionData = newCustomer.username; TODO: FIX SESSION DATA!!
     console.log("New User: " + newUsername + " created!");
     response.status(200);
     response.send("Sign up complete. Please log in to continue.");
@@ -157,6 +155,13 @@ app.post("/Customer/UpdatePassword", function(request, response){
     });
 });
 
+app.get("/Customer/Logout", function(request, response){
+    console.log("Successful log out by: " + customerSession);
+    customerSession = undefined;
+    response.status(200);
+    response.send("Log out Successful.");
+});
+
 //Endpoints for staff
 
 app.get("/Staff", function(request, response){
@@ -183,7 +188,7 @@ app.post("/Admin/Signup", function(request, response){
     var newJobRole = request.body.jobRole;
     var newAccountNo = request.body.accountNo;
     var newSortCode = request.body.sortCode;
-    var newShopName = request.body.shopName;
+    var newShopName = request.body.storeName;
 
     var salt = bcrypt.genSaltSync(saltRounds);
     var hash = bcrypt.hashSync(newPassword, salt);
@@ -224,34 +229,32 @@ app.post("/Manager/Staff/Signup", function(request, response){
     var newAccountNo = request.body.accountNo;
     var newSortCode = request.body.sortCode;
     var newShopName;
-
     db.GetStaff(staffSession).then(function(manager){
         newShopName = manager.storeName;
+        var salt = bcrypt.genSaltSync(saltRounds);
+        var hash = bcrypt.hashSync(newPassword, salt);
+    
+        var newStaff = new schemas.Staff({
+            username: newUsername,
+            staffHashedPassword: hash,
+            email: newEmail,
+            firstName: newFirstName,
+            lastName: newLastName,
+            DOB: newDateOfBirth,
+            addressLineOne: newAddressLineOne,
+            addressLineTwo: newAddressLineTwo,
+            postcode: newPostcode,
+            jobRole: newJobRole,
+            sortCode: newSortCode,
+            accountNo: newAccountNo,
+            storeName: newShopName
+        });
+    
+        newStaff.save();
+        console.log("New Staff Member: " + newUsername + " created!");
+        response.status(200);
+        response.send("Sign up complete. Please log in to continue");
     });
-
-    var salt = bcrypt.genSaltSync(saltRounds);
-    var hash = bcrypt.hashSync(newPassword, salt);
-
-    var newStaff = new schemas.Staff({
-        username: newUsername,
-        staffHashedPassword: hash,
-        email: newEmail,
-        firstName: newFirstName,
-        lastName: newLastName,
-        DOB: newDateOfBirth,
-        addressLineOne: newAddressLineOne,
-        addressLineTwo: newAddressLineTwo,
-        postcode: newPostcode,
-        jobRole: newJobRole,
-        sortCode: newSortCode,
-        accountNo: newAccountNo,
-        shopName: newShopName
-    });
-
-    newStaff.save(); //TODO: Add fail response for unique elements
-    console.log("New Staff Member: " + newUsername + " created!");
-    response.status(200);
-    response.send("Sign up complete. Please log in to continue");
 });
 
 app.post("/Staff/Login", function(request, response){
@@ -333,7 +336,7 @@ app.post("/Staff/UpdatePassword", function(request, response){
 app.get("/Manager/Staff", function(request, response){
     db.GetStaff(staffSession).then(function(manager){
         var staffShop = manager.storeName;
-        db.getShopStaff(staffShop).then(function(staffs){
+        db.GetShopStaff(staffShop).then(function(staffs){
             response.status(200);
             response.send(staffs);
         });
@@ -356,6 +359,13 @@ app.post("/Staff/Desktop/Update", function(request, response){
     db.UpdateStaff(updateUsername, updatedStaff).then(function(res){
         response.sendStatus(200);
     });
+});
+
+app.get("/Staff/Logout", function(request, response){
+    console.log("Log out by: " + staffSession);
+    staffSession = undefined;
+    response.status(200);
+    response.send("Log out Successful.");
 });
 
 //Endpoints for shops
@@ -450,7 +460,7 @@ app.post("/Delivery/Shop/Items", function(request, response){
 
 app.post("/Create/Delivery", function(request, response){
     var newDeliveryName = request.body.deliveryName;
-    var newDeliveryDate = request.body.deliveryType;
+    var newDeliveryDate = request.body.deliveryDate;
     var newDeliveryStore = request.body.storeName;
     var newDeliveryType = request.body.deliveryType;
 
@@ -485,19 +495,18 @@ app.post("/Create/Reservation", function(request, response){
     var shop = request.body.storeName;
     var customerName;
     db.GetCustomer(customerSession).then(function(customer){
-        customerName = customer.firstName + " " + customer.lastName;
-    });
-
-    var newReservation = new schemas.Reservation({
+        customerName = customer.firstName + " " + customer.lastName;    
+        var newReservation = new schemas.Reservation({
         name : customerName,
         productName : product,
         storeName : shop
-    });
+        });
 
-    newReservation.save();
-    console.log("New reservation for: " + customerName + " of: " + product);
-    response.status(200);
-    response.send("Reservation made. Your reservsation will be ready in 2 hours.");
+        newReservation.save();
+        console.log("New reservation for: " + customerName + " of: " + product);
+        response.status(200);
+        response.send("Reservation made. Your reservsation will be ready in 2 hours.");
+    });
 });
 
 app.get("/Customer/Reservation", function(request, response){
@@ -517,19 +526,18 @@ app.post("/Create/Shift", function(request, response){
     var date = request.body.shiftDate;
     var shop;
     db.GetStaff(staffSession).then(function(manager){
-        shop = manager.storeName;
-    });
-
-    var newShift = new schemas.Shift({
+        shop = manager.storeName;    
+        var newShift = new schemas.Shift({
         storeName: shop,
-        date: date,
+        shiftDate: date,
         username: staffMember
-    });
+        });
 
-    newShift.save();
-    console.log("New shift for shop: " + shop + " for staff member: " + staffMember);
-    response.status(200);
-    response.send("Shift successfully added");
+        newShift.save();
+        console.log("New shift for shop: " + shop + " for staff member: " + staffMember);
+        response.status(200);
+        response.send("Shift successfully added");
+    });
 });
 
 app.get("/Staff/Shift", function(request, response){
@@ -588,23 +596,21 @@ app.post("/Create/Holiday", function(request, response){
     var newHolidayStoreName;
     db.GetStaff(staffSession).then(function(staff){
         newHolidayStoreName = staff.storeName;
-    });
-
-    var newHoliday = new schemas.Holiday({
-        holidayReference : newHolidayRef,
-        storeName : newHolidayStoreName,
-        username : newHolidayUsername,
-        startDate : newHolidayStartDate,
-        endDate : newHolidayEndDate,
-        status : newHolidayStatus,
-        reason : newHolidayReason
-    });
-
-    newHoliday.save();
-    console.log("New holiday request for shop: " + newHolidayStoreName + " Created by staff member: " + staffSession);
-    response.status(200);
-    response.send("Holiday Request made. Check back to see if it has been approved.");
+        var newHoliday = new schemas.Holiday({
+            holidayReference : newHolidayRef,
+            storeName : newHolidayStoreName,
+            username : newHolidayUsername,
+            startDate : newHolidayStartDate,
+            endDate : newHolidayEndDate,
+            status : newHolidayStatus,
+            reason : newHolidayReason
+        });
     
+        newHoliday.save();
+        console.log("New holiday request for shop: " + newHolidayStoreName + " Created by staff member: " + staffSession);
+        response.status(200);
+        response.send("Holiday Request made. Check back to see if it has been approved.");
+    });
 });
 
 app.post("/Update/Holiday", function(request, response){

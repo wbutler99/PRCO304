@@ -11,9 +11,9 @@ namespace CornerShopSecialistDesktop.Models
     {
         [JsonProperty("storeName")]
         public string storeName { get; set; }
-        [JsonProperty("name")]
+        [JsonProperty("username")]
         public string username { get; set; }
-        [JsonProperty("date")]
+        [JsonProperty("shiftDate")]
         public DateTime shiftDate { get; set; }
     }
 }

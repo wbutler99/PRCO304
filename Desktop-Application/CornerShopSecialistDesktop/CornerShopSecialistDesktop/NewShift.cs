@@ -55,7 +55,6 @@ namespace CornerShopSecialistDesktop
             if(response.IsSuccessStatusCode)
             {
                 MessageBox.Show("New Shift Created.", "New Shift Created", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                comStaff.Items.Clear();
                 dtpShiftDate.Value.ToLocalTime();
             }
             else

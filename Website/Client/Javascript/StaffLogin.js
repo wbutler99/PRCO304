@@ -7,10 +7,9 @@ window.onload = function(){
 
         var post = $.post("http://localhost:9000/Staff/Login", {"username" : username, "password" : password}).always(function(){});
         post.done(function(data, text, res){
-            alert(data);
             if(res.status == 200)
             {
-                // alert("Welcome " + data.username + "!");
+                alert("Welcome " + data.username + "!");
                 // $.get("http://localhost:9000/StaffAuth", {username});
                 window.location.href = "StaffHome.html"; 
             }

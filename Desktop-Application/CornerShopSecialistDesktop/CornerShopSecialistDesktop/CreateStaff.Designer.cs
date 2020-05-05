@@ -293,7 +293,7 @@
             this.Controls.Add(this.txtFirstName);
             this.Controls.Add(this.label1);
             this.Name = "CreateStaff";
-            this.Text = "CreateManager";
+            this.Text = "Create Staff Member";
             this.ResumeLayout(false);
             this.PerformLayout();
 
