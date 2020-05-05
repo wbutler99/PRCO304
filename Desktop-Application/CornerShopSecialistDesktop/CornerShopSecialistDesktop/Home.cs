@@ -62,11 +62,6 @@ namespace CornerShopSecialistDesktop
                     ManagerHome home = new ManagerHome();
                     home.Show();
                 }
-                else
-                {
-                    StaffHome home = new StaffHome();
-                    home.Show();
-                }
                 txtUsernameInput.Clear();
                 txtPasswordInput.Clear();
                 this.Hide();
