@@ -35,6 +35,7 @@
             this.btnReservations = new System.Windows.Forms.Button();
             this.btnShifts = new System.Windows.Forms.Button();
             this.btnHolidays = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnStock
@@ -108,11 +109,22 @@
             this.btnHolidays.UseVisualStyleBackColor = true;
             this.btnHolidays.Click += new System.EventHandler(this.btnHolidays_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(13, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(303, 25);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Select the service you require:";
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(503, 379);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnHolidays);
             this.Controls.Add(this.btnShifts);
             this.Controls.Add(this.btnReservations);
@@ -123,6 +135,7 @@
             this.Name = "ManagerHome";
             this.Text = "Manager Home";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -135,5 +148,6 @@
         private System.Windows.Forms.Button btnReservations;
         private System.Windows.Forms.Button btnShifts;
         private System.Windows.Forms.Button btnHolidays;
+        private System.Windows.Forms.Label label1;
     }
 }
