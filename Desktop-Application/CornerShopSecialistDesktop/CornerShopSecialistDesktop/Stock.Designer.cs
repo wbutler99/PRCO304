@@ -76,7 +76,7 @@
             // 
             this.lblShop.AutoSize = true;
             this.lblShop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblShop.Location = new System.Drawing.Point(250, 13);
+            this.lblShop.Location = new System.Drawing.Point(233, 13);
             this.lblShop.Name = "lblShop";
             this.lblShop.Size = new System.Drawing.Size(59, 25);
             this.lblShop.TabIndex = 2;
@@ -96,7 +96,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 669);
+            this.ClientSize = new System.Drawing.Size(500, 669);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblShop);
             this.Controls.Add(this.label1);

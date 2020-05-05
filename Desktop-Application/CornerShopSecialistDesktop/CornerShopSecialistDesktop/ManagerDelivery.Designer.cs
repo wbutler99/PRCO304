@@ -53,7 +53,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(340, 13);
+            this.label1.Location = new System.Drawing.Point(419, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(156, 25);
             this.label1.TabIndex = 1;
@@ -96,7 +96,7 @@
             // 
             this.lblDeliveryType.AutoSize = true;
             this.lblDeliveryType.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDeliveryType.Location = new System.Drawing.Point(484, 13);
+            this.lblDeliveryType.Location = new System.Drawing.Point(581, 13);
             this.lblDeliveryType.Name = "lblDeliveryType";
             this.lblDeliveryType.Size = new System.Drawing.Size(60, 25);
             this.lblDeliveryType.TabIndex = 4;
@@ -116,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(680, 450);
+            this.ClientSize = new System.Drawing.Size(872, 450);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.lblDeliveryType);
             this.Controls.Add(this.lblDeliveryDate);

@@ -41,11 +41,12 @@ namespace CornerShopSecialistDesktop
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 holidays = JsonConvert.DeserializeObject<List<HolidayViewModel>>(jsonString);
 
-                lblShop.Text = holidays[0].storeName;
+                
 
                 foreach (HolidayViewModel holiday in holidays)
                 {
-                    grdHolidays.Rows.Add(holiday.holidayReference, holiday.username, holiday.startDate.ToString(), holiday.endDate.ToString(),
+                    lblShop.Text = holiday.storeName;
+                    grdHolidays.Rows.Add(holiday.holidayReference, holiday.username, holiday.startDate.Date.ToString(), holiday.endDate.Date.ToString(),
                         holiday.reason, holiday.status);
                 }
             }

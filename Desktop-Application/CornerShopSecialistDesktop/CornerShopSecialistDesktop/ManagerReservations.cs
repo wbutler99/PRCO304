@@ -31,16 +31,14 @@ namespace CornerShopSecialistDesktop
             {
                 BaseAddress = new Uri("http://localhost:9000/")
             };
-            var response = client.GetAsync("Shop/Reservations").Result;
+            var response = client.GetAsync("Shop/Reservation").Result;
             if (response.IsSuccessStatusCode)
             {
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 reservations = JsonConvert.DeserializeObject<List<ReservationViewModel>>(jsonString);
-
-                lblShop.Text = reservations[0].storeName;
-
                 foreach(ReservationViewModel reservation in reservations)
                 {
+                    lblShop.Text = reservation.storeName;
                     grdReservation.Rows.Add(reservation.name, reservation.productName);
                 }
             }
