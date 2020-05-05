@@ -38,24 +38,23 @@ namespace CornerShopSecialistDesktop
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 stocks = JsonConvert.DeserializeObject<List<StockViewModel>>(jsonString);
 
-                //grdStock.Rows.Add(stocks);
+                lblShop.Text = stocks[0].storeName;
                 foreach(StockViewModel stock in stocks)
                 {
                     grdStock.Rows.Add(stock.productName, stock.quantity);
                 }                
-                
-                //    DataGridViewRow newRow = new DataGridViewRow();
-                //    newRow.CreateCells(grdStock);
-                //    newRow.Cells[0].Value = stock.productName;
-                //    newRow.Cells[1].Value = stock.quantity;
-
-                //    grdStock.Rows.Add(newRow);
             }
             else
             {
                 MessageBox.Show("Stock Request failed. Please try again. Error Code: " + response.StatusCode.ToString(),
                     "Stock Request Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            grdStock.Rows.Clear();
+            PopulateStock();
         }
     }
 }
