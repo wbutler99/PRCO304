@@ -50,5 +50,11 @@ namespace CornerShopSecialistDesktop
                 }
             }
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            grdShifts.Rows.Clear();
+            PopulateShifts();
+        }
     }
 }
