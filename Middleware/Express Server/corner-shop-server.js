@@ -157,6 +157,13 @@ app.post("/Customer/UpdatePassword", function(request, response){
     });
 });
 
+app.post("/Customer/Logout", function(request, response){
+    console.log("Successful log out by: " + customerSession);
+    customerSession = undefined;
+    response.status(200);
+    response.send("Log out Successful.");
+});
+
 //Endpoints for staff
 
 app.get("/Staff", function(request, response){
@@ -356,6 +363,13 @@ app.post("/Staff/Desktop/Update", function(request, response){
     db.UpdateStaff(updateUsername, updatedStaff).then(function(res){
         response.sendStatus(200);
     });
+});
+
+app.post("/Staff/Logout", function(request, response){
+    console.log("Log out by: " + staffSession);
+    staffSession = undefined;
+    response.status(200);
+    response.send("Log out Successful.");
 });
 
 //Endpoints for shops
