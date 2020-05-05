@@ -58,7 +58,7 @@
             this.addressLineOne,
             this.addressLineTwo,
             this.postcode});
-            this.grdShops.Location = new System.Drawing.Point(64, 89);
+            this.grdShops.Location = new System.Drawing.Point(138, 88);
             this.grdShops.Name = "grdShops";
             this.grdShops.ReadOnly = true;
             this.grdShops.Size = new System.Drawing.Size(703, 422);
@@ -93,9 +93,9 @@
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(651, 14);
+            this.btnRefresh.Location = new System.Drawing.Point(18, 88);
             this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(97, 50);
+            this.btnRefresh.Size = new System.Drawing.Size(97, 76);
             this.btnRefresh.TabIndex = 2;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
@@ -105,7 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 537);
+            this.ClientSize = new System.Drawing.Size(863, 537);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.grdShops);
             this.Controls.Add(this.label1);
