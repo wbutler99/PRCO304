@@ -32,13 +32,16 @@
             this.btnDeliveries = new System.Windows.Forms.Button();
             this.btnLogOut = new System.Windows.Forms.Button();
             this.btnNewStaff = new System.Windows.Forms.Button();
+            this.btnReservations = new System.Windows.Forms.Button();
+            this.btnShifts = new System.Windows.Forms.Button();
+            this.btnHolidays = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnStock
             // 
-            this.btnStock.Location = new System.Drawing.Point(68, 59);
+            this.btnStock.Location = new System.Drawing.Point(101, 59);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(75, 23);
+            this.btnStock.Size = new System.Drawing.Size(88, 76);
             this.btnStock.TabIndex = 0;
             this.btnStock.Text = "Stock";
             this.btnStock.UseVisualStyleBackColor = true;
@@ -46,17 +49,18 @@
             // 
             // btnDeliveries
             // 
-            this.btnDeliveries.Location = new System.Drawing.Point(242, 59);
+            this.btnDeliveries.Location = new System.Drawing.Point(195, 59);
             this.btnDeliveries.Name = "btnDeliveries";
-            this.btnDeliveries.Size = new System.Drawing.Size(75, 23);
+            this.btnDeliveries.Size = new System.Drawing.Size(94, 76);
             this.btnDeliveries.TabIndex = 1;
             this.btnDeliveries.Text = "Deliveries";
             this.btnDeliveries.UseVisualStyleBackColor = true;
+            this.btnDeliveries.Click += new System.EventHandler(this.btnDeliveries_Click);
             // 
             // btnLogOut
             // 
             this.btnLogOut.ForeColor = System.Drawing.Color.Black;
-            this.btnLogOut.Location = new System.Drawing.Point(353, 410);
+            this.btnLogOut.Location = new System.Drawing.Point(205, 286);
             this.btnLogOut.Name = "btnLogOut";
             this.btnLogOut.Size = new System.Drawing.Size(75, 23);
             this.btnLogOut.TabIndex = 2;
@@ -66,19 +70,52 @@
             // 
             // btnNewStaff
             // 
-            this.btnNewStaff.Location = new System.Drawing.Point(379, 59);
+            this.btnNewStaff.Location = new System.Drawing.Point(195, 141);
             this.btnNewStaff.Name = "btnNewStaff";
-            this.btnNewStaff.Size = new System.Drawing.Size(124, 23);
+            this.btnNewStaff.Size = new System.Drawing.Size(94, 77);
             this.btnNewStaff.TabIndex = 3;
             this.btnNewStaff.Text = "New Staff Member";
             this.btnNewStaff.UseVisualStyleBackColor = true;
             this.btnNewStaff.Click += new System.EventHandler(this.btnNewStaff_Click);
             // 
+            // btnReservations
+            // 
+            this.btnReservations.Location = new System.Drawing.Point(101, 141);
+            this.btnReservations.Name = "btnReservations";
+            this.btnReservations.Size = new System.Drawing.Size(88, 77);
+            this.btnReservations.TabIndex = 4;
+            this.btnReservations.Text = "Reservations";
+            this.btnReservations.UseVisualStyleBackColor = true;
+            this.btnReservations.Click += new System.EventHandler(this.btnReservations_Click);
+            // 
+            // btnShifts
+            // 
+            this.btnShifts.Location = new System.Drawing.Point(296, 59);
+            this.btnShifts.Name = "btnShifts";
+            this.btnShifts.Size = new System.Drawing.Size(93, 76);
+            this.btnShifts.TabIndex = 5;
+            this.btnShifts.Text = "Shifts";
+            this.btnShifts.UseVisualStyleBackColor = true;
+            this.btnShifts.Click += new System.EventHandler(this.btnShifts_Click);
+            // 
+            // btnHolidays
+            // 
+            this.btnHolidays.Location = new System.Drawing.Point(296, 142);
+            this.btnHolidays.Name = "btnHolidays";
+            this.btnHolidays.Size = new System.Drawing.Size(93, 76);
+            this.btnHolidays.TabIndex = 6;
+            this.btnHolidays.Text = "Holidays";
+            this.btnHolidays.UseVisualStyleBackColor = true;
+            this.btnHolidays.Click += new System.EventHandler(this.btnHolidays_Click);
+            // 
             // ManagerHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 474);
+            this.ClientSize = new System.Drawing.Size(503, 379);
+            this.Controls.Add(this.btnHolidays);
+            this.Controls.Add(this.btnShifts);
+            this.Controls.Add(this.btnReservations);
             this.Controls.Add(this.btnNewStaff);
             this.Controls.Add(this.btnLogOut);
             this.Controls.Add(this.btnDeliveries);
@@ -95,5 +132,8 @@
         private System.Windows.Forms.Button btnDeliveries;
         private System.Windows.Forms.Button btnLogOut;
         private System.Windows.Forms.Button btnNewStaff;
+        private System.Windows.Forms.Button btnReservations;
+        private System.Windows.Forms.Button btnShifts;
+        private System.Windows.Forms.Button btnHolidays;
     }
 }

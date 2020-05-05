@@ -51,5 +51,29 @@ namespace CornerShopSecialistDesktop
             CreateStaff createStaff = new CreateStaff();
             createStaff.Show();
         }
+
+        private void btnReservations_Click(object sender, EventArgs e)
+        {
+            ManagerReservations reservations = new ManagerReservations();
+            reservations.Show();
+        }
+
+        private void btnDeliveries_Click(object sender, EventArgs e)
+        {
+            ManagerDelivery delivery = new ManagerDelivery();
+            delivery.Show();
+        }
+
+        private void btnShifts_Click(object sender, EventArgs e)
+        {
+            Shifts shifts = new Shifts();
+            shifts.Show();
+        }
+
+        private void btnHolidays_Click(object sender, EventArgs e)
+        {
+            Holiday holiday = new Holiday();
+            holiday.Show();
+        }
     }
 }
