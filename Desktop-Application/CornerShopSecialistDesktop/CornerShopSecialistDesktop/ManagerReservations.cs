@@ -50,5 +50,11 @@ namespace CornerShopSecialistDesktop
                     "Stock Request Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            grdReservation.Rows.Clear();
+            PopulateReservations();
+        }
     }
 }
