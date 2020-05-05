@@ -43,5 +43,17 @@ namespace CornerShopSecialistDesktop
             CreateAccount create = new CreateAccount();
             create.Show();
         }
+
+        private void btnNewDelivery_Click(object sender, EventArgs e)
+        {
+            CreateDelivery delivery = new CreateDelivery();
+            delivery.Show();
+        }
+
+        private void btnShops_Click(object sender, EventArgs e)
+        {
+            Shops shops = new Shops();
+            shops.Show();
+        }
     }
 }
