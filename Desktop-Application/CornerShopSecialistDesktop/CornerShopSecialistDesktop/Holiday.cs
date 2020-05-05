@@ -23,7 +23,8 @@ namespace CornerShopSecialistDesktop
 
         private void btnApproveHoliday_Click(object sender, EventArgs e)
         {
-
+            ApproveHolidays approve = new ApproveHolidays();
+            approve.Show();
         }
 
         private void PopulateHoliday()
