@@ -15,8 +15,7 @@
                         var product = products[i];
                         //insert data to the table
                         //TODO: Ask Dan about redirect button.
-                        $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
-                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/'" + product.name + ">" + "View" + "</a>" + "</td></tr>");
+                        $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td></tr>");
                     }
                 });
                 $("#searchbtn").click(function(){
@@ -29,8 +28,7 @@
                             //insert data to the table
                             //TODO: Ask Dan about redirect button.
                             $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" + 
-                                product.price + "</td><td>" +
-                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/" + product.name + "'>" + "View" + "</a>" + "</td></tr>"); 
+                                product.price + "</td></tr>"); 
                         }
                     });
                 });
@@ -67,7 +65,7 @@
             <input type="text" class="form-control col-sm-4" id="search" placeholder="Search for products...">
             <button class="btn btn-success col-sm-1" type="submit" id="searchbtn">Search</button>
         </div>
-
+        <button class="btn btn-success col-sm-1" id="stockbtn" onclick="window.location.href='CustomerProduct.html'">Check stock and Reserve</button> 
         <table id="productTable" class="table table-striped">
             <thead>
                 <tr>
@@ -75,7 +73,6 @@
                     <th>Product Type</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>View Product</th>
                 </tr>
             </thead>
             <tbody>

@@ -7,12 +7,61 @@
 
         <script>
             window.onload = function(){
-                $.get("http://localhost:9001/Product").then(function(productName){
-                    $.get("http://localhost:9000/Product", {"productName" : productName}).then(function(product){
-                        $("#name").append(product.name);
-                        $("#description").append(product.description);
-                        $("#type").append(product.stockType);
-                        $("#price").append(product.price);
+                $("#reserve").hide();
+                var selectedShop;
+                var selectedProduct;
+                //Initial set up of combo boxes
+                $.get("http://localhost:9000/Products").then(function(products){
+                    for (var i = 0; i <= products.length; i++)
+                    {
+                        var product = products[i];
+                        //insert data to the table
+                        //TODO: Ask Dan about redirect button.
+                        $("#products").append("<option value='" + product.productName + "'>" + product.productName + "</option>");
+                    }
+                });
+
+                $.get("http://localhost:9000/Shop").then(function(shops){
+                    for (var i = 0; i <= shops.length; i++)
+                    {
+                        $("#shop").append("<option value='" + shop.storeName +"'>" + shop.storeName + "</option>");
+                    }
+                });
+                
+                //Button events
+                $("#view").click(function(){
+                    $("select.products").change(function(){
+                        selectedProduct = $(this).children("option:selected").val();//Gets the selected value of combo box
+                        console.log(selectedProduct);
+                        $.get("http://localhost:9000/Product", {"productName" : selectedProduct}).then(function(product){
+                            $("#name").append(product.name);
+                            $("#description").append(product.description);
+                            $("#type").append(product.stockType);
+                            $("#price").append(product.price);
+                        });
+                    }); 
+                });
+
+                $("#checkStock").click(function(){
+                    selectedProduct = $("#name").val();
+                    $("select.shops").change(function(){
+                        selectedShop = $(this).children("option:selected").val();//Gets the selected value of combo box
+                        console.log(selectedShop);
+                    });
+                    $.get("http://localhost:9000/Customer/Stock", {"storeName" : selectedShop, "productName" : selectedProduct}).then(function(quantity){
+                        $("#quantity").append(quantity);
+                        $("#reserve").show();
+                    })
+                });
+
+                $("#reserve").click(function(){
+                    var post = $.post("http://localhost:9000/Create/Reservation", {"productName" : selectedProduct, "storeName" : selectedShop})
+                    post.done(function(data, text, res){
+                        alert(data);
+                        if(res.status == 200)
+                        {
+                            window.location.href = "Reservations.html";
+                        }
                     });
                 });
             }
@@ -44,10 +93,16 @@
                 </div>
             </ul>
         </nav>
+        <h1>Select a product to view:</h1>
+        <select id="products"></select>
+        <button class="btn btn-primary mt-3" id="view">View Product</button>
         <h1 id="name"></h1>
         <h2 id="description"></h2>
         <h3 id="type"></h3>
         <h2 id="price"></h2>
-        <button class="btn btn-primary mt-3" onclick="window.location.href='CheckStock.html'" id="stock">Check Stock</button>
+        <select id="shops"></select>
+        <button class="btn btn-primary mt-3" id="checkStock">Check Stock</button>
+        <h1 id="quantity">Quantity in stock: </h1>
+        <button class="btn btn-primary mt-3" id="reserve">Reserve</button>
     </body>
 </html>
