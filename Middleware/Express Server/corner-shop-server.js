@@ -188,7 +188,7 @@ app.post("/Admin/Signup", function(request, response){
     var newJobRole = request.body.jobRole;
     var newAccountNo = request.body.accountNo;
     var newSortCode = request.body.sortCode;
-    var newShopName = request.body.shopName;
+    var newShopName = request.body.storeName;
 
     var salt = bcrypt.genSaltSync(saltRounds);
     var hash = bcrypt.hashSync(newPassword, salt);
