@@ -87,7 +87,7 @@ var Reservation = mongoose.model("Reservation", {
 
 var Shift = mongoose.model("Shift", {
     storeName: String,
-    date: Date,
+    shiftDate: Date,
     username: String,
 });
 
