@@ -7,7 +7,7 @@
         <script src="../Javascript/CustomerLogout.js"></script>
         <script>
             window.onload = function(){
-                $.get("http://localhost:9000/Shops").then(function(shops){
+                $.get("http://localhost:9000/Shop").then(function(shops){
                     for (var i = 0; i <= shops.length; i++)
                     {
                         var shop = shops[i];

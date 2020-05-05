@@ -13,20 +13,17 @@
                     for (var i = 0; i <= products.length; i++)
                     {
                         var product = products[i];
-                        //insert data to the table
-                        //TODO: Ask Dan about redirect button.
-                        $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td></tr>");
+                        $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" + 
+                                product.price + "</td></tr>");
                     }
                 });
                 $("#searchbtn").click(function(){
                     var searchInput = $("#search").val();
-                    $.get("http://localhost:9000/Products/Search", {"searchInput": searchInput}).then(function(products){
+                    $.post("http://localhost:9000/Products/Search", {"searchInput": searchInput}).then(function(products){
                         $("#productTable tbody").remove();
                         for (var i = 0; i <= products.length; i++)
                         {
                             var product = products[i];
-                            //insert data to the table
-                            //TODO: Ask Dan about redirect button.
                             $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" + 
                                 product.price + "</td></tr>"); 
                         }

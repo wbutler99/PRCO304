@@ -7,16 +7,16 @@
         <script src="../Javascript/StaffLogout.js"></script>
         <script>
             window.onload = function(){
-                $.get("http://localhost:9000/Customer").then(function(customer){
-                $("#username").append(customer.username);
-                $("#DOB").append(customer.DOB.split('T')[0]);
+                $.get("http://localhost:9000/Staff").then(function(staff){
+                $("#username").append(staff.username);
+                $("#DOB").append(staff.DOB.split('T')[0]);
                 $("#name").append(staff.firstName + " " + staff.lastName);
                 $("#jobrole").append(staff.jobRole);
 
-                $("#email").val(customer.email);
-                $("#addressLineOne").val(customer.addressLineOne);
-                $("#addressLineTwo").val(customer.addressLineTwo);
-                $("#postcode").val(customer.postcode);
+                $("#email").val(staff.email);
+                $("#addressLineOne").val(staff.addressLineOne);
+                $("#addressLineTwo").val(staff.addressLineTwo);
+                $("#postcode").val(staff.postcode);
                 });
 
                 $("#updateForm").submit(function(){

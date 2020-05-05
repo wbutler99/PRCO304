@@ -4,6 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="../Javascript/StaffLogout.js"></script>
         <script>
             window.onload = function(){
                 //Get Holiday data for staff member and add it to the table
@@ -12,8 +13,8 @@
                     {
                         var holiday = holidays[i];
                         //insert data to the table
-                        $("#holidayTable").append("<tr><td>" + holiday.holidayReference + "</td><td>" + holiday.date + "</td><td>" + holiday.reason 
-                            + "</td><td>" + holiday.status + "</td></tr>");
+                        $("#holidayTable").append("<tr><td>" + holiday.holidayReference + "</td><td>" + holiday.startDate.split('T')[0] + "</td><td>" + holiday.endDate.split('T')[0] + 
+                            "</td><td>" + holiday.reason + "</td><td>" + holiday.status + "</td></tr>");
                     }
                 });
                 $("#newHoliday").click(function(){
@@ -57,7 +58,8 @@
             <thead>
                 <tr>
                     <th>Reference</th>
-                    <th>Date</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th>Reason</th>
                     <th>Status</th>
                 </tr>
