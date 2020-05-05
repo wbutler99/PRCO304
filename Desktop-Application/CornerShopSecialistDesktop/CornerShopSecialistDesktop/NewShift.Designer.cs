@@ -114,7 +114,7 @@
             this.Controls.Add(this.lblShop);
             this.Controls.Add(this.label1);
             this.Name = "NewShift";
-            this.Text = "NewShift";
+            this.Text = "New Shift";
             this.ResumeLayout(false);
             this.PerformLayout();
 

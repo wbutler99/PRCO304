@@ -210,7 +210,7 @@
             this.Controls.Add(this.comHolidays);
             this.Controls.Add(this.label1);
             this.Name = "ApproveHolidays";
-            this.Text = "ApproveHolidays";
+            this.Text = "Approve Holidays";
             this.ResumeLayout(false);
             this.PerformLayout();
 

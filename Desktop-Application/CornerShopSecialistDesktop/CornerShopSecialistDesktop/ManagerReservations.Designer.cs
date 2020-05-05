@@ -104,7 +104,7 @@
             this.Controls.Add(this.grdReservation);
             this.Controls.Add(this.label1);
             this.Name = "ManagerReservations";
-            this.Text = "ManagerReservations";
+            this.Text = "Reservations";
             ((System.ComponentModel.ISupportInitialize)(this.grdReservation)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
