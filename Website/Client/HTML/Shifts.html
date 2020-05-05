@@ -4,6 +4,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="../Javascript/StaffLogout.js"></script>
         <script>
             window.onload = function(){
                 //get Product data
@@ -31,13 +32,13 @@
                     <a class="nav-link" onclick="window.location.href = 'StaffHome.html'">Corner Shop Specialist</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="shops">Shops</a>
+                  <a class="nav-link" id="shops" onclick="window.location.href='StaffShops.html'">Shops</a>
                 </li>                        
                 <li class="nav-item">
                     <a class="nav-link" id="shift" onclick="window.location.href = 'Shifts.html'">Shifts</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="holiday">Holiday</a>
+                  <a class="nav-link" id="holiday" onclick="window.location.href='Holiday.html'">Holiday</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="account" onclick="window.location.href = 'StaffAccount.html'">Account</a>
@@ -49,7 +50,7 @@
                 </div>
             </ul>
         </nav>
-
+        <h1>Your shifts due to be worked:</h1>
         <table id="shifts" class="table table-striped">
             <thead>
                 <tr>

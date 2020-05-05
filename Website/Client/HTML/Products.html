@@ -13,11 +13,8 @@
                     for (var i = 0; i <= products.length; i++)
                     {
                         var product = products[i];
-                        //insert data to the table
-                        //TODO: Ask Dan about redirect button.
                         $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" +
-                            product.price + "</td><td>" +
-                            "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/'" + product.name + ">" + "View" + "</a>" + "</td></tr>");
+                            product.price + "</td></tr>");
                     }
                 });
                 $("#searchbtn").click(function(){
@@ -27,11 +24,8 @@
                         for (var i = 0; i <= products.length; i++)
                         {
                             var product = products[i];
-                            //insert data to the table
-                            //TODO: Ask Dan about redirect button.
-                            $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + "</td><td>" + 
-                                product.price + "</td><td>" +
-                                "<a class='btn btn-primary mt-3' href= 'http://localhost:9001/Products/View/" + product.name + "'>" + "View" + "</a>" + "</td></tr>"); 
+                            $("#productTable").append("<tr><td>" +  product.name + "</td><td>" + product.stockType + "</td><td>" + product.description + 
+                                "</td><td>" + product.price + "</td></tr>"); 
                         }
                     });
                 });
@@ -53,19 +47,15 @@
                     <a class="nav-link" onclick="window.location.href = 'Index.html'">Corner Shop Specialist</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" id="shops">Shops</a>
+                  <a class="nav-link" id="shops" onclick="window.location.href='Shops.html'">Shops</a>
                 </li>                        
                 <li class="nav-item">
-                    <a class="nav-link" id="products">Products</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" id="news">News Deliveries</a>
+                    <a class="nav-link" id="products" onclick="window.location.href='Products.html'">Products</a>
                 </li>
                 <div class="nav navbar-right">
                     <li class="nav-item">
-                        <button class="btn btn-primary mt-3" id="login">Log In</button>
+                        <button class="btn btn-primary mt-3" id="login" onclick="window.location.href='CustomerLogin.html'">Log In</button>
                     </li>
-
                     <li class="nav-item">
                         <button class="btn btn-primary mt-3" id="stafflogin" onclick="window.location.href='StaffLogin.html'">Staff Portal</button>
                     </li>
@@ -76,7 +66,7 @@
             <input type="text" class="form-control col-sm-4" id="search" placeholder="Search for products...">
             <button class="btn btn-success col-sm-1" type="submit" id="searchbtn">Search</button>
         </div>
-        <button class="btn btn-success col-sm-1" id="stockbtn">Check stock and Reserve</button> 
+        <button class="btn btn-success col-sm-1" id="stockbtn">Check Stock and Reserve</button> 
         <table id="productTable" class="table table-striped">
             <thead>
                 <tr>
@@ -84,7 +74,6 @@
                     <th>Product Type</th>
                     <th>Description</th>
                     <th>Price</th>
-                    <th>View Product</th>
                 </tr>
             </thead>
             <tbody>
