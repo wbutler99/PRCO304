@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script>
+            window.onload = function(){
+                $.get("http://localhost:9000/Customer/Reservation").then(function(reservations){
+                    for (var i = 0; i <= reservations.length; i++)
+                    {
+                        var reservation = reservations[i];
+                        //insert data to the table
+                        $("#reservationTable").append("<tr><td>" + reservation.storeName + "</td><td>" + reservation.productName + "</td></tr>");
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div class="jumbotron text-center bg-primary text-white">
+            <h1>Corner Shop Specialist</h1>
+            <h2>Your Reservations</h2> 
+        </div>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" onclick="window.location.href = 'CustomerHome.html'">Corner Shop Specialist</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="shops">Shops</a>
+                </li>                        
+                <li class="nav-item">
+                    <a class="nav-link" id="products" onclick="window.location.href = 'CustomerProducts.html'">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="account" onclick="window.location.href = 'CustomerAccount.html'">Account</a>
+                  </li>
+                <div class="nav navbar-right">
+                    <li class="nav-item">
+                        <button class="btn btn-primary mt-3" id="logout">Log Out</button>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+        <h1>Your reservation requests.</h1>
+        <table id="reservationTable" class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Shop</th>
+                    <th>Product</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+    </body>
+</html>
