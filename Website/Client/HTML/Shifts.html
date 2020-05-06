@@ -4,7 +4,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="../Javascript/StaffLogout.js"></script>
         <script>
             window.onload = function(){
                 //get Product data
@@ -17,6 +16,13 @@
                         //TODO: Ask Dan about redirect button.
                         $("#productTable").append("<tr><td>" +  shift.StoreName + "</td><td>" + shift.date.split('T')[0] +  "</td></tr>");
                     }
+                });
+
+                $("#logout").click(function(){
+                    $.get("http://localhost:9000/Staff/Logout").then(function(data){
+                        alert(data);
+                        window.location.href = "Index.html";
+                    });
                 });
             }
         </script>
