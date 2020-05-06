@@ -7,7 +7,6 @@
         <script src="../Javascript/CustomerLogout.js"></script>
         <script>
             window.onload = function(){
-                $("#reserve").hide();
                 var selectedShop;
                 var selectedProduct;
                 //Initial set up of combo boxes
@@ -15,48 +14,42 @@
                     for (var i = 0; i <= products.length; i++)
                     {
                         var product = products[i];
-                        //insert data to the table
-                        //TODO: Ask Dan about redirect button.
-                        $("#products").append("<option value='" + product.productName + "'>" + product.productName + "</option>");
+                        $("#product").append("<option value='" + product.name + "'>" + product.name + "</option>");
                     }
                 });
 
                 $.get("http://localhost:9000/Shop").then(function(shops){
                     for (var i = 0; i <= shops.length; i++)
                     {
+                        var shop = shops[i];
                         $("#shop").append("<option value='" + shop.storeName +"'>" + shop.storeName + "</option>");
                     }
                 });
                 
                 //Button events
                 $("#view").click(function(){
-                    $("select.products").change(function(){
-                        selectedProduct = $(this).children("option:selected").val();//Gets the selected value of combo box
-                        console.log(selectedProduct);
-                        $.get("http://localhost:9000/Product", {"productName" : selectedProduct}).then(function(product){
-                            $("#name").append(product.name);
-                            $("#description").append(product.description);
-                            $("#type").append(product.stockType);
-                            $("#price").append(product.price);
-                        });
-                    }); 
+                    selectedProduct = $("#product option:selected").val();//Gets the selected value of combo box
+                    $.post("http://localhost:9000/Product", {"productName" : selectedProduct}).then(function(product){
+                        $("#name").append(product.name);
+                        $("#description").append(product.description);
+                        $("#type").append(product.stockType);
+                        $("#price").append(product.price);
+                    });
+                     
                 });
 
                 $("#checkStock").click(function(){
-                    selectedProduct = $("#name").val();
-                    $("select.shops").change(function(){
-                        selectedShop = $(this).children("option:selected").val();//Gets the selected value of combo box
-                        console.log(selectedShop);
+                    selectedShop = $("#shop option:selected").val();//Gets the selected value of combo box
+                    $.post("http://localhost:9000/Customer/Stock", {"storeName" : selectedShop, "productName" : selectedProduct}).then(function(stock){
+                        $("#quantity").append(stock.quantity);
                     });
-                    $.get("http://localhost:9000/Customer/Stock", {"storeName" : selectedShop, "productName" : selectedProduct}).then(function(quantity){
-                        $("#quantity").append(quantity);
-                        $("#reserve").show();
-                    })
                 });
 
-                $("#reserve").click(function(){
-                    var post = $.post("http://localhost:9000/Create/Reservation", {"productName" : selectedProduct, "storeName" : selectedShop})
-                    post.done(function(data, text, res){
+                $("#reserveProduct").click(function(){
+                    selectedProduct = $("#product option:selected").val();
+                    selectedShop = $("#shop option:selected").val();
+                    console.log(selectedProduct);
+                    $.post("http://localhost:9000/Create/Reservation", {"productName" : selectedProduct, "storeName" : selectedShop}).then(function(data, text, res){
                         alert(data);
                         if(res.status == 200)
                         {
@@ -97,15 +90,15 @@
             </ul>
         </nav>
         <h1>Select a product to view:</h1>
-        <select id="products"></select>
+        <select id="product"></select>
         <button class="btn btn-primary mt-3" id="view">View Product</button>
-        <h1 id="name"></h1>
-        <h2 id="description"></h2>
-        <h3 id="type"></h3>
-        <h2 id="price"></h2>
-        <select id="shops"></select>
+        <h1 id="name">Name: </h1>
+        <h2 id="description">Description: </h2>
+        <h3 id="type">Product Type: </h3>
+        <h2 id="price">Price: </h2>
+        <select id="shop"></select>
         <button class="btn btn-primary mt-3" id="checkStock">Check Stock</button>
         <h1 id="quantity">Quantity in stock: </h1>
-        <button class="btn btn-primary mt-3" id="reserve">Reserve</button>
+        <button class="btn btn-primary mt-3" id="reserveProduct">Reserve</button>
     </body>
 </html>

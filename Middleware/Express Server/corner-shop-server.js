@@ -401,13 +401,12 @@ app.get("/Staff/Stock", function(request, response){
 
 });
 
-app.get("/Customer/Stock", function(request, response){
+app.post("/Customer/Stock", function(request, response){
     var shop = request.body.storeName;
     var product = request.body.productName;
     db.GetSpecificStock(shop, product).then(function(stock){
-        var quantity = stock.quantity;
         response.status(200);
-        response.send(quantity);
+        response.send(stock);
     });
 });
 
@@ -429,9 +428,8 @@ app.post("/Products/Search", function(request, response){
     });
 });
 
-app.get("/Product", function(request, response){
+app.post("/Product", function(request, response){
     var productName = request.body.productName;
-
     db.GetProduct(productName).then(function(product){
         response.status(200);
         response.send(product);
@@ -493,6 +491,7 @@ app.get("/Shop/Reservation", function(request, response){
 app.post("/Create/Reservation", function(request, response){
     var product = request.body.productName;
     var shop = request.body.storeName;
+    console.log(shop);
     var customerName;
     db.GetCustomer(customerSession).then(function(customer){
         customerName = customer.firstName + " " + customer.lastName;    
