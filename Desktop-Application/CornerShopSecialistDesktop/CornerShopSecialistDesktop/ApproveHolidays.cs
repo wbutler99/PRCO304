@@ -29,8 +29,8 @@ namespace CornerShopSecialistDesktop
             string reference = comHolidays.SelectedItem.ToString();
             selectedHoliday = holidays.Find(x => x.holidayReference == reference);
             lblUsername.Text = selectedHoliday.username;
-            lblStartDate.Text = selectedHoliday.startDate.ToString();
-            lblEndDate.Text = selectedHoliday.endDate.ToString();
+            lblStartDate.Text = selectedHoliday.startDate.ToShortDateString();
+            lblEndDate.Text = selectedHoliday.endDate.ToShortDateString();
             lblReason.Text = selectedHoliday.reason;
             lblStatus.Text = selectedHoliday.status;
             lblUsername.Visible = true;
