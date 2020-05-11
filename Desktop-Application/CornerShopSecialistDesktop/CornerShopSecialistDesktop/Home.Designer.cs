@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnLogIn = new System.Windows.Forms.Button();
-            this.btnCreateUser = new System.Windows.Forms.Button();
             this.txtUsernameInput = new System.Windows.Forms.TextBox();
             this.txtPasswordInput = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
@@ -38,23 +37,13 @@
             // 
             // btnLogIn
             // 
-            this.btnLogIn.Location = new System.Drawing.Point(238, 257);
+            this.btnLogIn.Location = new System.Drawing.Point(320, 257);
             this.btnLogIn.Name = "btnLogIn";
             this.btnLogIn.Size = new System.Drawing.Size(75, 23);
             this.btnLogIn.TabIndex = 0;
             this.btnLogIn.Text = "Log In";
             this.btnLogIn.UseVisualStyleBackColor = true;
             this.btnLogIn.Click += new System.EventHandler(this.btnLogIn_Click);
-            // 
-            // btnCreateUser
-            // 
-            this.btnCreateUser.Location = new System.Drawing.Point(400, 257);
-            this.btnCreateUser.Name = "btnCreateUser";
-            this.btnCreateUser.Size = new System.Drawing.Size(75, 23);
-            this.btnCreateUser.TabIndex = 1;
-            this.btnCreateUser.Text = "Create User";
-            this.btnCreateUser.UseVisualStyleBackColor = true;
-            this.btnCreateUser.Click += new System.EventHandler(this.btnCreateUser_Click);
             // 
             // txtUsernameInput
             // 
@@ -99,7 +88,6 @@
             this.Controls.Add(this.lblPassword);
             this.Controls.Add(this.txtPasswordInput);
             this.Controls.Add(this.txtUsernameInput);
-            this.Controls.Add(this.btnCreateUser);
             this.Controls.Add(this.btnLogIn);
             this.Name = "Home";
             this.Text = "Corner Shop Specialist";
@@ -111,7 +99,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnLogIn;
-        private System.Windows.Forms.Button btnCreateUser;
         private System.Windows.Forms.TextBox txtUsernameInput;
         private System.Windows.Forms.TextBox txtPasswordInput;
         private System.Windows.Forms.Label lblPassword;

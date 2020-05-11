@@ -46,7 +46,7 @@ namespace CornerShopSecialistDesktop
                 foreach (HolidayViewModel holiday in holidays)
                 {
                     lblShop.Text = holiday.storeName;
-                    grdHolidays.Rows.Add(holiday.holidayReference, holiday.username, holiday.startDate.Date.ToString(), holiday.endDate.Date.ToString(),
+                    grdHolidays.Rows.Add(holiday.holidayReference, holiday.username, holiday.startDate.ToShortDateString(), holiday.endDate.ToShortDateString(),
                         holiday.reason, holiday.status);
                 }
             }

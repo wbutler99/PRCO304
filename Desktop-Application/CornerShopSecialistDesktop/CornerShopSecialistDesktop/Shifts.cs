@@ -47,7 +47,7 @@ namespace CornerShopSecialistDesktop
                 foreach (ShiftViewModel shift in shifts)
                 {
                     lblShop.Text = shift.storeName.ToString();
-                    grdShifts.Rows.Add(shift.username, shift.shiftDate);
+                    grdShifts.Rows.Add(shift.username, shift.shiftDate.ToShortDateString());
                 }
             }
         }

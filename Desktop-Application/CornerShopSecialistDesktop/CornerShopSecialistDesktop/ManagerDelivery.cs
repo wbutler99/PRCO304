@@ -40,7 +40,7 @@ namespace CornerShopSecialistDesktop
             {
                 var jsonString = response.Content.ReadAsStringAsync().Result;
                 delivery = JsonConvert.DeserializeObject<DeliveryViewModel>(jsonString);
-                lblDeliveryDate.Text = delivery.deliveryDate.Date.ToString();
+                lblDeliveryDate.Text = delivery.deliveryDate.ToShortDateString();
                 lblDeliveryType.Text = delivery.deliveryType.ToString();
                 lblDeliveryDate.Visible = true;
                 lblDeliveryType.Visible = true;

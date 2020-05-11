@@ -4,7 +4,24 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-        <script src="../Javascript/CustomerLogout.js"></script>
+        <style>
+            body{
+                background-image: url("customer-background.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+        </style>
+        <script>
+            window.onload = function(){
+                $("#logout").click(function(){
+                    $.get("http://localhost:9000/Customer/Logout").then(function(data){
+                        alert(data);
+                        window.location.href = "Index.html";
+                    });
+                });
+            }
+        </script>
     </head>
     <body>
         <div class="jumbotron text-center bg-primary text-white">
@@ -35,5 +52,14 @@
                 </div>
             </ul>
         </nav>
+        <div class="container-fluid text-center">
+            <h1>Welcome to the customer portal of Corner Shop Specialist!</h1>
+            <h2>Look at products offered by our shops!</h2>
+            <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = 'CustomerProducts.html'">View Products</button>
+            <h2>View the shops supported by our service to find your new local!</h2>
+            <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = 'CustomerShops.html'">Discover Local Shops</button>
+            <h2>Or View your reservations at your local shop.</h2>
+            <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = 'Reservations.html'">View Your Reservations</button>
+        </div>
     </body>
 </html>

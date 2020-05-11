@@ -72,7 +72,7 @@ async function GetStock(shop)
 
 async function GetSpecificStock(shop, product)
 {
-    return await schemas.Stock.findOne({"storeName" : shop, "productName" : product});
+    return await schemas.Stock.findOne({ "productName" : product, "storeName" : shop});
 }
 
 //DB functions for deliveries
